@@ -1,0 +1,23 @@
+// Global SCSS entry point, imported once from the root layout alongside
+// globals.css. Tailwind's @theme tokens in globals.css remain the source
+// of truth for design tokens (color, font, spacing) — this file is for
+// structural component styles that benefit from SASS nesting/mixins,
+// e.g. GSAP-animated section wrappers.
+@use "./mixins" as m;
+
+// Example pattern — replace/remove once real components need this.
+.section-reveal {
+  position: relative;
+  overflow: clip;
+
+  &__inner {
+    @include m.breakpoint(lg) {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+
+  .visually-hidden {
+    @include m.visually-hidden;
+  }
+}

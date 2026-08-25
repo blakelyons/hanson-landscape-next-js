@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hanson Landscape — Next.js site
 
-## Getting Started
+Next.js 16 (App Router) site for hansonlandscape.com. Runs as a standard
+Node server (not a static export) so API routes/server actions stay
+available — deployed to a DigitalOcean droplet via PM2 + Nginx (see
+`DEPLOYMENT.md`). A headless CMS (Payload or ExpressionEngine, TBD) may be
+wired in later for the blog/portfolio; for now content is hardcoded.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** for utilities/design tokens (`src/app/globals.css`,
+  `@theme` block) + **SASS** for structural component styles that need
+  nesting/mixins (`src/styles/`) — see comments in `src/styles/main.scss`.
+- **GSAP** + **Lenis** smooth scroll, synced via `SmoothScrollProvider`
+  (`src/components/providers/smooth-scroll-provider.tsx`).
+- **Zustand** for client UI state (`src/store/`).
+- **TanStack Query** for client-side data fetching once CMS endpoints exist
+  (`src/components/providers/query-provider.tsx`).
+- **next-themes** wired up (`src/components/providers/theme-provider.tsx`);
+  no theme variants defined yet.
+- **Iconify** (`@iconify/react`, runtime API) with **Lucide** as the
+  default set — see `src/lib/icon-config.ts` to enable more icon sets.
+- **Formstack** contact form proxied through `src/app/api/contact/route.ts`
+  (keeps the API key server-side) — example client form in
+  `src/components/ui/contact-form-example.tsx`.
+- **Vitest** + **React Testing Library** for unit/component tests.
+- Native Next.js **Metadata API** for SEO (`generateMetadata`,
+  `src/app/sitemap.ts`, `src/app/robots.ts`) — no `next-seo` dependency.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in Formstack keys, site URL
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — dev server
+- `npm run build` / `npm run start` — production build + Node server
+- `npm run lint` — ESLint
+- `npm run test` / `npm run test:watch` — Vitest
+- `npm run format` — Prettier
 
-## Learn More
+## Folder structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/                 routes (App Router), api/, sitemap.ts, robots.ts
+  components/
+    providers/         client providers mounted in the root layout
+    ui/                 shared UI components
+  lib/                 server/shared utilities (formstack.ts, icon-config.ts)
+  store/               Zustand stores
+  styles/              SASS partials (imported once from the root layout)
+  hooks/               shared React hooks
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `DEPLOYMENT.md` for the DigitalOcean droplet setup (PM2 + Nginx).
