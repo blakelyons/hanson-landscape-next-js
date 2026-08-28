@@ -1,5 +1,5 @@
-import { PartnerLogos } from "./partner-logos";
-import { StatCard } from "./stat-card";
+import { PartnerLogos } from "@/components/ui/partner-logos";
+import { StatCard } from "@/components/ui/stat-card";
 
 const STATS = [
   { value: "20+", label: "Years Experience" },
@@ -31,7 +31,9 @@ export function AboutSection() {
           <div className="h-4 w-full shrink-0" />
           <p className="w-full font-sans text-[18px] font-normal leading-[28px] text-neutral-600">
             {`For over two decades, we've poured our passion into creating beautiful, custom landscapes across Chicagoland. Every project is personal to us — our job isn't finished until you're completely happy with the result.   `}
-            <span className="text-[18px] leading-[28px] text-[#3a8545]">Read More</span>
+            <a href="/about" className="text-[18px] leading-[28px] text-[#3a8545] hover:underline">
+              Read More
+            </a>
           </p>
         </div>
 

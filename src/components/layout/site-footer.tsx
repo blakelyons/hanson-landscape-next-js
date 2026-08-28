@@ -1,5 +1,5 @@
 import { FooterColumn } from "./footer-column";
-import { PartnerLogos } from "./partner-logos";
+import { PartnerLogos } from "@/components/ui/partner-logos";
 
 const MENU_COLUMNS = [
   {

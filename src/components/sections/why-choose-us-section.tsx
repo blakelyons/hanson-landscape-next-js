@@ -1,5 +1,5 @@
 import { PillButton } from "@/components/ui/pill-button";
-import { StatCard } from "./stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 
 const FEATURES = [
   {

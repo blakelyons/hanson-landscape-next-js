@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { SiteHeaderVariant } from "./site-header";
 
 type MenuItem = {
   label: string;
@@ -50,14 +51,22 @@ function MenuNode({ item }: { item: MenuItem }) {
   );
 }
 
-export function ServicesNavDropdown() {
+export function ServicesNavDropdown({
+  variant = "transparent",
+}: {
+  variant?: SiteHeaderVariant;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <a
         href="#"
-        className="whitespace-nowrap font-sans text-base font-medium leading-[52px] text-white transition-colors hover:text-primary"
+        className={
+          variant === "solid"
+            ? "whitespace-nowrap rounded-full px-5 py-2 font-sans text-base font-medium leading-normal text-forrest transition-colors hover:text-primary"
+            : "whitespace-nowrap font-sans text-base font-medium leading-[52px] text-white transition-colors hover:text-primary"
+        }
       >
         Our Services
       </a>
