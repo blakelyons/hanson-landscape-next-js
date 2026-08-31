@@ -84,7 +84,7 @@ export function ServicesSection() {
                         <ServiceCard key={service.title} {...service} />
                     ))}
                 </div>
-                <div className="absolute inset-[74.27%_82.97%_22.41%_15.16%] text-black">
+                <div className="absolute inset-[74.27%_82.97%_22.41%_15.16%] text-[#020618]">
                     <Icon name="mouse-pointer-2" width={27} height={23} />
                 </div>
             </div>
