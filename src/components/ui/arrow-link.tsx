@@ -29,13 +29,9 @@ export function ArrowLink({
     return (
         <Link href={href} className={`inline-flex items-center gap-2.5 whitespace-nowrap ${className}`} {...props}>
             <span className={textClassName}>{children}</span>
-            <Icon
-                name={iconName}
-                set={iconSet}
-                className="shrink-0"
-                width={iconWidth ?? iconSize}
-                height={iconHeight ?? iconSize}
-            />
+            <span className={`${textClassName} shrink-0`}>
+                <Icon name={iconName} set={iconSet} width={iconWidth ?? iconSize} height={iconHeight ?? iconSize} />
+            </span>
         </Link>
     );
 }

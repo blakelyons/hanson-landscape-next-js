@@ -1,9 +1,11 @@
 import { SectionIntro } from "@/components/ui/section-intro";
 import { PillButton } from "@/components/ui/pill-button";
+import { Icon } from "@/components/ui/icon";
 
 const STEPS = [
     {
-        icon: "/images/home/icon-arrow-diagonal.svg",
+        iconName: "arrow-up-right",
+        iconColor: "#2B6733",
         title: "Share Your Vision",
         number: "01",
         description: "Tell us about your outdoor space, ideas, and goals. We listen carefully",
@@ -44,9 +46,16 @@ export function ProcessSection() {
                     <div className="grid grid-cols-4 items-end gap-x-8">
                         {STEPS.map((step) => (
                             <div key={`${step.number}-title`} className="flex flex-col items-center gap-2 text-center">
-                                <div className="size-12 shrink-0">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img alt="" className="block size-full max-w-none" src={step.icon} />
+                                <div
+                                    className="size-12 shrink-0"
+                                    style={step.iconColor ? { color: step.iconColor } : undefined}
+                                >
+                                    {step.iconName ? (
+                                        <Icon name={step.iconName} width={48} height={48} />
+                                    ) : (
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img alt="" className="block size-full max-w-none" src={step.icon} />
+                                    )}
                                 </div>
                                 <p className="font-sans text-lg leading-7 font-bold whitespace-nowrap text-black">
                                     {step.title}

@@ -1,17 +1,21 @@
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { SectionIntro } from "@/components/ui/section-intro";
+import { Icon } from "@/components/ui/icon";
+import type { IconSet } from "@/lib/icon-config";
 
 const SERVICES = [
     {
         title: "Design",
         description: "Professional landscape design tailored to your vision, property, and lifestyle.",
-        icon: "/images/home/icon-design.svg",
+        iconName: "pencil",
+        iconColor: "#1E4A25",
         iconBg: "rgba(43,103,51,0.1)",
     },
     {
         title: "Build",
         description: "Expert construction from pavers and retaining walls to water features and outdoor living.",
-        icon: "/images/home/shovel-icon.svg",
+        iconName: "shovel",
+        iconColor: "#F89C1C",
         iconBg: "rgba(248,156,28,0.1)",
     },
     {
@@ -22,7 +26,12 @@ const SERVICES = [
     },
 ];
 
-function ServiceCard({ title, description, icon, iconBg }: (typeof SERVICES)[number]) {
+function ServiceCard({ title, description, icon, iconName, iconColor, iconSet, iconBg }: (typeof SERVICES)[number] & {
+    icon?: string;
+    iconName?: string;
+    iconColor?: string;
+    iconSet?: IconSet;
+}) {
     return (
         <div className="flex h-[324px] w-[337px] flex-col items-start justify-center gap-9 rounded-xl border border-[#cad5e2] bg-white p-8 drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.05)]">
             <div className="flex h-[194px] w-[220px] flex-col items-start gap-4">
@@ -30,9 +39,13 @@ function ServiceCard({ title, description, icon, iconBg }: (typeof SERVICES)[num
                     className="flex size-[60px] shrink-0 items-center justify-center rounded-lg p-6"
                     style={{ backgroundColor: iconBg }}
                 >
-                    <div className="size-6 shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="" className="block size-full max-w-none" src={icon} />
+                    <div className="size-6 shrink-0" style={iconColor ? { color: iconColor } : undefined}>
+                        {iconName ? (
+                            <Icon name={iconName} set={iconSet} width={24} height={24} />
+                        ) : (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img alt="" className="block size-full max-w-none" src={icon} />
+                        )}
                     </div>
                 </div>
                 <p className="font-serif-display w-full min-w-full text-2xl leading-6 font-normal text-black not-italic">
@@ -71,9 +84,8 @@ export function ServicesSection() {
                         <ServiceCard key={service.title} {...service} />
                     ))}
                 </div>
-                <div className="absolute inset-[74.27%_82.97%_22.41%_15.16%]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="block size-full max-w-none" src="/images/home/cursor-arrow.svg" />
+                <div className="absolute inset-[74.27%_82.97%_22.41%_15.16%] text-black">
+                    <Icon name="mouse-pointer-2" width={27} height={23} />
                 </div>
             </div>
         </section>

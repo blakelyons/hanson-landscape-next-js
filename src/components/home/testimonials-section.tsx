@@ -1,4 +1,5 @@
 import { SectionIntro } from "@/components/ui/section-intro";
+import { Icon } from "@/components/ui/icon";
 
 const TESTIMONIALS = [
     {
@@ -23,9 +24,8 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
         <div className="border-forrest-light-2-border bg-forrest-light-2 flex w-[336px] shrink-0 flex-col items-start gap-[30px] rounded-xl border p-8">
             <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, index) => (
-                    <div key={index} className="size-5 shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="" className="block size-full max-w-none" src="/images/home/star-icon.svg" />
+                    <div key={index} className="size-5 shrink-0 text-[#F89C1C]">
+                        <Icon set="mingcute" name="star-fill" width={20} height={20} />
                     </div>
                 ))}
             </div>

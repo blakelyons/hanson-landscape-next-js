@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PartnerLogos } from "@/components/ui/partner-logos";
 import { StatCard } from "@/components/ui/stat-card";
+import { Icon } from "@/components/ui/icon";
 
 const STATS = [
     { value: "20+", label: "Years Experience" },
@@ -18,9 +19,8 @@ export function AboutSection() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img alt="" className="block size-full max-w-none" src="/images/home/about-tree.svg" />
                 </div>
-                <div className="pointer-events-none absolute top-[142px] left-[487px] size-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="block size-full max-w-none" src="/images/home/arrow-icon-lg-amber.svg" />
+                <div className="pointer-events-none absolute top-[142px] left-[487px] size-3 text-[#3A8545]">
+                    <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
                 </div>
 
                 <div className="ml-[80px] flex w-[632px] flex-col items-start gap-4 px-4">
@@ -38,9 +38,8 @@ export function AboutSection() {
                         </p>
                     </div>
 
-                    <div className="size-3 shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="" className="block size-full max-w-none" src="/images/home/arrow-icon-lg-green.svg" />
+                    <div className="size-3 shrink-0 text-black">
+                        <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
                     </div>
 
                     <div className="text-forrest flex items-start gap-8">

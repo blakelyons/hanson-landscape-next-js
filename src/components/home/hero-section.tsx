@@ -1,4 +1,5 @@
 import { PillButton } from "@/components/ui/pill-button";
+import { Icon } from "@/components/ui/icon";
 
 const STATS = [
     { value: "25+", label: "Years of craftsmanship" },
@@ -142,22 +143,16 @@ export function HeroSection() {
                     </div>
                     <div className="absolute top-[627px] left-[130px] flex items-center gap-4">
                         <div className="flex shrink-0 items-center gap-2 rounded-[999px] border border-[rgba(250,251,248,0.14)] bg-[#29462f] py-2 pr-3.5 pl-3">
-                            <div className="flex size-3 shrink-0 items-center justify-center">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    alt=""
-                                    className="block size-full max-w-none"
-                                    src="/images/home/icon-building.svg"
-                                />
+                            <div className="flex size-3 shrink-0 items-center justify-center text-[#B2BEB3]">
+                                <Icon set="mingcute" name="building-6-line" width={12} height={12} />
                             </div>
                             <p className="font-sans text-[10px] font-medium tracking-[1.8px] whitespace-nowrap text-[rgba(250,251,248,0.65)]">
                                 COMMERCIAL LANDSCAPING
                             </p>
                         </div>
                         <div className="flex shrink-0 items-center gap-2 rounded-[999px] border border-[rgba(250,251,248,0.14)] bg-[#29462f] py-2 pr-3.5 pl-3">
-                            <div className="flex size-3 shrink-0 items-center justify-center">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img alt="" className="block size-full max-w-none" src="/images/home/icon-house.svg" />
+                            <div className="flex size-3 shrink-0 items-center justify-center text-[#B3BEB3]">
+                                <Icon set="streamlineUltimate" name="house-1" width={12} height={12} />
                             </div>
                             <p className="font-sans text-[10px] font-medium tracking-[1.8px] whitespace-nowrap text-[rgba(250,251,248,0.65)]">
                                 RESIDENTIAL LANDSCAPING
@@ -224,9 +219,8 @@ export function HeroSection() {
                     </div>
                 </div>
 
-                <div className="absolute top-[657px] left-[1066px] flex size-3 items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="block size-full max-w-none" src="/images/home/arrow-icon-lg-hero.svg" />
+                <div className="absolute top-[657px] left-[1066px] flex size-3 items-center justify-center text-[#FBB600]">
+                    <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
                 </div>
             </div>
         </section>
