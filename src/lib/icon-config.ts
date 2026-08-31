@@ -10,8 +10,12 @@
  *        <Icon set="simpleIcons" name="facebook" /> -> simple-icons:facebook
  */
 export const ICON_SETS = {
-  lucide: "lucide",
-  // simpleIcons: "simple-icons", // example: uncomment to enable brand/social logos
+    lucide: "lucide",
+    mingcute: "mingcute",
+    streamlineUltimate: "streamline-ultimate",
+    proicons: "proicons",
+    ci: "ci",
+    // simpleIcons: "simple-icons", // example: uncomment to enable brand/social logos
 } as const;
 
 export type IconSet = keyof typeof ICON_SETS;

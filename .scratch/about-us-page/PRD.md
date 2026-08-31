@@ -46,16 +46,16 @@ The homepage's existing About teaser section's "Read More" affordance becomes a 
 
 - **New route**: `/about`, rendering a new page component analogous in structure to the existing homepage (`SiteHeader` → `PageHero` → `StorySection` → `WhyChooseUsSection` → `CtaSection` → `SiteFooter`).
 - **Component reorganization** (moves, not rewrites — import paths update, behavior unchanged for moved components):
-  - `SiteHeader`, `ServicesNavDropdown`, `SiteFooter`, `FooterColumn` move from `components/home/` to `components/layout/`.
-  - `WhyChooseUsSection`, `CtaSection` move from `components/home/` to `components/sections/`. No content or markup changes — these render identically on both the homepage and the About page.
-  - `StatCard`, `PartnerLogos` move from `components/home/` to `components/ui/`, joining `PillButton`, `ArrowLink`, `SectionIntro`, `Icon`.
-  - Homepage-only sections (`HeroSection`, `TrustBar`, `ServicesSection`, `AboutSection` (the homepage teaser), `TestimonialsSection`, `PortfolioBento`, `ProcessSection`, `ConsultationSection`) stay in `components/home/`.
-  - New `StorySection` component is added under `components/about/`, since it is bespoke to the About page.
+    - `SiteHeader`, `ServicesNavDropdown`, `SiteFooter`, `FooterColumn` move from `components/home/` to `components/layout/`.
+    - `WhyChooseUsSection`, `CtaSection` move from `components/home/` to `components/sections/`. No content or markup changes — these render identically on both the homepage and the About page.
+    - `StatCard`, `PartnerLogos` move from `components/home/` to `components/ui/`, joining `PillButton`, `ArrowLink`, `SectionIntro`, `Icon`.
+    - Homepage-only sections (`HeroSection`, `TrustBar`, `ServicesSection`, `AboutSection` (the homepage teaser), `TestimonialsSection`, `PortfolioBento`, `ProcessSection`, `ConsultationSection`) stay in `components/home/`.
+    - New `StorySection` component is added under `components/about/`, since it is bespoke to the About page.
 - **`SiteHeader` variant + active link**:
-  - New `variant` prop: `"transparent"` (current homepage look — overlay nav, no solid background) or `"solid"` (opaque light background, used on interior pages including About).
-  - Active-link detection is derived from the current route via `usePathname`, not passed in as a prop — this is the one piece of real conditional logic in the feature, so it's the seam the tests target.
-  - Nav link list stays a single source of truth (shared between variants); only the container's background/color treatment and the active-link highlight (amber pill background behind the current page's label, matching Figma) differ by variant.
-  - `Home` (`/`) and `About` (`/about`) nav links get real `href`s. `Our Services` (dropdown), `Portfolio`, `Testimonials`, and `Contact Us` remain `href="#"` placeholders — their target pages don't exist yet.
+    - New `variant` prop: `"transparent"` (current homepage look — overlay nav, no solid background) or `"solid"` (opaque light background, used on interior pages including About).
+    - Active-link detection is derived from the current route via `usePathname`, not passed in as a prop — this is the one piece of real conditional logic in the feature, so it's the seam the tests target.
+    - Nav link list stays a single source of truth (shared between variants); only the container's background/color treatment and the active-link highlight (amber pill background behind the current page's label, matching Figma) differ by variant.
+    - `Home` (`/`) and `About` (`/about`) nav links get real `href`s. `Our Services` (dropdown), `Portfolio`, `Testimonials`, and `Contact Us` remain `href="#"` placeholders — their target pages don't exist yet.
 - **New `PageHero` component** (`components/ui/`): reusable dark hero banner used at the top of interior pages. Props cover breadcrumb trail, eyebrow label, heading, and description — the decorative background (glow + leaf-particle graphics) is a fixed visual treatment shared across all interior pages per the Figma design system component, not parameterized.
 - **New `StorySection` component** (`components/about/`): renders a photo, an "EST. 2001" eyebrow row, a serif heading, a narrative paragraph, and a row of `StatCard`s (25+ years of craftsmanship, 500+ projects delivered, 100% satisfaction rating) — a distinct stats dataset from the homepage About teaser's stats (20+ years, 3x award, 100% satisfaction), not shared data.
 - **Reused sections**: `WhyChooseUsSection` and `CtaSection` render on the About page with no prop/content differences from the homepage — same component, same data, imported from their new `sections/` location.

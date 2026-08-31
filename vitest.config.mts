@@ -6,15 +6,15 @@ import react from "@vitejs/plugin-react";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(dirname, "./src"),
+    plugins: [react()],
+    resolve: {
+        alias: {
+            "@": path.resolve(dirname, "./src"),
+        },
     },
-  },
-  test: {
-    environment: "jsdom",
-    setupFiles: ["./vitest.setup.ts"],
-    globals: true,
-  },
+    test: {
+        environment: "jsdom",
+        setupFiles: ["./vitest.setup.ts"],
+        globals: true,
+    },
 });

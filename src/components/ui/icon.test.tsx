@@ -7,8 +7,8 @@ import { Icon } from "./icon";
 // for the resolved SVG here would make this test depend on network access.
 // This just checks the component mounts without throwing.
 describe("Icon", () => {
-  it("renders without crashing", () => {
-    const { container } = render(<Icon name="leaf" />);
-    expect(container.firstChild).toBeInTheDocument();
-  });
+    it("renders without crashing", () => {
+        const { container } = render(<Icon name="leaf" />);
+        expect(container.firstChild).toBeInTheDocument();
+    });
 });

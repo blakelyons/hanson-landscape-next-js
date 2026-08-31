@@ -12,22 +12,22 @@ import { ConsultationSection } from "@/components/home/consultation-section";
 import { SiteFooter } from "@/components/layout/site-footer";
 
 export default function Home() {
-  return (
-    <div className="flex w-full flex-col bg-white">
-      <div className="relative">
-        <SiteHeader variant="transparent" />
-        <HeroSection />
-      </div>
-      <TrustBar />
-      <ServicesSection />
-      <AboutSection />
-      <TestimonialsSection />
-      <PortfolioBento />
-      <CtaSection />
-      <WhyChooseUsSection />
-      <ProcessSection />
-      <ConsultationSection />
-      <SiteFooter />
-    </div>
-  );
+    return (
+        <div className="flex w-full flex-col bg-white">
+            <div className="relative">
+                <SiteHeader variant="transparent" />
+                <HeroSection />
+            </div>
+            <TrustBar />
+            <ServicesSection />
+            <AboutSection />
+            <TestimonialsSection />
+            <PortfolioBento />
+            <CtaSection />
+            <WhyChooseUsSection />
+            <ProcessSection />
+            <ConsultationSection />
+            <SiteFooter />
+        </div>
+    );
 }

@@ -11,21 +11,21 @@ import { create } from "zustand";
  * Keep stores scoped to one concern each rather than one giant global store.
  */
 interface UIState {
-  isMobileNavOpen: boolean;
-  activeModal: string | null;
-  openMobileNav: () => void;
-  closeMobileNav: () => void;
-  toggleMobileNav: () => void;
-  openModal: (id: string) => void;
-  closeModal: () => void;
+    isMobileNavOpen: boolean;
+    activeModal: string | null;
+    openMobileNav: () => void;
+    closeMobileNav: () => void;
+    toggleMobileNav: () => void;
+    openModal: (id: string) => void;
+    closeModal: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
-  isMobileNavOpen: false,
-  activeModal: null,
-  openMobileNav: () => set({ isMobileNavOpen: true }),
-  closeMobileNav: () => set({ isMobileNavOpen: false }),
-  toggleMobileNav: () => set((state) => ({ isMobileNavOpen: !state.isMobileNavOpen })),
-  openModal: (id) => set({ activeModal: id }),
-  closeModal: () => set({ activeModal: null }),
+    isMobileNavOpen: false,
+    activeModal: null,
+    openMobileNav: () => set({ isMobileNavOpen: true }),
+    closeMobileNav: () => set({ isMobileNavOpen: false }),
+    toggleMobileNav: () => set((state) => ({ isMobileNavOpen: !state.isMobileNavOpen })),
+    openModal: (id) => set({ activeModal: id }),
+    closeModal: () => set({ activeModal: null }),
 }));

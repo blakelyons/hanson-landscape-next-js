@@ -7,17 +7,17 @@
 
 // Example pattern — replace/remove once real components need this.
 .section-reveal {
-  position: relative;
-  overflow: clip;
+    position: relative;
+    overflow: clip;
 
-  &__inner {
-    @include m.breakpoint(lg) {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
+    &__inner {
+        @include m.breakpoint(lg) {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
     }
-  }
 
-  .visually-hidden {
-    @include m.visually-hidden;
-  }
+    .visually-hidden {
+        @include m.visually-hidden;
+    }
 }

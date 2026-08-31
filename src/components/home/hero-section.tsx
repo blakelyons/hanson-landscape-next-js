@@ -8,7 +8,7 @@ const STATS = [
 
 export function HeroSection() {
     return (
-        <section className="relative h-240 w-full overflow-clip bg-[#0e2113]">
+        <section className="relative h-[960px] w-full overflow-clip bg-[#0e2113]">
             <div className="relative container h-full">
                 {/* Decorative background layers — legitimately absolute, scoped to this section's 1440 column */}
                 <div className="absolute top-[-60px] left-[620px] size-[980px]">

@@ -9,5 +9,5 @@ import type { ComponentProps } from "react";
  * `themes` prop here when seasonal/brand variants are designed.
  */
 export function ThemeProvider({ children, ...props }: ComponentProps<typeof NextThemesProvider>) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+    return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }

@@ -1,40 +1,41 @@
-import type { AnchorHTMLAttributes } from "react";
+import Link from "next/link";
+import type { ComponentProps } from "react";
+import { Icon } from "@/components/ui/icon";
+import type { IconSet } from "@/lib/icon-config";
 
 type ArrowLinkProps = {
-  children: string;
-  icon: string;
-  iconSize?: number;
-  iconWidth?: number;
-  iconHeight?: number;
-  textClassName?: string;
-  className?: string;
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
+    children: string;
+    iconName: string;
+    iconSet?: IconSet;
+    iconSize?: number;
+    iconWidth?: number;
+    iconHeight?: number;
+    textClassName?: string;
+    className?: string;
+} & Omit<ComponentProps<typeof Link>, "children" | "href"> & { href?: ComponentProps<typeof Link>["href"] };
 
 export function ArrowLink({
-  children,
-  icon,
-  iconSize = 12,
-  iconWidth,
-  iconHeight,
-  textClassName = "text-forrest text-sm font-medium",
-  className = "",
-  href = "#",
-  ...props
+    children,
+    iconName,
+    iconSet,
+    iconSize = 12,
+    iconWidth,
+    iconHeight,
+    textClassName = "text-forrest text-sm font-medium",
+    className = "",
+    href = "#",
+    ...props
 }: ArrowLinkProps) {
-  return (
-    <a
-      href={href}
-      className={`inline-flex items-center gap-2.5 whitespace-nowrap ${className}`}
-      {...props}
-    >
-      <span className={textClassName}>{children}</span>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={icon}
-        alt=""
-        className="shrink-0"
-        style={{ width: iconWidth ?? iconSize, height: iconHeight ?? iconSize }}
-      />
-    </a>
-  );
+    return (
+        <Link href={href} className={`inline-flex items-center gap-2.5 whitespace-nowrap ${className}`} {...props}>
+            <span className={textClassName}>{children}</span>
+            <Icon
+                name={iconName}
+                set={iconSet}
+                className="shrink-0"
+                width={iconWidth ?? iconSize}
+                height={iconHeight ?? iconSize}
+            />
+        </Link>
+    );
 }
