@@ -1,0 +1,3 @@
+# Prior knowledge: solid Next.js, rusty on GSAP-in-React idioms
+
+Blake stated he already knows Next.js well and just wants targeted refreshers, not a fundamentals re-teach. His first real question (`nav-dropdown.tsx` chevron hover) showed the actual gap is on the GSAP side: the existing `ServicesNavDropdown` component calls `gsap.to()` directly in the render body keyed on `open` state, rather than through `useGSAP`. This is a common mistake, not evidence of deep unfamiliarity — future sessions should default to GSAP-in-React idioms (`useGSAP`, `contextSafe`, `scope`) as the starting zone of proximal development, and only dip into core Next.js topics when a specific refresh is requested.

@@ -40,7 +40,7 @@ export function WhyChooseUsSection() {
                                 labelClassName="font-mono-stat text-sm uppercase"
                             />
                             <div className="flex min-w-0 flex-col items-start gap-10">
-                                <p className="w-full max-w-[416px] font-sans text-lg leading-7 font-normal whitespace-pre-wrap text-neutral-600">
+                                <p className="w-full max-w-104 font-sans text-lg leading-7 font-normal whitespace-pre-wrap text-neutral-600">
                                     {`Qui id id labor occaecat Lorem labore. Et consectetur oaecat nisi  voluptate cupidatat ipsum laborum eiusmod sit.`}
                                 </p>
                                 <div className="bg-light-green-cta flex w-full min-w-0 items-start gap-4 rounded-xl p-6">
@@ -77,7 +77,7 @@ export function WhyChooseUsSection() {
                         </PillButton>
                     </div>
 
-                    <div className="relative mt-[50px] h-[484px] w-[495px] shrink-0 rounded-xl">
+                    <div className="relative mt-[50px] h-121 w-[495px] shrink-0 rounded-xl">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img

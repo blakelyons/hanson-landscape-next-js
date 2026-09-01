@@ -31,10 +31,10 @@ function ServiceCard({ title, description, icon, iconName, iconColor, iconBg }: 
     iconColor?: string;
 }) {
     return (
-        <div className="flex h-[324px] w-[337px] flex-col items-start justify-center gap-9 rounded-xl border border-[#cad5e2] bg-white p-8 drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex h-[194px] w-[220px] flex-col items-start gap-4">
+        <div className="flex h-81 w-[337px] flex-col items-start justify-center gap-9 rounded-xl border border-[#cad5e2] bg-white p-8 drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.05)]">
+            <div className="flex h-[194px] w-55 flex-col items-start gap-4">
                 <div
-                    className="flex size-[60px] shrink-0 items-center justify-center rounded-lg p-6"
+                    className="flex size-15 shrink-0 items-center justify-center rounded-lg p-6"
                     style={{ backgroundColor: iconBg }}
                 >
                     <div className="size-6 shrink-0" style={iconColor ? { color: iconColor } : undefined}>
@@ -70,9 +70,9 @@ function ServiceCard({ title, description, icon, iconName, iconColor, iconBg }: 
 export function ServicesSection() {
     return (
         <section className="bg-neutral-25 relative flex w-full flex-col items-center justify-center py-20">
-            <div className="relative container flex flex-col items-center justify-center gap-[60px] px-20">
+            <div className="relative container flex flex-col items-center justify-center gap-15 px-20">
                 <SectionIntro
-                    className="h-[140px] w-[600px]"
+                    className="h-35 w-150"
                     eyebrow="What We Do"
                     heading="Expert Landscaping Services"
                     description="From initial design through ongoing maintenance, we create outdoor spaces that transform how you live."

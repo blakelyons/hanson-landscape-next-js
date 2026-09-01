@@ -10,7 +10,7 @@ describe("AboutPage", () => {
     it("renders header, hero, story, why-choose-us, cta, and footer sections", () => {
         render(<AboutPage />);
 
-        expect(screen.getByRole("link", { name: "About" })).toHaveClass("bg-primary");
+        expect(screen.getByRole("link", { name: "About" })).toHaveClass("bg-[#f89c1c]");
         expect(screen.getByText("Family-Owned. Passion-Driven.")).toBeInTheDocument();
         expect(
             screen.getByText("How a small crew became Chicagoland's trusted name in outdoor living."),

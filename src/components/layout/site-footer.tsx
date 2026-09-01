@@ -30,7 +30,7 @@ export function SiteFooter() {
                 <div className="container flex flex-col items-start px-20">
                     <div className="grid w-full grid-cols-[361px_1fr] gap-x-[43px]">
                         <div className="flex flex-col items-start gap-[21px]">
-                            <div className="relative h-[88px] w-[111px] shrink-0">
+                            <div className="relative h-22 w-[111px] shrink-0">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     alt="Hanson Landscape"

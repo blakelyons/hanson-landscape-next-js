@@ -9,22 +9,22 @@ const STATS = [
 
 export function HeroSection() {
     return (
-        <section className="relative h-[960px] w-full overflow-clip bg-[#0e2113]">
+        <section className="relative h-240 w-full overflow-clip bg-[#0e2113]">
             <div className="relative container h-full">
                 {/* Decorative background layers — legitimately absolute, scoped to this section's 1440 column */}
-                <div className="absolute top-[-60px] left-[620px] size-[980px]">
+                <div className="absolute -top-15 left-155 size-245">
                     <div className="absolute inset-[-32.65%]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img alt="" className="block size-full max-w-none" src="/images/home/bg-glow.svg" />
                     </div>
                 </div>
-                <div className="absolute top-[560px] left-[-260px] size-[700px]">
+                <div className="absolute top-140 -left-65 size-175">
                     <div className="absolute inset-[-42.86%]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img alt="" className="block size-full max-w-none" src="/images/home/bg-glow-amber.svg" />
                     </div>
                 </div>
-                <div className="absolute top-0 left-0 h-[960px] w-[1440px]">
+                <div className="absolute top-0 left-0 h-240 w-360">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         alt=""
@@ -33,31 +33,32 @@ export function HeroSection() {
                     />
                 </div>
 
-                {/* Content column — real flex flow instead of independently-pinned blocks */}
-                <div className="relative z-10 flex flex-col items-start pt-[257px]">
-                    <div className="ml-[84px] flex items-center gap-3">
-                        <div className="h-[2px] w-[36px] shrink-0 bg-[#f89c1c]" />
-                        <p className="font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap text-[#f89c1c]">
+                {/* Content column — real flex flow instead of independently-pinned blocks.
+                    pt = header height + 43px design gap below it. */}
+                <div className="relative z-10 flex flex-col items-start pt-[calc(var(--header-height)+43px)]">
+                    <div className="ml-21 flex items-center gap-3">
+                        <div className="h-0.5 w-9 shrink-0 bg-[#f89c1c]" />
+                        <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
                             {`CHICAGOLAND'S LANDSCAPE ARCHITECTS — EST. 2001`}
                         </p>
                     </div>
 
-                    <div className="mt-[22px] ml-[80px] flex flex-col items-start text-[96px] leading-[102px] whitespace-nowrap">
+                    <div className="mt-5.5 ml-20 flex flex-col items-start text-[96px] leading-25.5 whitespace-nowrap">
                         <p className="font-serif-display mb-[-6px] font-normal text-[#fafbf8] not-italic">
                             From blueprint
                         </p>
                         <div className="flex items-baseline gap-6">
                             <p className="font-serif-display font-normal text-[#fafbf8] not-italic">to</p>
-                            <p className="font-serif-display font-normal text-[#f89c1c] italic">backyard.</p>
+                            <p className="font-serif-display text-primary font-normal italic">backyard.</p>
                         </div>
                     </div>
 
-                    <p className="mt-[38px] ml-[84px] w-[480px] font-sans text-lg leading-[30px] font-normal text-[rgba(250,251,248,0.78)]">
+                    <p className="mt-[38px] ml-21 w-120 font-sans text-lg leading-[30px] font-normal text-[rgba(250,251,248,0.78)]">
                         Award-winning landscape design, construction, and year-round care for residential and commercial
                         properties across Chicagoland.
                     </p>
 
-                    <div className="mt-14 ml-[84px] flex items-start gap-4">
+                    <div className="mt-14 ml-21 flex items-start gap-4">
                         <PillButton variant="primary-dark" size="lg" textClassName="text-forrest-dark-2">
                             {`Start Your Project  →`}
                         </PillButton>
@@ -66,7 +67,7 @@ export function HeroSection() {
                         </PillButton>
                     </div>
 
-                    <div className="mt-[54px] ml-[84px] flex items-center gap-8">
+                    <div className="mt-[54px] ml-21 flex items-center gap-8">
                         {STATS.map((stat, index) => (
                             <div key={stat.value} className="contents">
                                 <div className="flex flex-col items-start gap-1 whitespace-nowrap">
@@ -78,7 +79,7 @@ export function HeroSection() {
                                     </p>
                                 </div>
                                 {index < STATS.length - 1 ? (
-                                    <div className="h-[44px] w-px shrink-0 bg-[rgba(250,251,248,0.18)]" />
+                                    <div className="h-11 w-px shrink-0 bg-[rgba(250,251,248,0.18)]" />
                                 ) : null}
                             </div>
                         ))}
@@ -86,22 +87,22 @@ export function HeroSection() {
                 </div>
 
                 {/* Floating scroll cue — legitimate small overlay, unrelated to content column's x-axis */}
-                <div className="absolute top-[876px] left-[700px] flex flex-col items-center gap-2">
-                    <p className="font-sans text-[10px] font-medium tracking-[2.4px] whitespace-nowrap text-[rgba(250,251,248,0.5)]">
+                <div className="absolute top-219 left-175 flex flex-col items-center gap-2">
+                    <p className="text-muted font-sans text-[10px] font-medium tracking-[2.4px] whitespace-nowrap">
                         SCROLL
                     </p>
-                    <div className="h-[36px] w-[2px] shrink-0 bg-[#f89c1c]" />
+                    <div className="h-9 w-[2px] shrink-0 bg-[#f89c1c]" />
                 </div>
 
                 {/* Freeform decorative graphic cluster — genuinely overlapping composition, kept as a scoped absolute cluster */}
-                <div className="absolute top-[120px] left-[690px] size-[700px]">
+                <div className="absolute top-30 left-[690px] size-175">
                     <div className="absolute top-[470px] left-[71px] h-[110px] w-[558px]">
                         <div className="absolute inset-[-63.64%_-12.54%]">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img alt="" className="block size-full max-w-none" src="/images/home/island-shadow.svg" />
                         </div>
                     </div>
-                    <div className="absolute top-[296px] left-[18px] h-[357px] w-[585px]">
+                    <div className="absolute top-74 left-[18px] h-[357px] w-[585px]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             alt=""
@@ -111,7 +112,7 @@ export function HeroSection() {
                             src="/images/home/orbit-ring-1.png"
                         />
                     </div>
-                    <div className="absolute top-[102.91px] left-[144px] flex h-[595.687px] w-[456.245px] items-center justify-center">
+                    <div className="absolute top-[102.91px] left-36 flex h-[595.687px] w-[456.245px] items-center justify-center">
                         <div className="flex-none rotate-[91.41deg]">
                             <div className="relative h-[442px] w-[585px]">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -133,7 +134,7 @@ export function HeroSection() {
                             src="/images/home/project-photo-1.jpg"
                         />
                     </div>
-                    <div className="absolute top-0 left-0 size-[700px]">
+                    <div className="absolute top-0 left-0 size-175">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             alt=""
@@ -159,7 +160,7 @@ export function HeroSection() {
                             </p>
                         </div>
                     </div>
-                    <div className="absolute top-[507px] left-[200px] flex w-[169px] items-center gap-2">
+                    <div className="absolute top-[507px] left-50 flex w-[169px] items-center gap-2">
                         <div className="relative flex shrink-0 items-center justify-center">
                             <div className="flex-none -scale-y-100">
                                 <div className="relative size-[50px] rounded-[4px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.15)]">
@@ -197,9 +198,9 @@ export function HeroSection() {
                             </div>
                         </div>
                     </div>
-                    <div className="absolute top-[449px] left-[514px] flex h-[100px] w-[175px] items-center justify-center">
+                    <div className="absolute top-[449px] left-[514px] flex h-25 w-[175px] items-center justify-center">
                         <div className="flex-none -scale-y-100 rotate-180">
-                            <div className="relative h-[100px] w-[175px]">
+                            <div className="relative h-25 w-[175px]">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     alt=""

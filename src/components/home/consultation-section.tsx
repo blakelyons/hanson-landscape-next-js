@@ -12,7 +12,7 @@ export function ConsultationSection() {
             </div>
             <div className="relative container flex h-full items-start pt-20 pl-[643px]">
                 <div className="relative flex w-[647px] flex-col items-center justify-center gap-2.5 overflow-clip rounded-xl bg-white p-8">
-                    <p className="font-serif-display h-[60px] w-full text-[32px] leading-[42px] font-normal text-black not-italic">
+                    <p className="font-serif-display h-15 w-full text-[32px] leading-[42px] font-normal text-black not-italic">
                         Book a Consultation Today
                     </p>
                     <div className="relative w-full shrink-0" style={{ aspectRatio: "684 / 562" }}>

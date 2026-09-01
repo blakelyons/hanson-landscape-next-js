@@ -15,7 +15,7 @@ export function AboutSection() {
             <div className="relative container overflow-x-clip">
                 {/* Decorative tree illustration — freeform overlay to the right of the text column,
           intentionally tall enough to bleed under the next (opaque) section */}
-                <div className="pointer-events-none absolute top-[62px] left-[644px] h-[979px] w-[852px]">
+                <div className="pointer-events-none absolute top-[62px] left-161 h-[979px] w-213">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img alt="" className="block size-full max-w-none" src="/images/home/about-tree.svg" />
                 </div>
@@ -23,7 +23,7 @@ export function AboutSection() {
                     <Icon icon="ci:arrow-right-lg" width={12} height={12} />
                 </div>
 
-                <div className="ml-[80px] flex w-[632px] flex-col items-start gap-4 px-4">
+                <div className="ml-20 flex w-158 flex-col items-start gap-4 px-4">
                     <div className="flex h-[169px] w-[779px] flex-col items-center">
                         <p className="font-mono-label text-forrest w-full text-xs uppercase">about us</p>
                         <p className="font-serif-display w-full text-[48px] leading-[46px] font-normal text-[#333] not-italic">
@@ -49,7 +49,7 @@ export function AboutSection() {
                     </div>
 
                     <div className="flex w-full items-center gap-4 pt-8">
-                        <div className="relative size-[292px] shrink-0 rounded-xl">
+                        <div className="relative size-73 shrink-0 rounded-xl">
                             <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
@@ -59,7 +59,7 @@ export function AboutSection() {
                                 />
                             </div>
                         </div>
-                        <div className="relative size-[292px] shrink-0 rounded-xl">
+                        <div className="relative size-73 shrink-0 rounded-xl">
                             <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img

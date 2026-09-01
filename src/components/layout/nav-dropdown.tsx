@@ -3,8 +3,60 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { useGSAP } from "@gsap/react";
 import type { SiteHeaderVariant } from "./site-header";
-import { Icon } from "@/components/ui/icon";
+gsap.registerPlugin(MorphSVGPlugin);
+
+// chevron-right (lucide, 24x24 viewBox)
+const CHEVRON_D = "m9 18l6-6l-6-6";
+// maple-leaf, scaled from its native 15x15 viewBox into 24x24 so it shares
+// coordinate space with the chevron — MorphSVGPlugin morphs raw path
+// coordinates, so mismatched viewBoxes would distort the tween.
+const MAPLE_LEAF_D =
+    "m2.32 24l4.96 -6.43l3.78 6.34L12.8 20.8l7.44 1.6l-0.61 -1.7c-0.1 -0.24 0.02 -0.5 0.24 -0.61L24 18L20.42 15.68c-0.19 -0.13 -0.27 -0.38 -0.19 -0.61l0.78 -1.9L16.8 12.8L24 7.71l-3.42 -0.85l2.56 -6l-6 2.56L16.29 0L11.2 7.2l-0.35 -4.21l-1.92 0.77c-0.22 0.08 -0.46 0 -0.61 -0.19L6 0L3.9 4.11c-0.13 0.22 -0.38 0.34 -0.62 0.24L1.58 3.74L3.2 11.2L0 12.88l6.43 3.84l-6.3 5.09q0.1 0.82 0.67 1.39c0.38 0.38 0.9 0.66 1.52 0.8";
+
+function ChevronToLeafIcon({
+    open,
+    className,
+    leafColor = "currentColor",
+}: {
+    open: boolean;
+    className?: string;
+    leafColor?: string;
+}) {
+    const pathRef = useRef<SVGPathElement>(null);
+
+    useGSAP(() => {
+        gsap.to(pathRef.current, {
+            morphSVG: open ? MAPLE_LEAF_D : CHEVRON_D,
+            fillOpacity: open ? 1 : 0,
+            strokeOpacity: open ? 0 : 1,
+            strokeWidth: open ? 0 : 2,
+            duration: 0.4,
+            ease: "power2.inOut",
+        });
+    }, [open]);
+
+    return (
+        <span className={className}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                    ref={pathRef}
+                    fill={leafColor}
+                    fillOpacity={0}
+                    stroke="currentColor"
+                    strokeOpacity={1}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={CHEVRON_D}
+                />
+            </svg>
+        </span>
+    );
+}
 
 function useDropdownEnter<T extends HTMLElement>() {
     const ref = useRef<T>(null);
@@ -39,7 +91,7 @@ function SubmenuPanel({ items }: { items: MenuItem[] }) {
     return (
         <div
             ref={ref}
-            className="absolute -top-1.5 left-full ml-1 flex min-w-[200px] flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
+            className="absolute -top-1.5 left-full ml-1 flex min-w-50 flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
         >
             {items.map((item) => (
                 <MenuNode key={item.label} item={item} />
@@ -60,10 +112,16 @@ function MenuNode({ item }: { item: MenuItem }) {
         >
             <Link
                 href="#"
-                className="hover:text-primary flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-[#29462f]"
+                className="hover:text-primary group flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-[#29462f]"
             >
                 {item.label}
-                {hasChildren ? <span className="text-xs text-[rgba(250,251,248,0.5)]">›</span> : null}
+                {hasChildren ? (
+                    <ChevronToLeafIcon
+                        open={open}
+                        leafColor="var(--color-primary)"
+                        className="text-muted text-xs transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+                    />
+                ) : null}
             </Link>
             {hasChildren && open ? <SubmenuPanel items={item.children!} /> : null}
         </div>
@@ -80,7 +138,7 @@ function ServicesMenuPanel() {
         <div className="absolute top-full left-0 pt-4">
             <div
                 ref={ref}
-                className="flex min-w-[220px] flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
+                className="flex min-w-55 flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
             >
                 {SERVICES_MENU.map((item) => (
                     <MenuNode key={item.label} item={item} />
@@ -101,8 +159,11 @@ export function ServicesNavDropdown({
 }) {
     const [open, setOpen] = useState(false);
 
+    const rootRef = useRef<HTMLDivElement>(null);
+
     return (
         <div
+            ref={rootRef}
             className="relative"
             onMouseEnter={() => {
                 setOpen(true);
@@ -115,14 +176,12 @@ export function ServicesNavDropdown({
                 href="#"
                 className={
                     variant === "solid"
-                        ? "text-forrest flex items-center gap-1.5 rounded-full px-5 py-2.5 font-sans text-base leading-normal font-medium whitespace-nowrap transition-colors hover:text-white"
-                        : "flex items-center gap-1.5 rounded-full px-5 py-2.5 font-sans text-base leading-normal font-medium whitespace-nowrap text-white transition-colors hover:text-white"
+                        ? "text-forrest is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-all duration-300 ease-in-out hover:text-white lg:text-base"
+                        : "is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap text-white transition-all duration-300 ease-in-out hover:text-white lg:text-base"
                 }
             >
-                Our Services
-                <span className="text-sm">
-                    <Icon icon="lucide:chevron-right" />
-                </span>
+                <span>Our Services</span>
+                <ChevronToLeafIcon open={open} className="services-chevron text-sm" />
             </Link>
             {open ? <ServicesMenuPanel /> : null}
         </div>

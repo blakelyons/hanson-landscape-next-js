@@ -3,6 +3,7 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --header-height: 114px;
 }
 
 @theme inline {
@@ -15,6 +16,8 @@
     --font-mono-stat: var(--font-dm-mono);
 
     /* Brand tokens — mirrors the Figma variable names used in the design file */
+    --color-white: #ffffff;
+    --color-black: #000000;
     --color-forrest: #2b6733;
     --color-forrest-dark: #1e4a25;
     --color-forrest-dark-2: #15240f;
@@ -29,6 +32,12 @@
     --color-primary-dark: #d4820f;
     --color-primary-dark-2: #7c4e0e;
     --color-light-green-cta: #f7f8ed;
+
+    --color-muted: rgba(250, 251, 248, 0.5);
+    --color-muted-dark: rgba(250, 251, 248, 0.7);
+
+    --text-xs: 0.6875rem;
+    --text-xs--line-height: 0.875rem;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -13,23 +13,23 @@ describe("SiteHeader", () => {
         usePathnameMock.mockReturnValue("/");
         render(<SiteHeader variant="solid" />);
 
-        expect(screen.getByRole("link", { name: "Home" })).toHaveClass("bg-primary");
-        expect(screen.getByRole("link", { name: "About" })).not.toHaveClass("bg-primary");
+        expect(screen.getByRole("link", { name: "Home" })).toHaveClass("bg-[#f89c1c]");
+        expect(screen.getByRole("link", { name: "About" })).not.toHaveClass("bg-[#f89c1c]");
     });
 
     it("marks About active and Home inactive at /about (solid variant)", () => {
         usePathnameMock.mockReturnValue("/about");
         render(<SiteHeader variant="solid" />);
 
-        expect(screen.getByRole("link", { name: "About" })).toHaveClass("bg-primary");
-        expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass("bg-primary");
+        expect(screen.getByRole("link", { name: "About" })).toHaveClass("bg-[#f89c1c]");
+        expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass("bg-[#f89c1c]");
     });
 
     it("never shows active-link highlighting on the transparent (homepage) variant", () => {
         usePathnameMock.mockReturnValue("/");
         render(<SiteHeader variant="transparent" />);
 
-        expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass("bg-primary");
+        expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass("bg-[#f89c1c]");
     });
 
     it("gives Home and About real hrefs, leaves other links as placeholders", () => {

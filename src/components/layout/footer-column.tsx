@@ -1,7 +1,7 @@
 export function FooterColumn({
     heading,
     items,
-    className = "flex w-[188px] flex-col items-start gap-4",
+    className = "flex w-47 flex-col items-start gap-4",
 }: {
     heading: string;
     items: string[];

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>useGSAP for the services chevron</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<div class="lesson">
+
+  <p class="eyebrow">Lesson 1 · GSAP in React</p>
+  <h1>Fixing the services-chevron hover with <code>useGSAP</code></h1>
+  <p class="lede">Your <code>ServicesNavDropdown</code> component already rotates the chevron on hover — but the way it's wired is a classic GSAP-in-React anti-pattern. This lesson fixes it and gives you the rule to carry forward.</p>
+
+  <h2>What your code does right now</h2>
+  <p>In <code>nav-dropdown.tsx</code>, <code>ServicesNavDropdown</code> calls <code>gsap.to()</code> straight in the component body, gated by an <code>if/else</code> on <code>open</code>:</p>
+
+  <div class="callout diff-bad">
+<pre>if (open) {
+  gsap.to(servicesChevronRef.current, { rotate: 90, duration: 0.3, ease: "power2.out" });
+} else {
+  gsap.to(servicesChevronRef.current, { rotate: 0, duration: 0.3, ease: "power2.out" });
+}</pre>
+  </div>
+
+  <p>It <em>works</em> — the chevron does rotate — but three things are wrong:</p>
+  <p>1. <strong>It fires on every render</strong>, not just when <code>open</code> changes. Any unrelated re-render of this component (a prop change, a parent re-render) restarts the tween.<br>
+  2. <strong>It runs outside GSAP's React context</strong>, so there's no automatic cleanup on unmount — GSAP even calls this pattern out by name.<br>
+  3. <strong>It double-fires under React 18 Strict Mode</strong> in dev, because render bodies run twice. You likely haven't noticed because the two tweens animate to the same end state, but it's wasted work and a bug waiting to surprise you elsewhere.</p>
+
+  <h2>The fix: <code>useGSAP</code> with a dependency array</h2>
+  <p>GSAP's own React hook, <code>useGSAP</code> — which this file already imports but doesn't use here — exists exactly for this: it's <code>useLayoutEffect</code> plus automatic <code>gsap.context()</code> cleanup. Give it a dependency array like <code>useEffect</code>, and a <code>scope</code> so selector strings elsewhere in the tree can't accidentally match.</p>
+
+  <div class="callout good diff-good">
+<pre>const rootRef = useRef&lt;HTMLDivElement&gt;(null);
+const servicesChevronRef = useRef&lt;HTMLSpanElement&gt;(null);
+const [open, setOpen] = useState(false);
+
+useGSAP(() => {
+  gsap.to(servicesChevronRef.current, {
+    rotate: open ? 90 : 0,
+    duration: 0.3,
+    ease: "power2.out",
+  });
+}, { dependencies: [open], scope: rootRef });</pre>
+  </div>
+
+  <p>Then attach <code>rootRef</code> to the outer <code>&lt;div className="relative"&gt;</code>. Now the tween only re-runs when <code>open</code> actually flips, GSAP tracks and reverts it on unmount, and Strict Mode's double-invoke is handled correctly by the hook.</p>
+
+  <h2>A related idiom you'll want soon: <code>contextSafe</code></h2>
+  <p>This fix uses a <em>dependency array</em> because the animation is driven by state (<code>open</code>). If you ever trigger a GSAP tween straight from an event handler — a raw <code>onMouseEnter</code> with no state involved — wrap that handler in <code>contextSafe()</code> instead, so it still gets tracked by the same context for cleanup:</p>
+
+  <pre>const { contextSafe } = useGSAP({ scope: rootRef });
+
+const onHoverIn = contextSafe(() => {
+  gsap.to(".card", { scale: 1.1, duration: 0.3 });
+});</pre>
+
+  <p>Rule of thumb: <strong>animation driven by React state → dependency array. Animation fired directly from a DOM event → <code>contextSafe</code>.</strong> Your chevron case is the first kind.</p>
+
+  <div class="quiz">
+    <p><strong>Quick recall</strong> — no peeking above.</p>
+    <p>1. Which hook replaces a raw <code>gsap.to()</code> call in a render body, giving you automatic cleanup?</p>
+    <input type="text" id="q1" placeholder="hook name">
+    <button onclick="checkQuiz()">Check</button>
+    <div class="quiz-feedback" id="feedback"></div>
+  </div>
+
+  <p class="source">Primary source: <a href="https://gsap.com/resources/React/" target="_blank" rel="noopener">GSAP — useGSAP() Hook Guide</a> (official GreenSock docs).</p>
+
+  <p class="ask-agent">Something unclear, or want to see this applied to <code>useDropdownEnter</code> too (it uses raw <code>useLayoutEffect</code> instead of <code>useGSAP</code> — a related but different case)? Ask your agent.</p>
+
+</div>
+
+<script>
+function checkQuiz() {
+  const val = document.getElementById('q1').value.trim().toLowerCase().replace(/[()]/g, '');
+  const fb = document.getElementById('feedback');
+  fb.classList.remove('correct', 'incorrect');
+  if (val === 'usegsap') {
+    fb.textContent = "Correct — useGSAP().";
+    fb.classList.add('show', 'correct');
+  } else {
+    fb.textContent = "Not quite — look at the fixed code block above again.";
+    fb.classList.add('show', 'incorrect');
+  }
+}
+</script>
+
+</body>
+</html>

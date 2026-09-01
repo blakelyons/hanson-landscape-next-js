@@ -14,9 +14,9 @@ export function PortfolioBento() {
                     View All Projects
                 </ArrowLink>
 
-                <div className="relative h-[500px] w-[1280px] shrink-0 overflow-clip">
-                    <div className="absolute top-0 left-0 flex w-[1280px] items-center justify-between">
-                        <div className="relative flex h-[500px] w-[388px] shrink-0 flex-col items-center justify-end overflow-clip rounded-xl px-[25px] py-8">
+                <div className="relative h-125 w-320 shrink-0 overflow-clip">
+                    <div className="absolute top-0 left-0 flex w-320 items-center justify-between">
+                        <div className="relative flex h-125 w-97 shrink-0 flex-col items-center justify-end overflow-clip rounded-xl px-[25px] py-8">
                             <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
@@ -45,7 +45,7 @@ export function PortfolioBento() {
                             </div>
                         </div>
 
-                        <div className="grid h-[500px] w-[857px] shrink-0 grid-cols-2 grid-rows-2 gap-8">
+                        <div className="grid h-125 w-[857px] shrink-0 grid-cols-2 grid-rows-2 gap-8">
                             <div className="col-span-2 grid grid-cols-2 grid-rows-1 gap-8 self-start">
                                 <div className="relative h-[234px] w-full shrink-0 rounded-xl">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}

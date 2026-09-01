@@ -35,14 +35,14 @@ export function ProcessSection() {
         <section className="bg-neutral-25 relative flex w-full flex-col items-center justify-center py-20">
             <div className="relative container flex flex-col items-center justify-center gap-12 px-20">
                 {/* Decorative plant illustration accenting the section's top-left corner */}
-                <div className="pointer-events-none absolute -top-16 left-6 h-[100px] w-[175px]">
+                <div className="pointer-events-none absolute -top-16 left-6 h-25 w-[175px]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img alt="" className="block size-full max-w-none" src="/images/home/plant-vector-standalone.svg" />
                 </div>
 
-                <SectionIntro className="w-[680px]" eyebrow="Our process" heading="How We Bring Your Project to Life" />
+                <SectionIntro className="w-170" eyebrow="Our process" heading="How We Bring Your Project to Life" />
 
-                <div className="w-[1140px] rounded-xl border border-neutral-200 bg-white px-12 py-10">
+                <div className="w-285 rounded-xl border border-neutral-200 bg-white px-12 py-10">
                     <div className="grid grid-cols-4 items-end gap-x-8">
                         {STEPS.map((step) => (
                             <div key={`${step.number}-title`} className="flex flex-col items-center gap-2 text-center">
