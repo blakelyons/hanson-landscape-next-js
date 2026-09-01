@@ -26,11 +26,13 @@ export function ArrowLink({
     return (
         <Link
             href={href}
-            className={`inline-flex items-center gap-2.5 whitespace-nowrap ${textClassName} ${className}`}
+            className={`inline-flex items-center gap-2 whitespace-nowrap ${textClassName} ${className} group`}
             {...props}
         >
             <span>{children}</span>
-            <Icon icon={icon} className="shrink-0" width={iconWidth ?? iconSize} height={iconHeight ?? iconSize} />
+            <span className="transition-all duration-300 ease-in-out group-hover:translate-x-1">
+                <Icon icon={icon} className="shrink-0" width={iconWidth ?? iconSize} height={iconHeight ?? iconSize} />
+            </span>
         </Link>
     );
 }

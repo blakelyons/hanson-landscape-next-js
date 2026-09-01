@@ -19,6 +19,7 @@
     --color-white: #ffffff;
     --color-black: #000000;
     --color-forrest: #2b6733;
+    --color-forrest-light: #3a8545;
     --color-forrest-dark: #1e4a25;
     --color-forrest-dark-2: #15240f;
     --color-forrest-light-2: #385b3b;
@@ -31,9 +32,11 @@
     --color-primary-light: #fbbd5e;
     --color-primary-dark: #d4820f;
     --color-primary-dark-2: #7c4e0e;
+    --color-secondary: #2b6733;
+    --color-secondary-light: #3a8545;
     --color-light-green-cta: #f7f8ed;
 
-    --color-muted: rgba(250, 251, 248, 0.5);
+    --color-muted: #cad5e2;
     --color-muted-dark: rgba(250, 251, 248, 0.7);
 
     --text-xs: 0.6875rem;

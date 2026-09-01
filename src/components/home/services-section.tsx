@@ -25,14 +25,21 @@ const SERVICES = [
     },
 ];
 
-function ServiceCard({ title, description, icon, iconName, iconColor, iconBg }: (typeof SERVICES)[number] & {
+function ServiceCard({
+    title,
+    description,
+    icon,
+    iconName,
+    iconColor,
+    iconBg,
+}: (typeof SERVICES)[number] & {
     icon?: string;
     iconName?: string;
     iconColor?: string;
 }) {
     return (
-        <div className="flex h-81 w-[337px] flex-col items-start justify-center gap-9 rounded-xl border border-[#cad5e2] bg-white p-8 drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.05)]">
-            <div className="flex h-[194px] w-55 flex-col items-start gap-4">
+        <div className="border-muted flex h-auto w-full flex-col items-start justify-center gap-9 rounded-xl border bg-white p-8 transition-all duration-300 ease-in-out hover:drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.05)]">
+            <div className="flex h-auto w-55 flex-1 flex-col items-start gap-4">
                 <div
                     className="flex size-15 shrink-0 items-center justify-center rounded-lg p-6"
                     style={{ backgroundColor: iconBg }}
@@ -49,9 +56,7 @@ function ServiceCard({ title, description, icon, iconName, iconColor, iconBg }: 
                 <p className="font-serif-display w-full min-w-full text-2xl leading-6 font-normal text-black not-italic">
                     {title}
                 </p>
-                <p className="w-full min-w-full font-sans text-sm leading-[22px] font-normal text-black">
-                    {description}
-                </p>
+                <p className="w-full min-w-full font-sans text-sm leading-5.5 font-normal text-black">{description}</p>
             </div>
             <ArrowLink
                 href="#"
@@ -59,7 +64,7 @@ function ServiceCard({ title, description, icon, iconName, iconColor, iconBg }: 
                 iconWidth={12}
                 iconHeight={14}
                 textClassName="text-forrest text-sm font-normal"
-                className="h-6 w-full items-center justify-between"
+                className="h-6 w-auto flex-row items-center justify-start"
             >
                 Learn More
             </ArrowLink>
@@ -77,13 +82,10 @@ export function ServicesSection() {
                     heading="Expert Landscaping Services"
                     description="From initial design through ongoing maintenance, we create outdoor spaces that transform how you live."
                 />
-                <div className="flex w-full items-center justify-center gap-[22px]">
+                <div className="flex w-full items-center justify-center gap-6">
                     {SERVICES.map((service) => (
                         <ServiceCard key={service.title} {...service} />
                     ))}
-                </div>
-                <div className="absolute inset-[74.27%_82.97%_22.41%_15.16%] text-[#020618]">
-                    <Icon icon="lucide:mouse-pointer-2" width={27} height={23} />
                 </div>
             </div>
         </section>

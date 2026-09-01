@@ -62,7 +62,7 @@ export function HeroSection() {
                         <PillButton variant="primary-dark" size="lg" textClassName="text-forrest-dark-2">
                             {`Start Your Project  →`}
                         </PillButton>
-                        <PillButton variant="outline" size="lg" textClassName="text-[#fafbf8] font-medium">
+                        <PillButton variant="outline-primary" size="lg" textClassName="text-[#fafbf8] font-medium">
                             View Our Work
                         </PillButton>
                     </div>

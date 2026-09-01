@@ -12,15 +12,10 @@ export function CtaSection() {
                         {`Get a free, no-obligation quote. We'll visit your property and bring your vision to life.`}
                     </p>
                     <div className="flex items-start gap-[18px] pt-6">
-                        <PillButton variant="green" size="md" textClassName="text-white">
+                        <PillButton variant="secondary" size="md" textClassName="text-white">
                             Get a Free Quote
                         </PillButton>
-                        <PillButton
-                            variant="primary-dark"
-                            size="md"
-                            textClassName="text-primary-dark-2"
-                            icon="lucide:phone"
-                        >
+                        <PillButton variant="primary-dark" size="md" icon="lucide:phone">
                             Call Us Today
                         </PillButton>
                     </div>
