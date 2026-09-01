@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import { ServicesNavDropdown } from "./nav-dropdown";
+import { MobileNav } from "./mobile-nav";
 import { getPillTargetRect } from "@/lib/nav-pill";
 gsap.registerPlugin(MorphSVGPlugin);
 
@@ -52,17 +53,17 @@ function MailToMailOpenIcon({ open, className }: { open: boolean; className?: st
     );
 }
 
-type NavLinkData = {
+export type NavLinkData = {
     label: string;
     href: string;
 };
 
-const NAV_LINKS: NavLinkData[] = [
+export const NAV_LINKS: NavLinkData[] = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
 ];
 
-const NAV_LINKS_AFTER: NavLinkData[] = [
+export const NAV_LINKS_AFTER: NavLinkData[] = [
     { label: "Portfolio", href: "#" },
     { label: "Testimonials", href: "#" },
 ];
@@ -260,6 +261,7 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
                     </nav>
                 </div>
             </header>
+            <MobileNav />
         </>
     );
 }
