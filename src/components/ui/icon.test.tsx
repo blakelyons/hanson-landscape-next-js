@@ -8,7 +8,7 @@ import { Icon } from "./icon";
 // This just checks the component mounts without throwing.
 describe("Icon", () => {
     it("renders without crashing", () => {
-        const { container } = render(<Icon name="leaf" />);
+        const { container } = render(<Icon icon="lucide:leaf" />);
         expect(container.firstChild).toBeInTheDocument();
     });
 });

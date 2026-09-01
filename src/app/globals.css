@@ -16,7 +16,8 @@
 
     /* Brand tokens — mirrors the Figma variable names used in the design file */
     --color-forrest: #2b6733;
-    --color-forest-dark: #1e4a25;
+    --color-forrest-dark: #1e4a25;
+    --color-forrest-dark-2: #15240f;
     --color-forrest-light-2: #385b3b;
     --color-forrest-light-2-border: #516f55;
     --color-neutral-700: #2d3b2d;
@@ -24,9 +25,9 @@
     --color-neutral-200: #c4ccc4;
     --color-neutral-25: #f6f8f6;
     --color-primary: #f89c1c;
-    --color-amber-light: #fbbd5e;
-    --color-amber-dark: #d4820f;
-    --color-amber-dark-2: #7c4e0e;
+    --color-primary-light: #fbbd5e;
+    --color-primary-dark: #d4820f;
+    --color-primary-dark-2: #7c4e0e;
     --color-light-green-cta: #f7f8ed;
 }
 
@@ -47,4 +48,10 @@ body {
     width: 100%;
     max-width: 1440px;
     margin-inline: auto;
+}
+
+a {
+    transition:
+        color 0.3s ease-in-out,
+        background-color 0.3s ease-in-out;
 }

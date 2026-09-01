@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/icon";
 
 const STEPS = [
     {
-        iconName: "arrow-up-right",
+        iconName: "lucide:arrow-up-right",
         iconColor: "#2B6733",
         title: "Share Your Vision",
         number: "01",
@@ -51,7 +51,7 @@ export function ProcessSection() {
                                     style={step.iconColor ? { color: step.iconColor } : undefined}
                                 >
                                     {step.iconName ? (
-                                        <Icon name={step.iconName} width={48} height={48} />
+                                        <Icon icon={step.iconName} width={48} height={48} />
                                     ) : (
                                         // eslint-disable-next-line @next/next/no-img-element
                                         <img alt="" className="block size-full max-w-none" src={step.icon} />
@@ -86,16 +86,15 @@ export function ProcessSection() {
                         ))}
                     </div>
 
-                    <div className="bg-amber-light mt-10 flex w-full items-center justify-between gap-8 rounded-xl px-12 py-[18px]">
+                    <div className="bg-primary-light mt-10 flex w-full items-center justify-between gap-8 rounded-xl px-12 py-[18px]">
                         <p className="font-sans text-sm leading-[18px] font-semibold whitespace-nowrap text-black">
                             Are You Prepared to Get Started on a Gorgeous Outdoor Area?
                         </p>
                         <PillButton
-                            variant="amber"
+                            variant="primary"
                             size="sm"
                             textClassName="text-[#1a2e1a]"
-                            iconName="arrow-right-lg"
-                            iconSet="ci"
+                            icon="ci:arrow-right-lg"
                             iconSize={12}
                         >
                             Get In Touch

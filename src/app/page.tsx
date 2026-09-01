@@ -1,5 +1,6 @@
+"use client";
 import { SiteHeader } from "@/components/layout/site-header";
-import { HeroSection } from "@/components/home/hero-section";
+import { HeroSection } from "@/components/home/hero-section-new";
 import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesSection } from "@/components/home/services-section";
 import { AboutSection } from "@/components/home/about-section";

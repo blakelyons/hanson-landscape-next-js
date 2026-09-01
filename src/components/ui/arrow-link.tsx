@@ -1,12 +1,10 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { Icon } from "@/components/ui/icon";
-import type { IconSet } from "@/lib/icon-config";
 
 type ArrowLinkProps = {
     children: string;
-    iconName: string;
-    iconSet?: IconSet;
+    icon: string;
     iconSize?: number;
     iconWidth?: number;
     iconHeight?: number;
@@ -16,8 +14,7 @@ type ArrowLinkProps = {
 
 export function ArrowLink({
     children,
-    iconName,
-    iconSet,
+    icon,
     iconSize = 12,
     iconWidth,
     iconHeight,
@@ -33,13 +30,7 @@ export function ArrowLink({
             {...props}
         >
             <span>{children}</span>
-            <Icon
-                name={iconName}
-                set={iconSet}
-                className="shrink-0"
-                width={iconWidth ?? iconSize}
-                height={iconHeight ?? iconSize}
-            />
+            <Icon icon={icon} className="shrink-0" width={iconWidth ?? iconSize} height={iconHeight ?? iconSize} />
         </Link>
     );
 }

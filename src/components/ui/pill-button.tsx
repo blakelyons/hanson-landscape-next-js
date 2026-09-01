@@ -1,15 +1,14 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
-import type { IconSet } from "@/lib/icon-config";
 
-type PillButtonVariant = "green" | "amber" | "amber-dark" | "outline";
+type PillButtonVariant = "green" | "primary" | "primary-dark" | "outline";
 type PillButtonSize = "sm" | "md" | "lg";
 
 const variantSurfaceClasses: Record<PillButtonVariant, string> = {
     green: "bg-forrest",
-    amber: "bg-primary",
-    "amber-dark": "bg-amber-dark",
+    primary: "bg-primary",
+    "primary-dark": "bg-primary-dark",
     outline: "border-[1.5px] border-[rgba(250,251,248,0.35)]",
 };
 
@@ -24,8 +23,7 @@ type PillButtonProps = {
     variant?: PillButtonVariant;
     size?: PillButtonSize;
     textClassName?: string;
-    iconName?: string;
-    iconSet?: IconSet;
+    icon?: string;
     iconSize?: number;
     className?: string;
 } & Omit<ComponentProps<typeof Link>, "children" | "href"> & { href?: ComponentProps<typeof Link>["href"] };
@@ -35,8 +33,7 @@ export function PillButton({
     variant = "green",
     size = "md",
     textClassName = "text-white",
-    iconName,
-    iconSet,
+    icon,
     iconSize = 14,
     className = "",
     href = "#",
@@ -45,13 +42,11 @@ export function PillButton({
     return (
         <Link
             href={href}
-            className={`group inline-flex items-center justify-center gap-2.5 rounded-full text-center whitespace-nowrap ${variantSurfaceClasses[variant]} ${sizeClasses[size]} ${textClassName} ${className}`}
+            className={`group hover:bg-primary-light inline-flex items-center justify-center gap-2.5 rounded-full text-center whitespace-nowrap transition-all duration-300 ease-in-out hover:gap-2.5 ${variantSurfaceClasses[variant]} ${sizeClasses[size]} ${textClassName} ${className}`}
             {...props}
         >
             <span>{children}</span>
-            {iconName ? (
-                <Icon name={iconName} set={iconSet} className="shrink-0" width={iconSize} height={iconSize} />
-            ) : null}
+            {icon ? <Icon icon={icon} className="shrink-0" width={iconSize} height={iconSize} /> : null}
         </Link>
     );
 }

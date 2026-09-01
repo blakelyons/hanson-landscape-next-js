@@ -25,7 +25,7 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
             <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, index) => (
                     <div key={index} className="size-5 shrink-0 text-[#F89C1C]">
-                        <Icon set="mingcute" name="star-fill" width={20} height={20} />
+                        <Icon icon="mingcute:star-fill" width={20} height={20} />
                     </div>
                 ))}
             </div>
@@ -43,7 +43,7 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
 
 export function TestimonialsSection() {
     return (
-        <section className="bg-forest-dark relative flex w-full flex-col items-center justify-center overflow-clip py-20">
+        <section className="bg-forrest-dark relative flex w-full flex-col items-center justify-center overflow-clip py-20">
             <div className="container flex flex-col items-center justify-center gap-[60px] px-20">
                 <SectionIntro
                     className="h-[72px] w-full"

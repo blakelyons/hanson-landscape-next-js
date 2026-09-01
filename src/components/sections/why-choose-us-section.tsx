@@ -68,10 +68,10 @@ export function WhyChooseUsSection() {
                         </div>
 
                         <PillButton
-                            variant="amber"
+                            variant="primary"
                             size="md"
-                            textClassName="text-amber-dark-2"
-                            iconName="arrow-right"
+                            textClassName="text-primary-dark-2"
+                            icon="lucide:arrow-right"
                         >
                             Discover More
                         </PillButton>

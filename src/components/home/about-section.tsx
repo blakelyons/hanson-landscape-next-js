@@ -20,7 +20,7 @@ export function AboutSection() {
                     <img alt="" className="block size-full max-w-none" src="/images/home/about-tree.svg" />
                 </div>
                 <div className="pointer-events-none absolute top-[142px] left-[487px] size-3 text-[#3A8545]">
-                    <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
+                    <Icon icon="ci:arrow-right-lg" width={12} height={12} />
                 </div>
 
                 <div className="ml-[80px] flex w-[632px] flex-col items-start gap-4 px-4">
@@ -39,7 +39,7 @@ export function AboutSection() {
                     </div>
 
                     <div className="size-3 shrink-0 text-black">
-                        <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
+                        <Icon icon="ci:arrow-right-lg" width={12} height={12} />
                     </div>
 
                     <div className="text-forrest flex items-start gap-8">

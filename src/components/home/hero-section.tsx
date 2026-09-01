@@ -58,7 +58,7 @@ export function HeroSection() {
                     </p>
 
                     <div className="mt-14 ml-[84px] flex items-start gap-4">
-                        <PillButton variant="amber" size="lg" textClassName="text-[#15240f]">
+                        <PillButton variant="primary-dark" size="lg" textClassName="text-forrest-dark-2">
                             {`Start Your Project  →`}
                         </PillButton>
                         <PillButton variant="outline" size="lg" textClassName="text-[#fafbf8] font-medium">
@@ -144,7 +144,7 @@ export function HeroSection() {
                     <div className="absolute top-[627px] left-[130px] flex items-center gap-4">
                         <div className="flex shrink-0 items-center gap-2 rounded-[999px] border border-[rgba(250,251,248,0.14)] bg-[#29462f] py-2 pr-3.5 pl-3">
                             <div className="flex size-3 shrink-0 items-center justify-center text-[#B2BEB3]">
-                                <Icon set="mingcute" name="building-6-line" width={12} height={12} />
+                                <Icon icon="mingcute:building-6-line" width={12} height={12} />
                             </div>
                             <p className="font-sans text-[10px] font-medium tracking-[1.8px] whitespace-nowrap text-[rgba(250,251,248,0.65)]">
                                 COMMERCIAL LANDSCAPING
@@ -152,7 +152,7 @@ export function HeroSection() {
                         </div>
                         <div className="flex shrink-0 items-center gap-2 rounded-[999px] border border-[rgba(250,251,248,0.14)] bg-[#29462f] py-2 pr-3.5 pl-3">
                             <div className="flex size-3 shrink-0 items-center justify-center text-[#B3BEB3]">
-                                <Icon set="streamlineUltimate" name="house-1" width={12} height={12} />
+                                <Icon icon="streamline-ultimate:house-1" width={12} height={12} />
                             </div>
                             <p className="font-sans text-[10px] font-medium tracking-[1.8px] whitespace-nowrap text-[rgba(250,251,248,0.65)]">
                                 RESIDENTIAL LANDSCAPING
@@ -220,7 +220,7 @@ export function HeroSection() {
                 </div>
 
                 <div className="absolute top-[657px] left-[1066px] flex size-3 items-center justify-center text-[#FBB600]">
-                    <Icon set="ci" name="arrow-right-lg" width={12} height={12} />
+                    <Icon icon="ci:arrow-right-lg" width={12} height={12} />
                 </div>
             </div>
         </section>

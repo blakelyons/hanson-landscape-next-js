@@ -6,7 +6,7 @@ export function PortfolioBento() {
             <div className="container flex flex-col items-end justify-center gap-4 px-20 pt-12 pb-20">
                 <ArrowLink
                     href="#"
-                    iconName="arrow-right"
+                    icon="lucide:arrow-right"
                     iconSize={14}
                     textClassName="text-forrest text-base font-medium"
                     className="shrink-0 items-center justify-center rounded-full"
@@ -35,7 +35,7 @@ export function PortfolioBento() {
                                 <div className="border-light-green-cta flex w-full shrink-0 items-center justify-end gap-2.5 border-t pt-3">
                                     <ArrowLink
                                         href="#"
-                                        iconName="arrow-right"
+                                        icon="lucide:arrow-right"
                                         iconSize={14}
                                         textClassName="text-forrest text-xs font-medium"
                                     >
