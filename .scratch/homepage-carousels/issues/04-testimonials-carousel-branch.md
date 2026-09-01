@@ -9,16 +9,17 @@ Blocked by: 02-carousel-component
 
 ## What to build
 
-`TestimonialsSection` computes `isCarousel = TESTIMONIALS.length > 3` and branches its render on it:
+`TestimonialsSection` passes `TESTIMONIALS` (rendered as `TestimonialCard`s) straight into `Carousel` as slides — no local `isCarousel` boolean. Carousel's own `slides.length > slidesPerView` check reproduces the "more than 3 testimonials" threshold with no separate logic in this section.
 
-- `isCarousel === false`: renders exactly today's static flex-row markup — `TestimonialCard` list, no `Carousel`/Swiper involved at all. No behavior or visual change from today at ≤3 testimonials.
-- `isCarousel === true`: renders the same `TestimonialCard`s as `Carousel` slides — `slidesPerView=3`, advancing one slide at a time, `showDots=false`, `showArrows=true`, `loop=true`.
-- Since testimonial cards are fixed-width (336px) with a 60px gap, the `Carousel` instance here is sized so Swiper's numeric `slidesPerView=3` computes to the same 336px-per-slide width the static row already uses.
+- `slidesPerView=3`, `spaceBetween={60}` (overriding Carousel's 16px default to match the cards' existing 60px gap), `showDots=false`, `showArrows=true`, `loop=true`.
+- At ≤3 testimonials: Carousel's own threshold check renders the Static Row — `TestimonialCard` list, no Swiper involved at all. No behavior or visual change from today.
+- At >3 testimonials: Carousel renders as a real carousel, advancing one card at a time.
+- Since testimonial cards are fixed-width (336px), the `Carousel` instance here is sized so Swiper's numeric `slidesPerView=3` computes to the same 336px-per-slide width the static row already uses.
 
 ## Acceptance criteria
 
-- [ ] With ≤3 testimonials, the section renders the current static row unchanged (no `Carousel`/Swiper markup present)
-- [ ] With >3 testimonials, the section renders `Carousel` with the testimonial cards as slides, `slidesPerView=3`, arrows only (no dots), advancing one card at a time
+- [ ] With ≤3 testimonials, the section renders the current static row unchanged (no `Carousel`/Swiper markup present) — driven entirely by Carousel's own threshold, not a section-local flag
+- [ ] With >3 testimonials, the section renders `Carousel` with the testimonial cards as slides, `slidesPerView=3`, `spaceBetween=60`, arrows only (no dots), advancing one card at a time
 - [ ] Carousel path wraps around at both ends
 - [ ] Card sizing (336px per card) is visually unchanged between the static-row and carousel paths
 - [ ] Behavioral tests cover both branches: ≤3 renders static row; >3 renders Carousel

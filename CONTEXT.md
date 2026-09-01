@@ -13,11 +13,11 @@ The thumbnail in the Hero Image Switcher matching the currently-displayed large 
 _Avoid_: Selected thumbnail, current image
 
 **Carousel**:
-The reusable, Swiper.js-backed component for cycling through a set of slides, with optional dots and prev/next arrows. Used by the Family-Owned section and (conditionally) the Testimonials section.
+The reusable, Swiper.js-backed component for cycling through a set of slides, with optional dots and prev/next arrows. Owns its own activation decision: renders as itself only when its slide count exceeds its configured `slidesPerView`; otherwise renders as a Static Row. Used by the Family-Owned section and (conditionally) the Testimonials section.
 _Avoid_: Slider, gallery
 
 **Static Row**:
-The non-carousel rendering of the Testimonials section: all cards laid out in a single flex row with no Swiper involved. Used when the testimonial count is 3 or fewer.
+The non-carousel rendering state of the Carousel component: slides laid out in a single flex row with no Swiper involved. Used whenever a Carousel instance's slide count doesn't exceed its configured `slidesPerView` (e.g. Testimonials at 3 or fewer cards, or the Family-Owned section below its own threshold).
 _Avoid_: Testimonial grid, testimonial list
 
 **Icon**:
