@@ -97,7 +97,7 @@ export function LargeTreeSvg() {
 
                 ScrollTrigger.create({
                     trigger: container,
-                    start: GROWTH_END,
+                    start: GROWTH_START,
                     end: "bottom top",
                     scrub: true,
                     onUpdate: (self) => {
@@ -135,7 +135,7 @@ export function LargeTreeSvg() {
                 let lastFireTime = 0;
                 ScrollTrigger.create({
                     trigger: container,
-                    start: GROWTH_END,
+                    start: GROWTH_START,
                     end: "bottom top",
                     onUpdate: (self) => {
                         const now = performance.now();
@@ -168,22 +168,24 @@ export function LargeTreeSvg() {
             });
 
             // Growth is scrubbed the first time through; once it completes, lock it
-            // (kill the trigger) so scrolling back up afterward never un-grows it,
-            // and hand off to the permanent wind-sway phase.
+            // (kill the trigger) so scrolling back up afterward never un-grows it.
             ScrollTrigger.create({
                 trigger: container,
                 start: GROWTH_START,
                 end: GROWTH_END,
                 scrub: true,
                 animation: growthTimeline,
-                onLeave: contextSafe((self: ScrollTrigger) => {
+                onLeave: (self) => {
                     // allowAnimation=true: killing the trigger must not also kill (and
                     // revert) growthTimeline — it needs to stay frozen fully-grown.
                     self.kill(false, true);
-                    startSway();
-                    startGusts();
-                }),
+                },
             });
+
+            // Wind runs the whole time the tree is on screen, concurrently with
+            // growth (not gated behind growth completing).
+            startSway();
+            startGusts();
         },
         { scope: containerRef },
     );
