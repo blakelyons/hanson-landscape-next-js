@@ -24,7 +24,7 @@ const SWAY_CYCLES = 5;
 const GUST_COOLDOWN_MS = 600;
 const GUST_SAMPLE_SIZE = 4;
 const GROWTH_START = "top bottom";
-const GROWTH_END = "top 50%";
+const GROWTH_END = "top top";
 
 const basePointById = new Map(LEAF_BASE_POINTS.map((point) => [point.id, point]));
 
