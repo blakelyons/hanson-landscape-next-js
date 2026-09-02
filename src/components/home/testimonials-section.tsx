@@ -1,5 +1,6 @@
 import { SectionIntro } from "@/components/ui/section-intro";
 import { Icon } from "@/components/ui/icon";
+import { Carousel } from "@/components/ui/carousel";
 
 const TESTIMONIALS = [
     {
@@ -52,10 +53,19 @@ export function TestimonialsSection() {
                     eyebrowClassName="text-primary"
                     headingClassName="text-white"
                 />
-                <div className="flex items-start gap-[60px]">
-                    {TESTIMONIALS.map((testimonial, index) => (
-                        <TestimonialCard key={index} {...testimonial} />
-                    ))}
+                {/* w-282 (1128px) = 3 cards * 336px + 2 gaps * 60px, so Swiper's numeric
+                    slidesPerView divides evenly back to the card's own fixed width. */}
+                <div className="w-282">
+                    <Carousel
+                        slides={TESTIMONIALS.map((testimonial, index) => (
+                            <TestimonialCard key={index} {...testimonial} />
+                        ))}
+                        slidesPerView={3}
+                        spaceBetween={60}
+                        showDots={false}
+                        showArrows
+                        loop
+                    />
                 </div>
             </div>
         </section>

@@ -3,11 +3,21 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { PartnerLogos } from "@/components/ui/partner-logos";
 import { StatCard } from "@/components/ui/stat-card";
 import { Icon } from "@/components/ui/icon";
+import { Carousel } from "@/components/ui/carousel";
+import { AboutCarouselSlide } from "@/components/home/about-carousel-slide";
 
 const STATS = [
     { value: "20+", label: "Years Experience" },
     { value: "3x", label: "camme award" },
     { value: "100%", label: "satisfaction" },
+];
+
+const ABOUT_PHOTOS = [
+    { src: "/images/home/project-photo-3.jpg", top: "0.05%", left: "-4.45%" },
+    { src: "/images/home/about-carousel-photo-2.jpg", top: "0.06%", left: "-10.31%" },
+    { src: "/images/home/project-photo-1.jpg" },
+    { src: "/images/home/project-photo-2.jpg" },
+    { src: "/images/home/project-photo-4.jpg" },
 ];
 
 export function AboutSection() {
@@ -46,35 +56,14 @@ export function AboutSection() {
                         ))}
                     </div>
 
-                    <div className="flex w-full items-center gap-4 pt-8">
-                        <div className="relative size-73 shrink-0 rounded-xl">
-                            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    alt="Landscaping project"
-                                    className="absolute top-[0.05%] left-[-4.45%] h-full w-[150.26%] max-w-none"
-                                    src="/images/home/project-photo-3.jpg"
-                                />
-                            </div>
-                        </div>
-                        <div className="relative size-73 shrink-0 rounded-xl">
-                            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    alt="Landscaping project"
-                                    className="absolute top-[0.06%] left-[-10.31%] h-full w-[150.26%] max-w-none"
-                                    src="/images/home/about-carousel-photo-2.jpg"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="ml-[26px] flex items-center gap-2 py-3">
-                        <span className="bg-forrest size-2 shrink-0 rounded-full" />
-                        <span className="size-2 shrink-0 rounded-full bg-[#d9d9d9]" />
-                        <span className="size-2 shrink-0 rounded-full bg-[#d9d9d9]" />
-                        <span className="size-2 shrink-0 rounded-full bg-[#d9d9d9]" />
-                        <span className="size-2 shrink-0 rounded-full bg-[#d9d9d9]" />
+                    <div className="pt-8">
+                        <Carousel
+                            slides={ABOUT_PHOTOS.map((photo) => (
+                                <AboutCarouselSlide key={photo.src} src={photo.src} top={photo.top} left={photo.left} />
+                            ))}
+                            slidesPerView={2}
+                            loop
+                        />
                     </div>
 
                     <PartnerLogos className="mt-6 ml-4 flex items-center gap-4" />
