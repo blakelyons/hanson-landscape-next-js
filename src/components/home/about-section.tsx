@@ -5,6 +5,7 @@ import { StatCard } from "@/components/ui/stat-card";
 import { Icon } from "@/components/ui/icon";
 import { Carousel } from "@/components/ui/carousel";
 import { AboutCarouselSlide } from "@/components/home/about-carousel-slide";
+import { LargeTreeSvg } from "@/components/ui/large-tree-svg";
 
 const STATS = [
     { value: "20+", label: "Years Experience" },
@@ -27,8 +28,7 @@ export function AboutSection() {
                 {/* Decorative tree illustration — freeform overlay to the right of the text column,
           intentionally tall enough to bleed under the next (opaque) section */}
                 <div className="pointer-events-none absolute top-[62px] left-161 h-[979px] w-213">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" className="block size-full max-w-none" src="/images/home/about-tree.svg" />
+                    <LargeTreeSvg />
                 </div>
 
                 <div className="ml-20 flex w-158 flex-col items-start gap-4 px-4">
