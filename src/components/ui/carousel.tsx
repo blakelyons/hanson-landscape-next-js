@@ -77,7 +77,7 @@ export function Carousel({
                               }
                             : false
                     }
-                    className="w-full"
+                    className="min-w-0 w-full"
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={index}>{slide}</SwiperSlide>

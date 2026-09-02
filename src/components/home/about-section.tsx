@@ -56,7 +56,7 @@ export function AboutSection() {
                         ))}
                     </div>
 
-                    <div className="pt-8">
+                    <div className="w-full pt-8">
                         <Carousel
                             slides={ABOUT_PHOTOS.map((photo) => (
                                 <AboutCarouselSlide key={photo.src} src={photo.src} top={photo.top} left={photo.left} />
