@@ -23,6 +23,8 @@ const DOT_RADIUS = 3;
 const SWAY_CYCLES = 5;
 const GUST_COOLDOWN_MS = 600;
 const GUST_SAMPLE_SIZE = 4;
+const GROWTH_START = "top bottom";
+const GROWTH_END = "top 50%";
 
 const basePointById = new Map(LEAF_BASE_POINTS.map((point) => [point.id, point]));
 
@@ -95,7 +97,7 @@ export function LargeTreeSvg() {
 
                 ScrollTrigger.create({
                     trigger: container,
-                    start: "top 25%",
+                    start: GROWTH_END,
                     end: "bottom top",
                     scrub: true,
                     onUpdate: (self) => {
@@ -133,7 +135,7 @@ export function LargeTreeSvg() {
                 let lastFireTime = 0;
                 ScrollTrigger.create({
                     trigger: container,
-                    start: "top 25%",
+                    start: GROWTH_END,
                     end: "bottom top",
                     onUpdate: (self) => {
                         const now = performance.now();
@@ -146,36 +148,41 @@ export function LargeTreeSvg() {
                 });
             });
 
-            const runGrowth = contextSafe(() => {
-                const order = shuffled(LEAF_PATHS.map((_, i) => i));
-                const tl = gsap.timeline({
-                    onComplete: () => {
-                        startSway();
-                        startGusts();
-                    },
-                });
+            const growthTimeline = gsap.timeline({ paused: true });
+            const order = shuffled(LEAF_PATHS.map((_, i) => i));
 
-                order.forEach((i, position) => {
-                    const dot = dotRefs.current[i];
-                    const leaf = leafRefs.current[i];
-                    if (!dot || !leaf) return;
-                    const delay = position * randomBetween(0.012, 0.028);
+            order.forEach((i, position) => {
+                const dot = dotRefs.current[i];
+                const leaf = leafRefs.current[i];
+                if (!dot || !leaf) return;
+                const delay = position * randomBetween(0.006, 0.014);
 
-                    tl.to(
+                growthTimeline
+                    .to(
                         dot,
-                        { morphSVG: LEAF_PATHS[i].d, duration: randomBetween(0.4, 0.8), ease: "power1.inOut" },
+                        { morphSVG: LEAF_PATHS[i].d, duration: randomBetween(0.2, 0.4), ease: "power1.inOut" },
                         delay,
                     )
-                        .to(dot, { opacity: 0, duration: 0.1 }, ">-0.1")
-                        .set(leaf, { opacity: 1 }, "<");
-                });
+                    .to(dot, { opacity: 0, duration: 0.1 }, ">-0.1")
+                    .set(leaf, { opacity: 1 }, "<");
             });
 
+            // Growth is scrubbed the first time through; once it completes, lock it
+            // (kill the trigger) so scrolling back up afterward never un-grows it,
+            // and hand off to the permanent wind-sway phase.
             ScrollTrigger.create({
                 trigger: container,
-                start: "top 25%",
-                toggleActions: "play none none none",
-                onEnter: runGrowth,
+                start: GROWTH_START,
+                end: GROWTH_END,
+                scrub: true,
+                animation: growthTimeline,
+                onLeave: contextSafe((self: ScrollTrigger) => {
+                    // allowAnimation=true: killing the trigger must not also kill (and
+                    // revert) growthTimeline — it needs to stay frozen fully-grown.
+                    self.kill(false, true);
+                    startSway();
+                    startGusts();
+                }),
             });
         },
         { scope: containerRef },
