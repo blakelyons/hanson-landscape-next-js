@@ -20,7 +20,7 @@ export function StorySection() {
                 </div>
                 <div className="flex min-w-0 flex-col items-start gap-5">
                     <div className="flex items-center gap-3">
-                        <div className="bg-primary h-[2px] w-8 shrink-0" />
+                        <div className="bg-primary h-0.5 w-8 shrink-0" />
                         <p className="text-forrest font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
                             EST. 2001
                         </p>

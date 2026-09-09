@@ -49,7 +49,7 @@ export function WhyChooseUsSection() {
                                             key={feature.title}
                                             className="flex min-w-0 flex-1 items-start gap-4 overflow-clip"
                                         >
-                                            <div className="flex size-[41px] shrink-0 items-center justify-center">
+                                            <div className="flex size-10.25 shrink-0 items-center justify-center">
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img alt="" className="block size-full max-w-none" src={feature.icon} />
                                             </div>
@@ -85,7 +85,7 @@ export function WhyChooseUsSection() {
                         </div>
                     </div>
 
-                    <div className="relative mt-[50px] h-121 w-[495px] shrink-0 rounded-xl">
+                    <div className="relative mt-12.5 h-121 w-123.75 shrink-0 rounded-xl">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img

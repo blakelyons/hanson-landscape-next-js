@@ -18,16 +18,12 @@ const HERO_STATS = [
 ];
 
 export function HeroSection() {
-    const windowWidth = useWindowWidth();
-
     useGSAP(() => {
         const t = 1.8; // timeline duration
         const staggerDelay = t * 0.1;
 
         const scrollTimeilne = gsap.timeline({ defaults: { duration: 2, ease: "power1.out" } });
         const heroMainTimeline = gsap.timeline({ defaults: { duration: t, ease: "power3.out" } });
-
-        console.log(windowWidth);
 
         scrollTimeilne
             .to(
@@ -97,11 +93,11 @@ export function HeroSection() {
     }, []);
 
     return (
-        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-[100vh] xl:max-h-[1080px]">
+        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-[100vh] xl:max-h-270">
             <div className="relative container h-full lg:pt-[calc(var(--header-height)+1.25rem)] xl:pt-[calc(var(--header-height)*1.1)]">
                 <div className="grid h-full grid-cols-1 items-center gap-8 xl:grid-cols-2 xl:gap-12">
                     <div className="col z-1 grid place-items-center gap-8 text-center xl:place-items-start xl:gap-12 xl:text-left">
-                        <Logo size="md" className="mt-10 transition-all duration-300 ease-in-out lg:mt-0 lg:hidden" />
+                        <Logo size="lg" className="mt-10 transition-all duration-300 ease-in-out lg:mt-0 lg:hidden" />
                         <div className="hero-eyebrow -mb-8 flex translate-y-10 flex-row flex-wrap items-center justify-center gap-3 opacity-0 lg:justify-start">
                             <div className="bg-primary h-0.5 w-9 shrink-0" />
                             <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px]">
@@ -144,7 +140,7 @@ export function HeroSection() {
                         <div className="hero-stats mt-4 flex items-center justify-center gap-8 lg:mt-13.5 xl:justify-start">
                             {HERO_STATS.map((stat, index) => (
                                 <div key={stat.value} className="contents">
-                                    <div className="hero-stats-item flex flex-col items-center gap-1 text-center xl:items-start xl:text-left">
+                                    <div className="hero-stats-item flex -translate-x-24 flex-col items-center gap-1 text-center opacity-0 xl:items-start xl:text-left">
                                         <p className="font-serif-display text-[34px] font-normal text-[#fafbf8] not-italic">
                                             {stat.value}
                                         </p>
@@ -153,14 +149,14 @@ export function HeroSection() {
                                         </p>
                                     </div>
                                     {index < HERO_STATS.length - 1 ? (
-                                        <div className="hero-stats-item h-11 w-px shrink-0 bg-[rgba(250,251,248,0.18)]" />
+                                        <div className="hero-stats-item h-11 w-px shrink-0 -translate-x-24 bg-[rgba(250,251,248,0.18)] opacity-0" />
                                     ) : null}
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div className="col z-1 hidden items-center justify-end xl:flex">
-                        <div className="relative aspect-[522/347] h-auto w-full max-w-[620px] rounded-[18px] border border-[#41754b] shadow-[0px_4px_13.7px_6px_rgba(0,0,0,0.15)]">
+                        <div className="relative aspect-[522/347] h-auto w-full max-w-155 rounded-[18px] border border-[#41754b] shadow-[0px_4px_13.7px_6px_rgba(0,0,0,0.15)]">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 alt="Hanson Landscape project"

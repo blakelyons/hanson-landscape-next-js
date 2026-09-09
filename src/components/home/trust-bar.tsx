@@ -6,7 +6,7 @@ const BADGES = [
 
 export function TrustBar() {
     return (
-        <div className="flex h-[57px] w-full items-center border-b border-[#eee] bg-white">
+        <div className="flex h-14.25 w-full items-center border-b border-[#eee] bg-white">
             <div className="container flex items-center justify-center gap-16">
                 {BADGES.map((badge) => (
                     <div key={badge.label} className="flex h-4 shrink-0 items-center gap-2">

@@ -12,14 +12,14 @@ export function Logo({ isScrolled = false, effectiveVariant = "solid", className
     return (
         <Link
             href="/"
-            className={`block shrink-0 ${
+            className={`block shrink-0 transition-all duration-300 ${
                 isScrolled
                     ? "h-25 w-31.5"
                     : size === "sm"
                       ? "h-20 w-26.25"
                       : size === "md"
-                        ? "h-30 w-37.5"
-                        : "h-36.25 w-45.75"
+                        ? "h-20 w-26.25 xl:h-30 xl:w-37.5"
+                        : "h-28 w-35 xl:h-36.25 xl:w-45.75"
             } ${effectiveVariant === "transparent" ? "mt-1.75" : ""} ${className}`}
         >
             {/* eslint-disable-next-line @next/next/no-img-element */}

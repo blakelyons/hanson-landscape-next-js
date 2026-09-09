@@ -24,7 +24,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         src="/images/home/leaf-particles.svg"
                     />
                 </div>
-                <div className="absolute top-[10%] right-[12%] h-[70px] w-[90px] max-w-none -rotate-[22deg]">
+                <div className="absolute top-[10%] right-[12%] h-17.5 w-22.5 max-w-none -rotate-[22deg]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         alt=""
@@ -32,7 +32,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         src="/images/home/page-hero-leaves-1.svg"
                     />
                 </div>
-                <div className="absolute top-[42%] right-[6%] h-15 w-[95px] max-w-none rotate-[62deg]">
+                <div className="absolute top-[42%] right-[6%] h-15 w-23.75 max-w-none rotate-[62deg]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         alt=""
@@ -40,7 +40,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         src="/images/home/page-hero-leaves-2.svg"
                     />
                 </div>
-                <div className="absolute top-[55%] right-[2%] h-[62px] w-[98px] max-w-none -scale-x-100">
+                <div className="absolute top-[55%] right-[2%] h-15.5 w-24.5 max-w-none -scale-x-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         alt=""
@@ -48,7 +48,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         src="/images/home/page-hero-leaves-3.svg"
                     />
                 </div>
-                <div className="absolute top-[62%] right-[16%] h-[46px] w-25 max-w-none -scale-x-100">
+                <div className="absolute top-[62%] right-[16%] h-11.5 w-25 max-w-none -scale-x-100">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         alt=""
@@ -64,7 +64,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         {breadcrumb}
                     </p>
                     <div className="flex items-center gap-3">
-                        <div className="bg-primary h-[2px] w-8 shrink-0" />
+                        <div className="bg-primary h-0.5 w-8 shrink-0" />
                         <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
                             {eyebrow}
                         </p>

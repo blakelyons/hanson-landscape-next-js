@@ -45,9 +45,9 @@ export function PortfolioBento() {
                             </div>
                         </div>
 
-                        <div className="grid h-125 w-[857px] shrink-0 grid-cols-2 grid-rows-2 gap-8">
+                        <div className="grid h-125 w-214.25 shrink-0 grid-cols-2 grid-rows-2 gap-8">
                             <div className="col-span-2 grid grid-cols-2 grid-rows-1 gap-8 self-start">
-                                <div className="relative h-[234px] w-full shrink-0 rounded-xl">
+                                <div className="relative h-58.5 w-full shrink-0 rounded-xl">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         alt="Hanson Landscape project"
@@ -55,7 +55,7 @@ export function PortfolioBento() {
                                         src="/images/home/project-photo-2.jpg"
                                     />
                                 </div>
-                                <div className="relative h-[234px] w-full shrink-0 rounded-xl">
+                                <div className="relative h-58.5 w-full shrink-0 rounded-xl">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         alt="Hanson Landscape project"

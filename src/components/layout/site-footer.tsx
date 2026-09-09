@@ -20,7 +20,7 @@ export function SiteFooter() {
     return (
         <footer className="relative w-full">
             <div
-                className="h-[3px] w-full"
+                className="h-0.75 w-full"
                 style={{
                     backgroundImage:
                         "linear-gradient(90deg, rgb(34, 197, 94) 0%, rgb(248, 156, 28) 25%, rgb(159, 51, 34) 75%, rgb(34, 197, 94) 100%)",

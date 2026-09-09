@@ -115,13 +115,13 @@ export function ProcessSection() {
 
                     <div className="mt-6 grid grid-cols-4 gap-x-8 text-center font-sans text-sm leading-[18px] font-normal text-black">
                         {STEPS.map((step) => (
-                            <p key={`${step.number}-desc`} className="mx-auto w-[183px]">
+                            <p key={`${step.number}-desc`} className="mx-auto w-45.75">
                                 {step.description}
                             </p>
                         ))}
                     </div>
 
-                    <div className="bg-primary-light mt-10 flex w-full items-center justify-between gap-8 rounded-xl px-12 py-[18px]">
+                    <div className="bg-primary-light mt-10 flex w-full items-center justify-between gap-8 rounded-xl px-12 py-4.5">
                         <p className="font-sans text-sm leading-[18px] font-semibold whitespace-nowrap text-black">
                             Are You Prepared to Get Started on a Gorgeous Outdoor Area?
                         </p>

@@ -25,7 +25,7 @@ const variantSurfaceClasses: Record<PillButtonVariant, string> = {
 const sizeClasses: Record<PillButtonSize, string> = {
     sm: "px-4 py-2 text-xs font-medium",
     md: "px-8 py-4 text-base font-medium",
-    lg: "px-6 py-3 text-base font-medium lg:px-7 lg:py-[17px]",
+    lg: "px-6 py-3 text-base font-medium lg:px-7 lg:py-4.25",
 };
 
 type PillButtonProps = {
