@@ -37,7 +37,7 @@ export function HeroSection() {
                     pt = header height + 43px design gap below it. */}
                 <div className="relative z-10 flex flex-col items-start justify-center pt-[calc(var(--header-height)+110px)]">
                     <div className="ml-21 flex items-center gap-3">
-                        <div className="h-0.5 w-9 shrink-0 bg-[#f89c1c]" />
+                        <div className="bg-primary h-0.5 w-9 shrink-0" />
                         <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
                             {`CHICAGOLAND'S LANDSCAPE ARCHITECTS — EST. 2001`}
                         </p>
@@ -91,7 +91,7 @@ export function HeroSection() {
                     <p className="text-muted font-sans text-[10px] font-medium tracking-[2.4px] whitespace-nowrap">
                         SCROLL
                     </p>
-                    <div className="h-9 w-[2px] shrink-0 bg-[#f89c1c]" />
+                    <div className="bg-primary h-9 w-[2px] shrink-0" />
                 </div>
 
                 {/* Freeform decorative graphic cluster — genuinely overlapping composition, kept as a scoped absolute cluster */}

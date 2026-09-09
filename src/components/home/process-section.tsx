@@ -57,10 +57,9 @@ export function ProcessSection() {
                 stagger: 0.15,
                 scrollTrigger: {
                     trigger: container.current,
-                    start: "top center+=20%",
-                    end: "top center-=20%",
+                    start: "top center+=10%",
+                    end: "top center-=30%",
                     scrub: true,
-                    markers: true,
                 },
             });
         },
@@ -73,7 +72,12 @@ export function ProcessSection() {
             className="our-process-section bg-neutral-25 relative hidden w-full flex-col items-center justify-center py-20 xl:flex"
         >
             <div className="relative container flex flex-col items-center justify-center gap-12">
-                <SectionIntro className="w-170" eyebrow="Our process" heading="How We Bring Your Project to Life" />
+                <SectionIntro
+                    animateEntrance
+                    className="w-170"
+                    eyebrow="Our process"
+                    heading="How We Bring Your Project to Life"
+                />
 
                 <div className="process-steps w-285 rounded-xl border border-neutral-200 bg-white px-12 py-10">
                     <div className="grid grid-cols-4 items-end gap-x-8">

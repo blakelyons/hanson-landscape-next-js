@@ -52,6 +52,7 @@ export function TestimonialsSection() {
                     eyebrowColor="text-primary"
                     heading="What Our Clients Say"
                     headingClassName="text-white"
+                    animateEntrance
                 />
                 {/* w-282 (1128px) = 3 cards * 336px + 2 gaps * 60px, so Swiper's numeric
                     slidesPerView divides evenly back to the card's own fixed width. */}

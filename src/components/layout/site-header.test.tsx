@@ -14,8 +14,8 @@ describe("SiteHeader", () => {
         const { container } = render(<SiteHeader variant="solid" />);
         const nav = within(container.querySelector("nav")!);
 
-        expect(nav.getByRole("link", { name: "Home" })).toHaveClass("bg-[#f89c1c]");
-        expect(nav.getByRole("link", { name: "About" })).not.toHaveClass("bg-[#f89c1c]");
+        expect(nav.getByRole("link", { name: "Home" })).toHaveClass("bg-primary");
+        expect(nav.getByRole("link", { name: "About" })).not.toHaveClass("bg-primary");
     });
 
     it("marks About active and Home inactive at /about (solid variant)", () => {
@@ -23,8 +23,8 @@ describe("SiteHeader", () => {
         const { container } = render(<SiteHeader variant="solid" />);
         const nav = within(container.querySelector("nav")!);
 
-        expect(nav.getByRole("link", { name: "About" })).toHaveClass("bg-[#f89c1c]");
-        expect(nav.getByRole("link", { name: "Home" })).not.toHaveClass("bg-[#f89c1c]");
+        expect(nav.getByRole("link", { name: "About" })).toHaveClass("bg-primary");
+        expect(nav.getByRole("link", { name: "Home" })).not.toHaveClass("bg-primary");
     });
 
     it("never shows active-link highlighting on the transparent (homepage) variant", () => {
@@ -32,7 +32,7 @@ describe("SiteHeader", () => {
         const { container } = render(<SiteHeader variant="transparent" />);
         const nav = within(container.querySelector("nav")!);
 
-        expect(nav.getByRole("link", { name: "Home" })).not.toHaveClass("bg-[#f89c1c]");
+        expect(nav.getByRole("link", { name: "Home" })).not.toHaveClass("bg-primary");
     });
 
     it("gives Home and About real hrefs, leaves other links as placeholders", () => {

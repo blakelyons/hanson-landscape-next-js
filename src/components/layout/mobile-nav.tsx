@@ -262,7 +262,7 @@ export function MobileNav() {
                         <Link
                             href="#"
                             onClick={closeMobileNav}
-                            className="mt-auto flex h-11 items-center justify-center rounded-full bg-[#f89c1c] px-8 font-sans text-sm font-medium whitespace-nowrap text-black"
+                            className="bg-primary mt-auto flex h-11 items-center justify-center rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black"
                         >
                             Contact Us
                         </Link>

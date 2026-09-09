@@ -28,20 +28,22 @@ export function AboutSection() {
                     <div className="grid place-content-start gap-4 pt-20 md:h-210">
                         <div className="relative z-2 block overflow-x-hidden">
                             <SectionIntro
+                                animateEntrance
                                 eyebrow="About Us"
                                 horizontalAlignment="start"
                                 heading="Family-Owned. Passion-Driven."
+                                description={`For over two decades, we've poured our passion into creating beautiful, custom landscapes across Chicagoland. Every project is personal to us — our job isn't finished until you're completely happy with the result.   `}
+                                descriptionClassName="w-full font-sans text-base leading-relaxed font-normal text-neutral-600"
+                                cta={
+                                    <ArrowLink
+                                        href="/about"
+                                        icon="ci:arrow-right-lg"
+                                        className="text-forrest-light hover:text-primary ms-2 text-base leading-relaxed"
+                                    >
+                                        Read More
+                                    </ArrowLink>
+                                }
                             />
-                            <p className="w-full font-sans text-base leading-relaxed font-normal text-neutral-600">
-                                {`For over two decades, we've poured our passion into creating beautiful, custom landscapes across Chicagoland. Every project is personal to us — our job isn't finished until you're completely happy with the result.   `}
-                                <ArrowLink
-                                    href="/about"
-                                    icon="ci:arrow-right-lg"
-                                    className="text-forrest-light hover:text-primary ms-2 text-base leading-relaxed"
-                                >
-                                    Read More
-                                </ArrowLink>
-                            </p>
                         </div>
                         <div className="about-section__overflow-clip relative block overflow-x-hidden">
                             <div className="text-forrest about-section__stats flex flex-wrap items-start gap-x-9 gap-y-4 py-4">
@@ -61,7 +63,7 @@ export function AboutSection() {
                                         />
                                     ))}
                                     slidesPerView={2}
-                                    loop
+                                    showArrows={true}
                                 />
                             </div>
 

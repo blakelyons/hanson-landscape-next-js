@@ -114,7 +114,7 @@ function NavLink({
             href={link.href}
             onMouseEnter={onHoverEnter}
             className={`rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-colors lg:text-base ${
-                active ? "bg-[#f89c1c] text-white" : "text-forrest hover:text-white"
+                active ? "bg-primary text-white" : "text-forrest hover:text-white"
             }`}
         >
             {link.label}
@@ -220,7 +220,7 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
                         <div
                             ref={pillRef}
                             aria-hidden
-                            className="pointer-events-none absolute top-0 left-0 -z-10 rounded-full bg-[#f89c1c] opacity-0"
+                            className="bg-primary pointer-events-none absolute top-0 left-0 -z-10 rounded-full opacity-0"
                         />
                         {NAV_LINKS.map((link) => (
                             <NavLink
@@ -251,7 +251,7 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
                             href="#"
                             onMouseEnter={() => setMailOpen(true)}
                             onMouseLeave={() => setMailOpen(false)}
-                            className="group hover:bg-primary-light group flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#f89c1c] px-8 font-sans text-sm font-medium whitespace-nowrap text-black transition-all duration-300 ease-in-out xl:text-base"
+                            className="group hover:bg-primary-light group bg-primary flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black transition-all duration-300 ease-in-out xl:text-base"
                         >
                             <MailToMailOpenIcon open={mailOpen} className="transition-all duration-300 ease-in-out" />
                             <span className="transition-all duration-300 ease-in-out">Contact Us</span>

@@ -46,18 +46,28 @@ export function AboutCarouselSlide({
 
     return (
         <div className="group relative size-73 w-full shrink-0 rounded-xl">
-            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
+            <div
+                className="absolute inset-0 cursor-pointer overflow-hidden rounded-xl"
+                data-fancybox="about-carousel"
+                data-src={src}
+            >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt={alt} className="h-full w-full max-w-215 object-cover" style={{ top, left }} src={src} />
+                <img
+                    alt={alt}
+                    className="h-full w-full max-w-215 object-cover transition-transform duration-600 ease-in-out group-hover:scale-102"
+                    style={{ top, left }}
+                    src={src}
+                />
             </div>
             <button
                 type="button"
                 aria-label="Enlarge image"
-                data-fancybox="about-carousel"
-                data-src={src}
-                className="bg-primary absolute top-3 left-3 z-10 flex size-9 cursor-pointer items-center justify-center rounded-lg text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                className="bg-primary pointer-events-none absolute top-3 left-3 z-10 flex size-9 items-center justify-center overflow-hidden rounded-lg text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
             >
-                <Icon icon="lucide:expand" className="text-lg" />
+                <Icon
+                    icon="lucide:expand"
+                    className="transition-translate -translate-x-10 text-lg delay-150 duration-300 ease-in-out group-hover:translate-x-0"
+                />
             </button>
         </div>
     );

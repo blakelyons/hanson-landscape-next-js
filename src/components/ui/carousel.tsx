@@ -46,18 +46,8 @@ export function Carousel({
     }
 
     return (
-        <div className="flex w-full flex-col items-start gap-4">
+        <div className="flex w-full flex-col items-start gap-2">
             <div className="relative flex w-full items-center gap-4">
-                {showArrows && (
-                    <button
-                        ref={setPrevEl}
-                        type="button"
-                        aria-label="Previous slide"
-                        className="text-forrest absolute -left-6 z-10 flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out xl:-left-11.5"
-                    >
-                        <Icon icon="lucide:chevron-right" className="rotate-180" />
-                    </button>
-                )}
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     observer
@@ -85,20 +75,37 @@ export function Carousel({
                         <SwiperSlide key={index}>{slide}</SwiperSlide>
                     ))}
                 </Swiper>
+            </div>
+            <div className="jusfity-between flex w-full items-center gap-4">
+                <div className="flex flex-1 items-center justify-start gap-2">
+                    {showDots && (
+                        <div ref={setPaginationEl} className="swiper-pagination flex items-center gap-2 py-1" />
+                    )}
+                </div>
+
                 {showArrows && (
-                    <button
-                        ref={setNextEl}
-                        type="button"
-                        aria-label="Next slide"
-                        className="text-forrest absolute -right-6 z-10 flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out xl:-right-11.5"
-                    >
-                        <Icon icon="lucide:chevron-right" />
-                    </button>
+                    <div className="flex items-center justify-end gap-2">
+                        <button
+                            id="btn-prev"
+                            ref={setPrevEl}
+                            type="button"
+                            aria-label="Prev slide"
+                            className="text-forrest [&.swiper-button-disabled]:text-muted flex flex-1 cursor-pointer items-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out [&.swiper-button-disabled]:cursor-not-allowed"
+                        >
+                            <Icon icon="akar-icons:chevron-left-small" className="size-6" />
+                        </button>
+                        <button
+                            id="btn-next"
+                            ref={setNextEl}
+                            type="button"
+                            aria-label="Next slide"
+                            className="text-forrest [&.swiper-button-disabled]:text-muted flex flex-1 cursor-pointer items-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out [&.swiper-button-disabled]:cursor-not-allowed"
+                        >
+                            <Icon icon="akar-icons:chevron-right-small" className="size-6" />
+                        </button>
+                    </div>
                 )}
             </div>
-            {showDots && (
-                <div ref={setPaginationEl} className="swiper-pagination ml-1.5 flex items-center gap-2 py-1" />
-            )}
         </div>
     );
 }

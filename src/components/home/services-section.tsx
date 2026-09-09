@@ -112,27 +112,11 @@ export function ServicesSection() {
                 x: "-110%",
             });
 
-            gsap.from(
-                ".services-section .section-intro__eyebrow, .services-section .section-intro__title, .services-section .section-intro__description",
-                {
-                    opacity: 0,
-                    y: 16,
-                    stagger: 0.12,
-                    duration: 0.8,
-                    ease: "power2.inOut",
-                    scrollTrigger: {
-                        trigger: ".services-section .section-intro__title",
-                        start: "top bottom-=15%",
-                        end: "center top",
-                    },
-                },
-            );
-
             const tl = gsap.timeline({
                 defaults: { duration: 0.8, ease: "power2.inOut", stagger: 0.12, overwrite: "auto" },
                 scrollTrigger: {
                     trigger: ".services-section .section-intro__title",
-                    start: "top center+=10%",
+                    start: "top center+=15%",
                     end: "center top",
                 },
             });
@@ -169,6 +153,7 @@ export function ServicesSection() {
         >
             <div className="relative container flex flex-col items-center justify-center gap-15">
                 <SectionIntro
+                    animateEntrance
                     eyebrowColor="text-forrest"
                     className="w-full max-w-150"
                     eyebrow="What We Do"

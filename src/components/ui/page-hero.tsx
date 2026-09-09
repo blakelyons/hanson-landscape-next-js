@@ -64,7 +64,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         {breadcrumb}
                     </p>
                     <div className="flex items-center gap-3">
-                        <div className="h-[2px] w-8 shrink-0 bg-[#f89c1c]" />
+                        <div className="bg-primary h-[2px] w-8 shrink-0" />
                         <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
                             {eyebrow}
                         </p>
