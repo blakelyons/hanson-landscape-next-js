@@ -110,7 +110,9 @@ export function ServicesNavDropdown({
                 href="#"
                 className={
                     variant === "solid"
-                        ? "text-forrest is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-all duration-300 ease-in-out hover:text-white lg:text-base"
+                        ? `is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-all duration-300 ease-in-out lg:text-base ${
+                              open ? "text-white" : "text-forrest hover:text-white"
+                          }`
                         : "is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap text-white transition-all duration-300 ease-in-out hover:text-white lg:text-base"
                 }
             >

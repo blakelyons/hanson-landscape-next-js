@@ -17,7 +17,7 @@ const FEATURES = [
 export function WhyChooseUsSection() {
     return (
         <section className="relative w-full py-20">
-            <div className="container">
+            <div className="container px-20">
                 <div className="grid grid-cols-[minmax(0,1fr)_495px] items-start gap-8 px-8">
                     <div className="flex min-w-0 flex-col items-start gap-9">
                         <div className="flex flex-col items-start gap-2.5">
@@ -31,7 +31,7 @@ export function WhyChooseUsSection() {
                             </p>
                         </div>
 
-                        <div className="flex min-w-0 items-start gap-22">
+                        <div className="flex min-w-0 items-start gap-[90px]">
                             <StatCard
                                 value="20+"
                                 label="Years Experience"
@@ -75,14 +75,6 @@ export function WhyChooseUsSection() {
                         >
                             Discover More
                         </PillButton>
-                        <div className="pointer-events-none h-25 w-43.75">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                alt=""
-                                className="block size-full max-w-none"
-                                src="/images/home/plant-vector-standalone.svg"
-                            />
-                        </div>
                     </div>
 
                     <div className="relative mt-[50px] h-121 w-[495px] shrink-0 rounded-xl">

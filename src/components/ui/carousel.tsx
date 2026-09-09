@@ -17,8 +17,8 @@ export type CarouselProps = {
     spaceBetween?: number;
 };
 
-const BULLET_CLASS = "size-2 shrink-0 rounded-full bg-[#d9d9d9] cursor-pointer";
-const BULLET_ACTIVE_CLASS = "!bg-forrest";
+const BULLET_CLASS = "size-2 shrink-0 rounded-full bg-[#d9d9d9] cursor-pointer transition-all duration-300 ease-in-out";
+const BULLET_ACTIVE_CLASS = "!bg-forrest size-2.5";
 
 export function Carousel({
     slides,
@@ -46,20 +46,22 @@ export function Carousel({
     }
 
     return (
-        <div className="flex w-full flex-col items-center gap-4">
-            <div className="flex w-full items-center gap-4">
+        <div className="flex w-full flex-col items-start gap-4">
+            <div className="relative flex w-full items-center gap-4">
                 {showArrows && (
                     <button
                         ref={setPrevEl}
                         type="button"
                         aria-label="Previous slide"
-                        className="bg-forrest hover:bg-forrest-light flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 ease-in-out"
+                        className="text-forrest absolute -left-6 z-10 flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out xl:-left-11.5"
                     >
-                        <Icon icon="ci:arrow-right-lg" className="rotate-180" />
+                        <Icon icon="lucide:chevron-right" className="rotate-180" />
                     </button>
                 )}
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
+                    observer
+                    observeParents
                     slidesPerView={slidesPerView}
                     slidesPerGroup={1}
                     spaceBetween={spaceBetween}
@@ -77,7 +79,7 @@ export function Carousel({
                               }
                             : false
                     }
-                    className="min-w-0 w-full"
+                    className="w-full min-w-0"
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={index}>{slide}</SwiperSlide>
@@ -88,13 +90,15 @@ export function Carousel({
                         ref={setNextEl}
                         type="button"
                         aria-label="Next slide"
-                        className="bg-forrest hover:bg-forrest-light flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 ease-in-out"
+                        className="text-forrest absolute -right-6 z-10 flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-transparent text-3xl transition-all duration-300 ease-in-out xl:-right-11.5"
                     >
-                        <Icon icon="ci:arrow-right-lg" />
+                        <Icon icon="lucide:chevron-right" />
                     </button>
                 )}
             </div>
-            {showDots && <div ref={setPaginationEl} className="swiper-pagination ml-6.5 flex items-center gap-2 py-3" />}
+            {showDots && (
+                <div ref={setPaginationEl} className="swiper-pagination ml-1.5 flex items-center gap-2 py-1" />
+            )}
         </div>
     );
 }

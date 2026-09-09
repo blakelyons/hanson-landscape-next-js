@@ -35,7 +35,7 @@ export function HeroSection() {
 
                 {/* Content column — real flex flow instead of independently-pinned blocks.
                     pt = header height + 43px design gap below it. */}
-                <div className="relative z-10 flex flex-col items-start pt-[calc(var(--header-height)+43px)]">
+                <div className="relative z-10 flex flex-col items-start justify-center pt-[calc(var(--header-height)+110px)]">
                     <div className="ml-21 flex items-center gap-3">
                         <div className="h-0.5 w-9 shrink-0 bg-[#f89c1c]" />
                         <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">

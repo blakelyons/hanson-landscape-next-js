@@ -9,7 +9,7 @@ export function FooterColumn({
 }) {
     return (
         <div className={className}>
-            <p className="font-mono-label h-[45px] w-full text-base leading-[52px] font-normal text-[rgba(255,255,255,0.35)]">
+            <p className="font-mono-label w-full text-base font-normal text-nowrap text-[rgba(255,255,255,0.35)]">
                 {heading}
             </p>
             <div className="flex w-full flex-col items-start gap-4 font-sans text-base leading-4 font-normal text-[rgba(255,255,255,0.5)]">

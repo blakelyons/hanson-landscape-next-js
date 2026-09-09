@@ -23,8 +23,8 @@ const DOT_RADIUS = 3;
 const SWAY_CYCLES = 5;
 const GUST_COOLDOWN_MS = 600;
 const GUST_SAMPLE_SIZE = 4;
-const GROWTH_START = "top bottom";
-const GROWTH_END = "top top";
+const GROWTH_START = "top center";
+const GROWTH_END = "top top+=20%";
 
 const basePointById = new Map(LEAF_BASE_POINTS.map((point) => [point.id, point]));
 
@@ -193,11 +193,9 @@ export function LargeTreeSvg() {
     return (
         <svg
             ref={containerRef}
-            preserveAspectRatio="none"
+            preserveAspectRatio="xMidYMid meet"
             overflow="visible"
-            style={{ display: "block" }}
-            width="852"
-            height="979"
+            className="block h-auto w-[min(100vw,852px)]"
             viewBox="0 0 852 979"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

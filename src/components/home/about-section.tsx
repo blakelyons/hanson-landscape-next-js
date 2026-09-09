@@ -1,8 +1,7 @@
-import Link from "next/link";
+import { SectionIntro } from "@/components/ui/section-intro";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { PartnerLogos } from "@/components/ui/partner-logos";
 import { StatCard } from "@/components/ui/stat-card";
-import { Icon } from "@/components/ui/icon";
 import { Carousel } from "@/components/ui/carousel";
 import { AboutCarouselSlide } from "@/components/home/about-carousel-slide";
 import { LargeTreeSvg } from "@/components/ui/large-tree-svg";
@@ -23,50 +22,57 @@ const ABOUT_PHOTOS = [
 
 export function AboutSection() {
     return (
-        <section className="relative w-full pt-20 pb-28">
-            <div className="relative container overflow-x-clip">
-                {/* Decorative tree illustration — freeform overlay to the right of the text column,
-          intentionally tall enough to bleed under the next (opaque) section */}
-                <div className="pointer-events-none absolute top-[62px] left-161 h-[979px] w-213">
-                    <LargeTreeSvg />
-                </div>
+        <section className="home-about-section relative w-full xl:h-screen xl:max-h-210">
+            <div className="relative container h-full overflow-x-clip">
+                <div className="grid w-full grid-cols-1 items-start gap-8 xl:grid-cols-[55%_1fr]">
+                    <div className="grid place-content-start gap-4 pt-20 md:h-210">
+                        <div className="relative z-2 block overflow-x-hidden">
+                            <SectionIntro
+                                eyebrow="About Us"
+                                horizontalAlignment="start"
+                                heading="Family-Owned. Passion-Driven."
+                            />
+                            <p className="w-full font-sans text-base leading-relaxed font-normal text-neutral-600">
+                                {`For over two decades, we've poured our passion into creating beautiful, custom landscapes across Chicagoland. Every project is personal to us — our job isn't finished until you're completely happy with the result.   `}
+                                <ArrowLink
+                                    href="/about"
+                                    icon="ci:arrow-right-lg"
+                                    className="text-forrest-light hover:text-primary ms-2 text-base leading-relaxed"
+                                >
+                                    Read More
+                                </ArrowLink>
+                            </p>
+                        </div>
+                        <div className="about-section__overflow-clip relative block overflow-x-hidden">
+                            <div className="text-forrest about-section__stats flex flex-wrap items-start gap-x-9 gap-y-4 py-4">
+                                {STATS.map((stat) => (
+                                    <StatCard key={stat.label} value={stat.value} label={stat.label} />
+                                ))}
+                            </div>
 
-                <div className="ml-20 flex w-158 flex-col items-start gap-4 px-4">
-                    <div className="flex h-42.5 w-[779px] flex-col items-center">
-                        <p className="font-mono-label text-forrest w-full text-xs uppercase">about us</p>
-                        <p className="font-serif-display w-full text-[48px] leading-[46px] font-normal text-[#333] not-italic">
-                            Family-Owned. Passion-Driven.
-                        </p>
-                        <div className="h-4 w-full shrink-0" />
-                        <p className="w-full font-sans text-[18px] leading-[28px] font-normal text-neutral-600">
-                            {`For over two decades, we've poured our passion into creating beautiful, custom landscapes across Chicagoland. Every project is personal to us — our job isn't finished until you're completely happy with the result.   `}
-                            <ArrowLink
-                                href="/about"
-                                icon="ci:arrow-right-lg"
-                                className="text-[18px] leading-[28px] text-[#3a8545] hover:underline"
-                            >
-                                Read More
-                            </ArrowLink>
-                        </p>
+                            <div className="about-section__carousel-wrapper w-full pt-8">
+                                <Carousel
+                                    slides={ABOUT_PHOTOS.map((photo) => (
+                                        <AboutCarouselSlide
+                                            key={photo.src}
+                                            src={photo.src}
+                                            top={photo.top}
+                                            left={photo.left}
+                                        />
+                                    ))}
+                                    slidesPerView={2}
+                                    loop
+                                />
+                            </div>
+
+                            <PartnerLogos className="mt-6 ml-4 flex items-center gap-4" />
+                        </div>
                     </div>
-
-                    <div className="text-forrest flex items-start gap-8">
-                        {STATS.map((stat) => (
-                            <StatCard key={stat.label} value={stat.value} label={stat.label} />
-                        ))}
+                    <div className="block h-full">
+                        <div className="pointer-events-none absolute -right-20 -bottom-45 flex h-full w-full items-end justify-end opacity-10 transition-all duration-300 ease-in-out xl:opacity-100">
+                            <LargeTreeSvg />
+                        </div>
                     </div>
-
-                    <div className="w-full pt-8">
-                        <Carousel
-                            slides={ABOUT_PHOTOS.map((photo) => (
-                                <AboutCarouselSlide key={photo.src} src={photo.src} top={photo.top} left={photo.left} />
-                            ))}
-                            slidesPerView={2}
-                            loop
-                        />
-                    </div>
-
-                    <PartnerLogos className="mt-6 ml-4 flex items-center gap-4" />
                 </div>
             </div>
         </section>

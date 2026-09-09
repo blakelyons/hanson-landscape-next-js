@@ -1,7 +1,7 @@
 export function StatCard({
     value,
     label,
-    className = "flex w-[135px] flex-col items-start text-forrest",
+    className = "flex w-auto max-w-35 flex-col items-start text-forrest",
     valueClassName = "font-serif-display text-4xl",
     labelClassName = "font-mono-stat text-sm uppercase",
 }: {

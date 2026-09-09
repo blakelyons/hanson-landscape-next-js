@@ -19,7 +19,9 @@ export default function AboutPage() {
             />
             <StorySection />
             <WhyChooseUsSection />
-            <CtaSection />
+            <div className="container pb-20">
+                <CtaSection />
+            </div>
             <SiteFooter />
         </div>
     );

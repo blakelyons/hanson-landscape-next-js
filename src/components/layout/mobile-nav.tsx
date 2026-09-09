@@ -8,6 +8,9 @@ import { useGSAP } from "@gsap/react";
 import { useUIStore } from "@/store/ui-store";
 import { NAV_LINKS, NAV_LINKS_AFTER } from "./site-header";
 import { ChevronToLeafIcon, SERVICES_MENU, type MenuItem } from "./chevron-to-leaf-icon";
+import { Logo } from "@/components/ui/logo";
+import { Icon } from "@/components/ui/icon";
+
 gsap.registerPlugin(MorphSVGPlugin);
 
 // Three horizontal bars (top/middle/bottom) morphing into an X: top and
@@ -54,7 +57,7 @@ function HamburgerIcon({ open, className }: { open: boolean; className?: string 
 const LG_BREAKPOINT_QUERY = "(min-width: 1024px)";
 
 const drawerLinkClasses =
-    "font-sans text-lg font-medium text-forrest transition-colors hover:text-[#f89c1c]";
+    "font-sans text-lg font-medium text-forrest transition-colors flex items-center gap-2.5 hover:text-[#f89c1c]";
 
 const OUR_SERVICES_ITEM: MenuItem = { label: "Our Services", children: SERVICES_MENU };
 
@@ -64,8 +67,34 @@ const INDENT_CLASSES = ["pl-0", "pl-4", "pl-8"];
 
 function AccordionRow({ item, depth, onNavigate }: { item: MenuItem; depth: number; onNavigate: () => void }) {
     const [open, setOpen] = useState(false);
+    const submenuRef = useRef<HTMLDivElement>(null);
     const hasChildren = Boolean(item.children?.length);
     const indentClass = INDENT_CLASSES[depth] ?? INDENT_CLASSES[INDENT_CLASSES.length - 1];
+
+    // Submenu stays mounted (height starts at 0) so opening can slide-down
+    // to its measured height instead of popping in, and each row can fade
+    // up in a stagger once the container has room for them.
+    useGSAP(
+        () => {
+            const submenu = submenuRef.current;
+            if (!submenu) return;
+            const rows = submenu.children[0]?.children;
+
+            if (open) {
+                gsap.to(submenu, { height: "auto", duration: 0.35, ease: "power2.inOut" });
+                if (rows?.length) {
+                    gsap.fromTo(
+                        rows,
+                        { opacity: 0, y: 8 },
+                        { opacity: 1, y: 0, duration: 0.3, stagger: 0.05, ease: "power2.out", delay: 0.1 },
+                    );
+                }
+            } else {
+                gsap.to(submenu, { height: 0, duration: 0.3, ease: "power2.inOut" });
+            }
+        },
+        { dependencies: [open], scope: submenuRef },
+    );
 
     if (!hasChildren) {
         return (
@@ -76,7 +105,7 @@ function AccordionRow({ item, depth, onNavigate }: { item: MenuItem; depth: numb
     }
 
     return (
-        <div>
+        <div className="relative">
             <button
                 type="button"
                 onClick={() => setOpen((current) => !current)}
@@ -86,13 +115,13 @@ function AccordionRow({ item, depth, onNavigate }: { item: MenuItem; depth: numb
                 <span>{item.label}</span>
                 <ChevronToLeafIcon open={open} className="text-sm" />
             </button>
-            {open ? (
-                <div className="flex flex-col gap-4 pt-4">
+            <div ref={submenuRef} className="h-0 overflow-hidden" aria-hidden={!open}>
+                <div className={`flex flex-col gap-4 pt-4 ${depth === 0 ? "border-primary border-l-2" : ""}`}>
                     {item.children!.map((child) => (
                         <AccordionRow key={child.label} item={child} depth={depth + 1} onNavigate={onNavigate} />
                     ))}
                 </div>
-            ) : null}
+            </div>
         </div>
     );
 }
@@ -179,7 +208,7 @@ export function MobileNav() {
                 aria-expanded={isOpen}
                 aria-controls="mobile-nav-drawer"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
-                className="fixed top-6 right-6 z-50 flex size-11 items-center justify-center rounded-full bg-white text-forrest shadow-md lg:hidden"
+                className="bg-primary fixed top-6 right-6 z-50 flex size-11 items-center justify-center rounded-full text-white shadow-md lg:hidden"
             >
                 <HamburgerIcon open={isOpen} className="text-2xl" />
             </button>
@@ -200,25 +229,44 @@ export function MobileNav() {
                 aria-label="Mobile navigation"
                 className="invisible fixed inset-y-0 right-0 z-40 w-full max-w-100 bg-white"
             >
-                <div ref={itemsRef} className="flex h-full flex-col gap-6 p-8 pt-24">
-                    {NAV_LINKS.map((link) => (
-                        <Link key={link.label} href={link.href} onClick={closeMobileNav} className={drawerLinkClasses}>
-                            {link.label}
+                <div className="flex h-dvh flex-col gap-6 pb-8">
+                    <div className="flex-0">
+                        <Logo isScrolled effectiveVariant="solid" className="mt-8 ml-8" />
+                    </div>
+                    <div ref={itemsRef} className="flex h-full flex-1 flex-col gap-6 p-8">
+                        {NAV_LINKS.map((link) => (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                onClick={closeMobileNav}
+                                className={drawerLinkClasses}
+                            >
+                                <Icon icon={link.icon} className="size-5" />
+                                {link.label}
+                            </Link>
+                        ))}
+                        <AccordionRow item={OUR_SERVICES_ITEM} depth={0} onNavigate={closeMobileNav} />
+                        {NAV_LINKS_AFTER.map((link) => (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                onClick={closeMobileNav}
+                                className={drawerLinkClasses}
+                            >
+                                <Icon icon={link.icon} className="size-5" />
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="mt-auto flex-0 px-8">
+                        <Link
+                            href="#"
+                            onClick={closeMobileNav}
+                            className="mt-auto flex h-11 items-center justify-center rounded-full bg-[#f89c1c] px-8 font-sans text-sm font-medium whitespace-nowrap text-black"
+                        >
+                            Contact Us
                         </Link>
-                    ))}
-                    <AccordionRow item={OUR_SERVICES_ITEM} depth={0} onNavigate={closeMobileNav} />
-                    {NAV_LINKS_AFTER.map((link) => (
-                        <Link key={link.label} href={link.href} onClick={closeMobileNav} className={drawerLinkClasses}>
-                            {link.label}
-                        </Link>
-                    ))}
-                    <Link
-                        href="#"
-                        onClick={closeMobileNav}
-                        className="mt-auto flex h-11 items-center justify-center rounded-full bg-[#f89c1c] px-8 font-sans text-sm font-medium whitespace-nowrap text-black"
-                    >
-                        Contact Us
-                    </Link>
+                    </div>
                 </div>
             </div>
         </>

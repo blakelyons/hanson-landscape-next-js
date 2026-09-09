@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { ServicesNavDropdown } from "./nav-dropdown";
 import { MobileNav } from "./mobile-nav";
 import { getPillTargetRect } from "@/lib/nav-pill";
+import { Logo } from "@/components/ui/logo";
 gsap.registerPlugin(MorphSVGPlugin);
 
 export type SiteHeaderVariant = "transparent" | "solid";
@@ -56,16 +57,17 @@ function MailToMailOpenIcon({ open, className }: { open: boolean; className?: st
 export type NavLinkData = {
     label: string;
     href: string;
+    icon: string;
 };
 
 export const NAV_LINKS: NavLinkData[] = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
+    { label: "Home", href: "/", icon: "lucide:house" },
+    { label: "About", href: "/about", icon: "lucide:hard-hat" },
 ];
 
 export const NAV_LINKS_AFTER: NavLinkData[] = [
-    { label: "Portfolio", href: "#" },
-    { label: "Testimonials", href: "#" },
+    { label: "Portfolio", href: "#", icon: "lucide:briefcase" },
+    { label: "Testimonials", href: "#", icon: "lucide:star" },
 ];
 
 const headerContainerClasses: Record<SiteHeaderVariant, string> = {
@@ -205,15 +207,11 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
                 <div
                     className={`container flex h-full ${effectiveVariant === "solid" ? "items-center" : "items-start"} justify-between`}
                 >
-                    <Link
-                        href="/"
-                        className={`ml-23.5 block shrink-0 ${
-                            isScrolled ? "h-25 w-31.5" : "h-36.25 w-45.75"
-                        } ${effectiveVariant === "transparent" ? "mt-1.75" : ""}`}
-                    >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="Hanson Landscape" className="size-full object-cover" src="/images/home/logo.png" />
-                    </Link>
+                    <Logo
+                        isScrolled={isScrolled}
+                        effectiveVariant={effectiveVariant}
+                        className="ml-23.5 hidden lg:block"
+                    />
                     <nav
                         ref={navRef}
                         onMouseLeave={hidePill}

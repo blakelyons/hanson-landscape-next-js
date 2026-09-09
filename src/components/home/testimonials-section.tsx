@@ -45,27 +45,35 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
 export function TestimonialsSection() {
     return (
         <section className="bg-forrest-dark relative flex w-full flex-col items-center justify-center overflow-clip py-20">
-            <div className="container flex flex-col items-center justify-center gap-[60px] px-20">
+            <div className="container flex flex-col items-center justify-center gap-15">
                 <SectionIntro
-                    className="h-[72px] w-full"
+                    className="w-full"
                     eyebrow="client stories"
+                    eyebrowColor="text-primary"
                     heading="What Our Clients Say"
-                    eyebrowClassName="text-primary"
                     headingClassName="text-white"
                 />
                 {/* w-282 (1128px) = 3 cards * 336px + 2 gaps * 60px, so Swiper's numeric
                     slidesPerView divides evenly back to the card's own fixed width. */}
-                <div className="w-282">
-                    <Carousel
-                        slides={TESTIMONIALS.map((testimonial, index) => (
-                            <TestimonialCard key={index} {...testimonial} />
-                        ))}
-                        slidesPerView={3}
-                        spaceBetween={60}
-                        showDots={false}
-                        showArrows
-                        loop
-                    />
+                <div className="w-full">
+                    {TESTIMONIALS.length > 3 ? (
+                        <Carousel
+                            slides={TESTIMONIALS.map((testimonial, index) => (
+                                <TestimonialCard key={index} {...testimonial} />
+                            ))}
+                            slidesPerView={3}
+                            spaceBetween={32}
+                            showDots={false}
+                            showArrows
+                            loop
+                        />
+                    ) : (
+                        <div className="flex flex-row flex-wrap items-center justify-center gap-8">
+                            {TESTIMONIALS.map((testimonial, index) => (
+                                <TestimonialCard key={index} {...testimonial} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
