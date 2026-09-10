@@ -102,7 +102,7 @@ export function SectionIntro({
             }}
         >
             {eyebrow && <Eyebrow text={eyebrow} color={eyebrowColor} className="section-intro__eyebrow" />}
-            <h2 className={`section-intro__title font-serif-display mb-2 text-[40px] leading-11.5 ${headingClassName}`}>
+            <h2 className={`section-intro__title font-serif-display mb-2 text-4xl leading-11.5 ${headingClassName}`}>
                 {heading}
             </h2>
             {description ? (

@@ -60,19 +60,19 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
 
             <div className="relative container">
                 <div className="relative z-10 flex flex-col items-start gap-3.5 px-30 py-16">
-                    <p className="font-sans text-[13px] font-normal whitespace-pre-wrap text-[rgba(250,251,248,0.6)]">
+                    <p className="font-sans text-sm font-normal whitespace-pre-wrap text-[rgba(250,251,248,0.6)]">
                         {breadcrumb}
                     </p>
                     <div className="flex items-center gap-3">
                         <div className="bg-primary h-0.5 w-8 shrink-0" />
-                        <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px] whitespace-nowrap">
+                        <p className="text-primary font-sans text-sm font-medium tracking-[2.6px] whitespace-nowrap">
                             {eyebrow}
                         </p>
                     </div>
-                    <h1 className="font-serif-display text-[56px] leading-[62px] font-normal text-[#fafbf8] not-italic">
+                    <h1 className="font-serif-display text-6xl leading-15.5 font-normal text-[#fafbf8] not-italic">
                         {heading}
                     </h1>
-                    <p className="max-w-160 font-sans text-lg leading-[30px] font-normal text-[rgba(250,251,248,0.78)]">
+                    <p className="max-w-160 font-sans text-lg leading-7.5 font-normal text-[rgba(250,251,248,0.78)]">
                         {description}
                     </p>
                 </div>

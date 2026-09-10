@@ -130,3 +130,9 @@ body {
     text-box-trim: trim-end;
     color: transparent;
 }
+
+.swiper-wrapper,
+.swiper-slide,
+.swiper {
+    overflow: visible !important;
+}

@@ -3,12 +3,12 @@ import { useGSAP } from "@gsap/react";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { Logo } from "@/components/ui/logo";
 import { Carousel } from "@/components/ui/carousel";
-import { HeroCarouselSlide } from "@/components/home/hero-carousel-slide";
+import { HeroCarouselSlide, HeroCarouselSlideThumb } from "@/components/home/hero-carousel-slide";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
 import { PillButton } from "@/components/ui/pill-button";
-//import { Icon } from "@/components/ui/icon";
+import { Icon } from "@/components/ui/icon";
 
 const HERO_STATS = [
     { value: "25+", label: "Years of craftsmanship" },
@@ -16,12 +16,21 @@ const HERO_STATS = [
     { value: "100%", label: "Satisfaction rating" },
 ];
 
+const SHOW_THUMBNAILS = true;
+const MAX_VISIBLE_THUMBNAILS = 3;
+const THUMBNAIL_SIZE_PX = 80; // matches size-20 on HeroCarouselSlideThumb
+const THUMBNAIL_GAP_PX = 16;
+
 const HERO_SLIDES = [
     { src: "/images/home/project-photo-1.webp", alt: "Home Hero Carousel Slide 1" },
-    { src: "/images/home/project-photo-2.webp", alt: "Home Hero Carousel Slide 2" },
-    { src: "/images/home/project-photo-3.webp", alt: "Home Hero Carousel Slide 3" },
-    { src: "/images/home/project-photo-4.webp", alt: "Home Hero Carousel Slide 4" },
+    { src: "/images/home/project-photo-2.jpg", alt: "Home Hero Carousel Slide 2" },
+    { src: "/images/home/project-photo-3.jpg", alt: "Home Hero Carousel Slide 3" },
+    { src: "/images/home/project-photo-4.jpg", alt: "Home Hero Carousel Slide 4" },
 ];
+
+const visibleThumbnailCount = Math.min(MAX_VISIBLE_THUMBNAILS, HERO_SLIDES.length);
+const THUMBNAILS_MAX_WIDTH =
+    visibleThumbnailCount * THUMBNAIL_SIZE_PX + (visibleThumbnailCount - 1) * THUMBNAIL_GAP_PX + 16;
 
 export function HeroSection() {
     useGSAP(() => {
@@ -95,18 +104,27 @@ export function HeroSection() {
                 },
                 "<",
             )
+            .to(
+                ".hero-carousel-wrapper",
+                {
+                    opacity: 1,
+                    duration: t,
+                    ease: "expo.inOut",
+                },
+                "<",
+            )
             .add(scrollTimeilne, ">");
     }, []);
 
     return (
-        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-[100vh] xl:max-h-[980px]">
+        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-screen xl:max-h-245">
             <div className="relative container h-full lg:pt-[calc(var(--header-height)+1.25rem)] xl:pt-[calc(var(--header-height)*1.1)]">
                 <div className="grid h-full grid-cols-1 items-center gap-8 xl:grid-cols-2 xl:gap-12">
                     <div className="col z-1 grid place-items-center gap-8 text-center xl:place-items-start xl:gap-12 xl:text-left">
                         <Logo size="lg" className="mt-10 transition-all duration-300 ease-in-out lg:mt-0 lg:hidden" />
                         <div className="hero-eyebrow -mb-8 flex translate-y-10 flex-row flex-wrap items-center justify-center gap-3 opacity-0 lg:justify-start">
                             <div className="bg-primary h-0.5 w-9 shrink-0" />
-                            <p className="text-primary font-sans text-[13px] font-medium tracking-[2.6px]">
+                            <p className="text-primary font-sans text-sm font-medium tracking-[2.6px]">
                                 {`CHICAGOLAND'S LANDSCAPE ARCHITECTS — EST. 2001`}
                             </p>
                         </div>
@@ -147,10 +165,10 @@ export function HeroSection() {
                             {HERO_STATS.map((stat, index) => (
                                 <div key={stat.value} className="contents">
                                     <div className="hero-stats-item flex -translate-x-24 flex-col items-center gap-1 text-center opacity-0 xl:items-start xl:text-left">
-                                        <p className="font-serif-display text-[34px] font-normal text-[#fafbf8] not-italic">
+                                        <p className="font-serif-display text-4xl font-normal text-[#fafbf8] not-italic">
                                             {stat.value}
                                         </p>
-                                        <p className="text-center font-sans text-[13px] font-normal text-[rgba(250,251,248,0.55)] xl:text-left">
+                                        <p className="text-center font-sans text-sm font-normal text-[rgba(250,251,248,0.55)] xl:text-left">
                                             {stat.label}
                                         </p>
                                     </div>
@@ -161,7 +179,7 @@ export function HeroSection() {
                             ))}
                         </div>
                     </div>
-                    <div className="col relative z-1 hidden items-center justify-end pl-10 xl:flex">
+                    <div className="col relative z-1 hidden items-center justify-end overflow-x-hidden pl-10 xl:flex">
                         <Carousel
                             slides={HERO_SLIDES.map((photo) => (
                                 <HeroCarouselSlide key={photo.src} src={photo.src} alt={photo.alt} />
@@ -169,6 +187,18 @@ export function HeroSection() {
                             slidesPerView={1}
                             showArrows={false}
                             showDots={false}
+                            thumbnailsMaxWidth={THUMBNAILS_MAX_WIDTH}
+                            loop={true}
+                            effect="fade"
+                            fadeCrossFade={true}
+                            className="hero-carousel-wrapper opacity-0"
+                            thumbnails={
+                                SHOW_THUMBNAILS
+                                    ? HERO_SLIDES.map((photo) => (
+                                          <HeroCarouselSlideThumb key={photo.src} src={photo.src} alt={photo.alt} />
+                                      ))
+                                    : undefined
+                            }
                         />
                     </div>
 
@@ -199,12 +229,98 @@ export function HeroSection() {
                             />
                         </div>
                         <div className="absolute right-0 size-175">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                alt=""
-                                className="absolute inset-0 block size-full max-w-none"
-                                src="/images/home/leaf-particles.svg"
-                            />
+                            <svg
+                                preserveAspectRatio="none"
+                                overflow="visible"
+                                style={{ display: "block" }}
+                                width="700"
+                                height="700"
+                                viewBox="0 0 700 700"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                id="orbit-dots"
+                            >
+                                <g id="orbit-dot-particles">
+                                    <circle id="particle" cx="302" cy="125" r="5" fill="#F89C1C" fillOpacity="0.9" />
+                                    <circle id="particle_2" cx="163" cy="63" r="3" fill="#61A229" fillOpacity="0.8" />
+                                    <circle id="particle_3" cx="566" cy="96" r="6" fill="#FAFBF8" fillOpacity="0.5" />
+                                    <circle id="particle_4" cx="18" cy="485" r="6" fill="#FAFBF8" fillOpacity="0.5" />
+                                    <circle
+                                        id="particle_5"
+                                        cx="643.5"
+                                        cy="203.5"
+                                        r="3.5"
+                                        fill="#F89C1C"
+                                        fill-opacity="0.7"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_6"
+                                        cx="624.5"
+                                        cy="424.5"
+                                        r="4.5"
+                                        fill="#61A229"
+                                        fill-opacity="0.9"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_7"
+                                        cx="92.5"
+                                        cy="422.5"
+                                        r="2.5"
+                                        fill="#FAFBF8"
+                                        fill-opacity="0.6"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_8"
+                                        cx="192"
+                                        cy="573"
+                                        r="4"
+                                        fill="#F89C1C"
+                                        fill-opacity="0.6"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_9"
+                                        cx="543"
+                                        cy="583"
+                                        r="3"
+                                        fill="#61A229"
+                                        fill-opacity="0.7"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_10"
+                                        cx="422.5"
+                                        cy="42.5"
+                                        r="2.5"
+                                        fill="#FBBD5E"
+                                        fill-opacity="0.8"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle id="particle_11" cx="302" cy="92" r="2" fill="#FAFBF8" fill-opacity="0.4" />
+                                    <circle
+                                        id="particle_12"
+                                        cx="63.5"
+                                        cy="263.5"
+                                        r="3.5"
+                                        fill="#61A229"
+                                        fill-opacity="0.5"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <circle
+                                        id="particle_13"
+                                        cx="662"
+                                        cy="322"
+                                        r="2"
+                                        fill="#FBBD5E"
+                                        fill-opacity="0.9"
+                                        className="orbit-dot-particle"
+                                    />
+                                    <g id="Frame 33"></g>
+                                </g>
+                            </svg>
                         </div>
                     </div>
                 </div>

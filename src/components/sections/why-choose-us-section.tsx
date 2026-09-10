@@ -22,7 +22,7 @@ export function WhyChooseUsSection() {
                     <div className="flex min-w-0 flex-col items-start gap-9">
                         <div className="flex flex-col items-start gap-2.5">
                             <p className="font-mono-label text-forrest text-xs uppercase">Why Choose us</p>
-                            <p className="font-serif-display text-[40px] leading-[46px] font-normal whitespace-pre-wrap text-[#1a2e1a] not-italic">
+                            <p className="font-serif-display text-4xl leading-11.5 font-normal whitespace-pre-wrap text-[#1a2e1a] not-italic">
                                 {`Crafting Beautiful Outdoor `}
                                 <br aria-hidden />
                                 {`Spaces With Passion & `}
@@ -57,7 +57,7 @@ export function WhyChooseUsSection() {
                                                 <p className="font-serif-display text-xl leading-7 font-normal whitespace-nowrap text-black not-italic">
                                                     {feature.title}
                                                 </p>
-                                                <p className="w-full font-sans text-sm leading-[18px] font-normal text-[#6d827c]">
+                                                <p className="w-full font-sans text-sm leading-4.5 font-normal text-[#6d827c]">
                                                     {feature.description}
                                                 </p>
                                             </div>

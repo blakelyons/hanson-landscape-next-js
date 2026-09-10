@@ -5,7 +5,7 @@ export function CtaSection() {
         <section className="relative flex w-full items-center justify-center overflow-clip">
             <div className="container flex items-center justify-center">
                 <div className="bg-primary-light relative flex w-256 shrink-0 flex-col items-center justify-center gap-4.5 overflow-clip rounded-xl py-15">
-                    <p className="font-serif-display w-full min-w-full text-center text-[40px] leading-[46px] font-normal text-black not-italic">
+                    <p className="font-serif-display w-full min-w-full text-center text-4xl leading-11.5 font-normal text-black not-italic">
                         Ready to Transform Your Space?
                     </p>
                     <p className="w-110.75 text-center font-sans text-lg leading-7 font-normal text-[rgba(0,0,0,0.5)]">

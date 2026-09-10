@@ -14,7 +14,9 @@ export function PortfolioBento() {
                     View All Projects
                 </ArrowLink>
 
-                <div className="portfolio-bento-grid"></div>
+                <div className="portfolio-bento-grid">
+                    <div className="featured-image"></div>
+                </div>
             </div>
         </section>
     );

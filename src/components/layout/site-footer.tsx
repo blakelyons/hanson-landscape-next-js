@@ -38,7 +38,7 @@ export function SiteFooter() {
                                     src="/images/home/logo.png"
                                 />
                             </div>
-                            <p className="font-serif-display w-full min-w-full text-[40px] leading-11 font-normal text-white not-italic">
+                            <p className="font-serif-display w-full min-w-full text-4xl leading-11 font-normal text-white not-italic">
                                 Our Mission
                             </p>
                             <p className="w-full min-w-full font-sans text-lg leading-7 font-normal text-[rgba(255,255,255,0.5)]">
