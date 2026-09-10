@@ -1,20 +1,26 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { useWindowWidth } from "@/hooks/use-media-query";
 import { Logo } from "@/components/ui/logo";
+import { Carousel } from "@/components/ui/carousel";
+import { HeroCarouselSlide } from "@/components/home/hero-carousel-slide";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
 import { PillButton } from "@/components/ui/pill-button";
 //import { Icon } from "@/components/ui/icon";
 
-import "./hero-section.scss";
-
 const HERO_STATS = [
     { value: "25+", label: "Years of craftsmanship" },
     { value: "500+", label: "Projects delivered" },
     { value: "100%", label: "Satisfaction rating" },
+];
+
+const HERO_SLIDES = [
+    { src: "/images/home/project-photo-1.webp", alt: "Home Hero Carousel Slide 1" },
+    { src: "/images/home/project-photo-2.webp", alt: "Home Hero Carousel Slide 2" },
+    { src: "/images/home/project-photo-3.webp", alt: "Home Hero Carousel Slide 3" },
+    { src: "/images/home/project-photo-4.webp", alt: "Home Hero Carousel Slide 4" },
 ];
 
 export function HeroSection() {
@@ -93,7 +99,7 @@ export function HeroSection() {
     }, []);
 
     return (
-        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-[100vh] xl:max-h-270">
+        <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-[100vh] xl:max-h-[980px]">
             <div className="relative container h-full lg:pt-[calc(var(--header-height)+1.25rem)] xl:pt-[calc(var(--header-height)*1.1)]">
                 <div className="grid h-full grid-cols-1 items-center gap-8 xl:grid-cols-2 xl:gap-12">
                     <div className="col z-1 grid place-items-center gap-8 text-center xl:place-items-start xl:gap-12 xl:text-left">
@@ -155,15 +161,15 @@ export function HeroSection() {
                             ))}
                         </div>
                     </div>
-                    <div className="col z-1 hidden items-center justify-end xl:flex">
-                        <div className="relative aspect-[522/347] h-auto w-full max-w-155 rounded-[18px] border border-[#41754b] shadow-[0px_4px_13.7px_6px_rgba(0,0,0,0.15)]">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                alt="Hanson Landscape project"
-                                className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[18px] object-cover"
-                                src="/images/home/project-photo-1.jpg"
-                            />
-                        </div>
+                    <div className="col relative z-1 hidden items-center justify-end pl-10 xl:flex">
+                        <Carousel
+                            slides={HERO_SLIDES.map((photo) => (
+                                <HeroCarouselSlide key={photo.src} src={photo.src} alt={photo.alt} />
+                            ))}
+                            slidesPerView={1}
+                            showArrows={false}
+                            showDots={false}
+                        />
                     </div>
 
                     <div className="absolute inset-0 z-0 flex h-full w-full items-center justify-center">

@@ -3,8 +3,9 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination, Thumbs } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/thumbs";
 import { Icon } from "@/components/ui/icon";
 
 export type CarouselProps = {
@@ -32,6 +33,7 @@ export function Carousel({
     const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
     const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
     const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState<typeof Swiper | null>(null);
 
     if (slides.length <= slidesPerView) {
         return (
@@ -49,7 +51,7 @@ export function Carousel({
         <div className="flex w-full flex-col items-start gap-2">
             <div className="relative flex w-full items-center gap-4">
                 <Swiper
-                    modules={[Navigation, Pagination, Autoplay]}
+                    modules={[Navigation, Pagination, Autoplay, Thumbs]}
                     observer
                     observeParents
                     slidesPerView={slidesPerView}
@@ -58,6 +60,7 @@ export function Carousel({
                     loop={loop}
                     autoplay={autoplay === false ? false : { delay: autoplay === true ? 3000 : autoplay }}
                     navigation={showArrows ? { prevEl, nextEl } : false}
+                    thumbs={{ swiper: thumbsSwiper }}
                     pagination={
                         showDots && paginationEl
                             ? {

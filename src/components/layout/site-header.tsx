@@ -210,7 +210,7 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
                     <Logo
                         isScrolled={isScrolled}
                         effectiveVariant={effectiveVariant}
-                        className="ml-23.5 hidden lg:block"
+                        className="hidden lg:block"
                         size={isScrolled ? "md" : "lg"}
                     />
                     <nav

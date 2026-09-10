@@ -12,7 +12,7 @@ export function Logo({ isScrolled = false, effectiveVariant = "solid", className
     return (
         <Link
             href="/"
-            className={`block shrink-0 transition-all duration-300 ${
+            className={`logo block shrink-0 transition-all duration-300 ${
                 isScrolled
                     ? "h-25 w-31.5"
                     : size === "sm"
