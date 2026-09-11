@@ -15,13 +15,14 @@ procedure is:
 1. Install Node (match `.nvmrc`), PM2 (`npm i -g pm2`), and Nginx.
 2. Clone the repo, copy `.env.example` to `.env.local` (or `.env.production`)
    and fill in real values.
-3. `npm ci && npm run build`
-4. `pm2 start ecosystem.config.js`
-5. `pm2 save && pm2 startup` (so it survives a reboot)
-6. Copy `deploy/nginx.conf.example` to
+3. `npm ci && npm run build` — `build` runs `next build` then reloads the PM2
+   process, falling back to starting it if it isn't running yet (first-time
+   setup), so this one command builds and starts the app.
+4. `pm2 save && pm2 startup` (so it survives a reboot)
+5. Copy `deploy/nginx.conf.example` to
    `/etc/nginx/sites-available/hansonlandscape.com`, symlink into
    `sites-enabled`, `nginx -t`, then reload Nginx.
-7. `certbot --nginx -d hansonlandscape.com -d www.hansonlandscape.com` for TLS.
+6. `certbot --nginx -d hansonlandscape.com -d www.hansonlandscape.com` for TLS.
 
 ## Hardening (run after provision-droplet, before going live)
 
@@ -59,7 +60,18 @@ npm run deploy
 ```
 
 Pushes the current branch, then SSHes into the droplet and runs
-`deploy/deploy.sh` (`git pull && npm ci && npm run build && pm2 reload
-ecosystem.config.js`). Requires committed changes (fails on a dirty tree) and
-a droplet reachable at the IP hardcoded in `deploy/remote-deploy.sh` (or
-cached in `deploy/.wizard-state` by the provisioning wizard).
+`deploy/deploy.sh` (`git pull && npm ci && npm run build`). Requires committed
+changes (fails on a dirty tree) and a droplet reachable at the IP hardcoded in
+`deploy/remote-deploy.sh` (or cached in `deploy/.wizard-state` by the
+provisioning wizard).
+
+## `build` vs `build:local`
+
+`npm run build` is the server-ready build: `next build` followed by a PM2
+reload (falling back to `pm2 start` if the process isn't registered yet). Use
+it on the droplet — it's what `deploy/deploy.sh` and `provision-droplet.sh`
+call, and what you'd run yourself if you ever build on the server by hand.
+
+`npm run build:local` is a plain `next build`, no PM2 involved — use it on
+your laptop (e.g. to sanity-check the production build compiles) since PM2
+isn't managing anything there.

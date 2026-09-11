@@ -284,7 +284,6 @@ NEXT_PUBLIC_SITE_URL=${SITE_URL_REMOTE}
 ENVEOF
 npm ci
 npm run build
-pm2 start ecosystem.config.js
 pm2 save
 REMOTE
 say "App built and running under PM2 on port 3000."

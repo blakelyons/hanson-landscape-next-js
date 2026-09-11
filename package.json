@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev --webpack",
-        "build": "next build --webpack",
+        "build": "next build --webpack && (pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js)",
+        "build:local": "next build --webpack",
         "start": "next start",
         "deploy": "bash deploy/remote-deploy.sh",
         "provision-droplet": "bash deploy/provision-droplet.sh",

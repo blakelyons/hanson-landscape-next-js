@@ -8,4 +8,3 @@ cd "$(dirname "$0")/.."
 git pull
 npm ci
 npm run build
-pm2 reload ecosystem.config.js
