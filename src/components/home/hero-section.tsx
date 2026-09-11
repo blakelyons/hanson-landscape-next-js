@@ -68,9 +68,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
         const scrollTimeilne = gsap.timeline({ defaults: { duration: 2, ease: "power1.out" } });
         // Delayed so the hero's own entrance starts right as the header
         // finishes its slide-down (see site-header.tsx's HEADER_SLIDE_DURATION).
-        const heroMainTimeline = gsap
-            .timeline({ defaults: { duration: t, ease: "power3.out" } })
-            .delay(HEADER_SLIDE_DURATION);
+        const heroMainTimeline = gsap.timeline({ defaults: { duration: t, ease: "power3.out" } });
 
         gsap.set(".green-plant-svg", { opacity: 0, display: "block", scale: 0, transformOrigin: "bottom center" });
 
@@ -104,13 +102,17 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
         });
 
         heroMainTimeline
-            .to([".hero-eyebrow", ".hero-title-wrapper", ".hero-subtitle"], {
-                y: 0,
-                opacity: 1,
-                duration: t,
-                stagger: staggerDelay,
-                ease: "expo.inOut",
-            })
+            .to(
+                [".hero-eyebrow", ".hero-title-wrapper", ".hero-subtitle"],
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: t,
+                    stagger: staggerDelay,
+                    ease: "expo.inOut",
+                },
+                "<",
+            )
             .to(
                 ".hero-title-highlight",
                 {
