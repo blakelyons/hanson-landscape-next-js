@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import { useUIStore } from "@/store/ui-store";
+import { TransitionLink } from "@/components/transitions/transition-link";
 import { NAV_LINKS, NAV_LINKS_AFTER } from "./site-header";
 import { ChevronToLeafIcon, SERVICES_MENU, type MenuItem } from "./chevron-to-leaf-icon";
 import { Logo } from "@/components/ui/logo";
@@ -235,7 +236,7 @@ export function MobileNav() {
                     </div>
                     <div ref={itemsRef} className="flex h-full flex-1 flex-col gap-6 p-8">
                         {NAV_LINKS.map((link) => (
-                            <Link
+                            <TransitionLink
                                 key={link.label}
                                 href={link.href}
                                 onClick={closeMobileNav}
@@ -243,7 +244,7 @@ export function MobileNav() {
                             >
                                 <Icon icon={link.icon} className="size-5" />
                                 {link.label}
-                            </Link>
+                            </TransitionLink>
                         ))}
                         <AccordionRow item={OUR_SERVICES_ITEM} depth={0} onNavigate={closeMobileNav} />
                         {NAV_LINKS_AFTER.map((link) => (

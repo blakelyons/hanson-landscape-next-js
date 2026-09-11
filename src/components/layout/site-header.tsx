@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useGSAP } from "@gsap/react";
+import { TransitionLink } from "@/components/transitions/transition-link";
 import { ServicesNavDropdown } from "./nav-dropdown";
 import { MobileNav } from "./mobile-nav";
 import { getPillTargetRect } from "@/lib/nav-pill";
@@ -79,6 +80,9 @@ const headerContainerClasses: Record<SiteHeaderVariant, string> = {
 // height) and the sticky drawer sliding down into view.
 const DRAWER_REVEAL_DELAY_MS = 300;
 
+// Exported so HeroSection can delay its own entrance until this finishes.
+export const HEADER_SLIDE_DURATION = 0.6;
+
 // Active-link highlighting is an interior-page (solid) affordance — the
 // homepage's transparent overlay header keeps its original plain-text nav
 // unchanged, active route or not, to avoid a visual regression there.
@@ -97,19 +101,19 @@ function NavLink({
 }) {
     if (variant === "transparent") {
         return (
-            <Link
+            <TransitionLink
                 ref={(el) => registerItem(link.label, el)}
                 href={link.href}
                 onMouseEnter={onHoverEnter}
                 className="rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap text-white transition-colors hover:text-white xl:text-base"
             >
                 {link.label}
-            </Link>
+            </TransitionLink>
         );
     }
 
     return (
-        <Link
+        <TransitionLink
             ref={(el) => registerItem(link.label, el)}
             href={link.href}
             onMouseEnter={onHoverEnter}
@@ -118,11 +122,17 @@ function NavLink({
             }`}
         >
             {link.label}
-        </Link>
+        </TransitionLink>
     );
 }
 
-export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVariant }) {
+export function SiteHeader({
+    variant = "transparent",
+    playIntro = true,
+}: {
+    variant?: SiteHeaderVariant;
+    playIntro?: boolean;
+}) {
     const pathname = usePathname();
     const headerRef = useRef<HTMLElement>(null);
     const navRef = useRef<HTMLElement>(null);
@@ -133,6 +143,16 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
     // viewport (like a normal, non-sticky header would).
     const [isScrolled, setIsScrolled] = useState(false);
     const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    // The mount entrance effect below owns the header's initial position.
+    // This lets the scroll-drawer effect (right below) skip whenever
+    // isScrolled hasn't actually changed since its last run — comparing
+    // values (rather than a one-shot "have I run yet" flag) is what makes it
+    // safe under React Strict Mode's dev-only double-invoke: both the
+    // throwaway trial run and the real run see the same "unchanged" value
+    // and skip identically, instead of the trial run consuming a one-shot
+    // flag and leaving the real run to fire for real and stomp whatever the
+    // entrance tween is mid-animating.
+    const prevIsScrolledRef = useRef(isScrolled);
 
     // Threshold = header's own height (its distance from the top of the
     // page to its bottom edge, captured before any scroll happens).
@@ -147,6 +167,26 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Initial slide-down from the CSS-hidden resting position (-translate-y-100
+    // on the header element). Gated by playIntro so a page that opts out (e.g.
+    // a revisit to "/" after the intro has already played once) just shows the
+    // header in place instead of replaying the slide.
+    useGSAP(() => {
+        // y: 0 forces out the plain-pixel baseline GSAP parses from the CSS
+        // class's translateY(-400px) (Tailwind's -translate-y-100 spacing
+        // value, not a percentage) on first touch — without it, yPercent
+        // tracks separately from that imported pixel `y` and a later
+        // `yPercent: 0` leaves the -400px sitting there untouched (same
+        // xPercent/x gotcha documented in route-transition-overlay.tsx).
+        gsap.set(headerRef.current, { y: 0, yPercent: -100 });
+
+        if (!playIntro) {
+            gsap.set(headerRef.current, { yPercent: 0 });
+            return;
+        }
+        gsap.to(headerRef.current, { yPercent: 0, duration: HEADER_SLIDE_DURATION, ease: "power2.inOut" });
+    }, [playIntro]);
+
     const effectiveVariant: SiteHeaderVariant = isScrolled ? "solid" : variant;
 
     // Once the header has scrolled out of view (isScrolled), it's parked
@@ -154,6 +194,9 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
     // After a beat, it slides down into view like a drawer. Scrolling back
     // up before that delay fires cancels the pending reveal.
     useGSAP(() => {
+        if (prevIsScrolledRef.current === isScrolled) return;
+        prevIsScrolledRef.current = isScrolled;
+
         if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
 
         if (isScrolled) {
@@ -193,25 +236,21 @@ export function SiteHeader({ variant = "transparent" }: { variant?: SiteHeaderVa
         <>
             {/* base "solid" header sits in normal flow; going fixed on scroll
                 pulls it out of flow, so hold its space to stop content jumping */}
-            {isScrolled && variant === "solid" && <div className="w-full" aria-hidden />}
+            {isScrolled && variant === "solid" && <div className="h-(--header-height) w-full" aria-hidden />}
             <header
                 ref={headerRef}
-                className={`${headerContainerClasses[effectiveVariant]} ${
-                    isScrolled
-                        ? "fixed top-0 shadow-sm"
-                        : effectiveVariant === "transparent"
-                          ? "absolute top-3.25"
-                          : "relative"
+                className={`global-header -translate-y-100 ${headerContainerClasses[effectiveVariant]} ${
+                    isScrolled ? "fixed top-0" : effectiveVariant === "transparent" ? "absolute top-3.25" : "relative"
                 }`}
             >
                 <div
                     className={`container flex h-full ${effectiveVariant === "solid" ? "items-center" : "items-start"} justify-between`}
                 >
                     <Logo
-                        isScrolled={isScrolled}
+                        isScrolled={isScrolled || pathname !== "/"}
                         effectiveVariant={effectiveVariant}
                         className="hidden lg:block"
-                        size={isScrolled ? "md" : "lg"}
+                        size={isScrolled || pathname !== "/" ? "md" : "lg"}
                     />
                     <nav
                         ref={navRef}

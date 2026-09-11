@@ -6,6 +6,7 @@ type PillButtonVariant =
     | "secondary"
     | "primary"
     | "primary-dark"
+    | "forrest-deep"
     | "outline-primary"
     | "outline-primary-dark"
     | "outline-secondary"
@@ -13,13 +14,15 @@ type PillButtonVariant =
 type PillButtonSize = "sm" | "md" | "lg";
 
 const variantSurfaceClasses: Record<PillButtonVariant, string> = {
-    secondary: "bg-forrest hover:bg-forrest-light border-2 border-forrest hover:border-forrest-light",
-    primary: "bg-primary hover:bg-primary-light border-2 border-primary hover:border-primary-light",
-    "primary-dark": "bg-primary-dark hover:bg-primary border-2 border-primary-dark hover:border-primary",
-    "outline-primary": "border-2 bg-transparent border-primary hover:border-primary-light",
-    "outline-white": "border-2 bg-transparent border-white hover:border-white-light hover:border-primary",
-    "outline-primary-dark": "border-2 bg-transparent border-primary-dark hover:border-primary",
-    "outline-secondary": "border-2 bg-transparent border-forrest hover:border-forrest-light",
+    secondary: "bg-forrest hover:bg-forrest-light border border-forrest hover:border-forrest-light",
+    primary: "bg-primary hover:bg-primary-light border border-primary hover:border-primary-light",
+    "primary-dark": "bg-primary-dark hover:bg-primary border border-primary-dark hover:border-primary",
+    "forrest-deep":
+        "bg-forrest-deep hover:bg-forrest-light-2 border border-forrest-deep-border hover:border-forrest-light-2-border",
+    "outline-primary": "border bg-transparent border-primary hover:border-primary-light",
+    "outline-white": "border bg-transparent border-white hover:border-white-light hover:border-primary",
+    "outline-primary-dark": "border bg-transparent border-primary-dark hover:border-primary",
+    "outline-secondary": "border bg-transparent border-forrest hover:border-forrest-light",
 };
 
 const sizeClasses: Record<PillButtonSize, string> = {

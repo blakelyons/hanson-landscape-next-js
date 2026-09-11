@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink } from "@/components/transitions/transition-link";
 import type { SiteHeaderVariant } from "@/components/layout/site-header";
 
 type LogoProps = {
@@ -10,7 +10,7 @@ type LogoProps = {
 
 export function Logo({ isScrolled = false, effectiveVariant = "solid", className = "", size = "lg" }: LogoProps) {
     return (
-        <Link
+        <TransitionLink
             href="/"
             className={`logo block shrink-0 transition-all duration-300 ${
                 isScrolled
@@ -24,6 +24,6 @@ export function Logo({ isScrolled = false, effectiveVariant = "solid", className
         >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img alt="Hanson Landscape" className="size-full object-cover" src="/images/home/logo.png" />
-        </Link>
+        </TransitionLink>
     );
 }

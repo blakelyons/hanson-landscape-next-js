@@ -1,4 +1,5 @@
 import { StatCard } from "@/components/ui/stat-card";
+import Image from "next/image";
 
 const STATS = [
     { value: "25+", label: "Years of craftsmanship" },
@@ -11,17 +12,19 @@ export function StorySection() {
         <section className="w-full bg-white py-20">
             <div className="container grid grid-cols-2 items-center gap-20">
                 <div className="min-w-0 overflow-hidden rounded-2xl">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                         alt="Hanson Landscape crew working on a stone garden path"
-                        className="aspect-[29/28] size-full object-cover"
+                        className="aspect-29/28 size-full object-cover"
                         src="/images/about/story-photo.jpg"
+                        priority
+                        width={750}
+                        height={500}
                     />
                 </div>
                 <div className="flex min-w-0 flex-col items-start gap-5">
                     <div className="flex items-center gap-3">
                         <div className="bg-primary h-0.5 w-8 shrink-0" />
-                        <p className="text-forrest font-sans text-sm font-medium tracking-[2.6px] whitespace-nowrap">
+                        <p className="text-primary font-sans text-sm font-medium tracking-[2.6px] whitespace-nowrap">
                             EST. 2001
                         </p>
                     </div>

@@ -25,6 +25,8 @@
     --color-forrest-dark-2: #15240f;
     --color-forrest-light-2: #385b3b;
     --color-forrest-light-2-border: #516f55;
+    --color-forrest-deep: #29462f;
+    --color-forrest-deep-border: #465f4b;
     --color-neutral-700: #2d3b2d;
     --color-neutral-600: #4a5a4a;
     --color-neutral-200: #c4ccc4;
@@ -66,6 +68,24 @@ body {
     margin-inline: auto;
     padding-inline: 32px;
     transition: max-width 0.3s ease-in-out;
+}
+
+/* Route transition overlay's resting (hidden) position, applied before any
+   JS runs so there's no flash on first paint/hard refresh. GSAP animates
+   these elements via inline `transform`, which always wins over this class
+   rule — the two never fight over the same declaration the way a React
+   `style` prop re-render would. */
+.route-transition-door-left {
+    transform: translateX(-100%);
+}
+.route-transition-door-right {
+    transform: translateX(100%);
+}
+.route-transition-iris {
+    transform: scale(0);
+}
+.route-transition-fade {
+    opacity: 0;
 }
 
 @layer base {

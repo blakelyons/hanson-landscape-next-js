@@ -1,5 +1,6 @@
 import { FooterColumn } from "./footer-column";
 import { PartnerLogos } from "@/components/ui/partner-logos";
+import Link from "next/link";
 
 const MENU_COLUMNS = [
     {
@@ -29,7 +30,7 @@ export function SiteFooter() {
             <div className="flex w-full flex-col items-center bg-neutral-700 py-20">
                 <div className="container flex flex-col items-start">
                     <div className="flex w-full flex-row flex-wrap gap-x-10 gap-y-10 xl:gap-y-0">
-                        <div className="flex w-full flex-col items-center gap-6 xl:w-1/3 xl:items-start">
+                        <div className="flex w-full flex-col items-center gap-6 lg:w-1/2 lg:items-start xl:w-1/3">
                             <div className="relative h-22 w-30 shrink-0">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
@@ -46,7 +47,7 @@ export function SiteFooter() {
                             </p>
                         </div>
 
-                        <div className="grid w-auto flex-1 grid-cols-1 gap-x-10 xl:grid-cols-[repeat(4,minmax(max-content,1fr))]">
+                        <div className="grid w-auto flex-1 grid-cols-1 gap-x-10 gap-y-10 lg:w-1/2 lg:grid-cols-2 xl:grid-cols-[repeat(4,minmax(max-content,1fr))]">
                             {MENU_COLUMNS.map((column) => (
                                 <FooterColumn
                                     key={column.heading}
@@ -61,7 +62,9 @@ export function SiteFooter() {
                                 </p>
                                 <div className="flex w-full flex-col items-start gap-4">
                                     <div className="w-full font-sans text-base leading-none font-normal whitespace-pre-wrap text-[rgba(255,255,255,0.5)]">
-                                        <p className="mb-0 leading-4">(630) 556-4120</p>
+                                        <p className="mb-0 leading-4">
+                                            <Link href="tel:6305564120">(630) 556-4120</Link>
+                                        </p>
                                         <p className="mb-0 leading-4">&#8203;</p>
                                         <p className="text-forrest mb-0 leading-4">info@hansonlandscape.com</p>
                                         <p className="mb-0 leading-4">&#8203;</p>

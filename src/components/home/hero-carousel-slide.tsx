@@ -51,7 +51,7 @@ export function HeroCarouselSlide({ src, alt = "Home Hero Carousel Slide" }: Her
     }, []);
 
     return (
-        <div className="flex aspect-4/3 max-h-100 w-[calc(100%-32px)] flex-col items-center justify-center">
+        <div className="flex aspect-4/3 max-h-100 w-full flex-col items-center justify-center">
             <div className="relative h-full w-full rounded-2xl border border-[#41754b] shadow-lg shadow-black/40">
                 <Image
                     data-fancybox="hero-carousel"

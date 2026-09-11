@@ -12,7 +12,7 @@ export function StatCard({
     labelClassName?: string;
 }) {
     return (
-        <div className={className}>
+        <div className={`${className} grid gap-1.5`}>
             <p className={`w-full leading-none not-italic ${valueClassName}`}>{value}</p>
             <p className={`w-full leading-none not-italic ${labelClassName}`}>{label}</p>
         </div>

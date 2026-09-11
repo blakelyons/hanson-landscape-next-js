@@ -4,11 +4,12 @@ import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { Logo } from "@/components/ui/logo";
 import { Carousel } from "@/components/ui/carousel";
 import { HeroCarouselSlide, HeroCarouselSlideThumb } from "@/components/home/hero-carousel-slide";
+import { GreenPlantSvg } from "@/components/ui/green-plant-leaf-svg";
+import { HEADER_SLIDE_DURATION } from "@/components/layout/site-header";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
 import { PillButton } from "@/components/ui/pill-button";
-import { Icon } from "@/components/ui/icon";
 
 const HERO_STATS = [
     { value: "25+", label: "Years of craftsmanship" },
@@ -32,13 +33,46 @@ const visibleThumbnailCount = Math.min(MAX_VISIBLE_THUMBNAILS, HERO_SLIDES.lengt
 const THUMBNAILS_MAX_WIDTH =
     visibleThumbnailCount * THUMBNAIL_SIZE_PX + (visibleThumbnailCount - 1) * THUMBNAIL_GAP_PX + 16;
 
-export function HeroSection() {
+export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
     useGSAP(() => {
+        if (!playIntro) {
+            gsap.set(
+                [
+                    ".hero-eyebrow",
+                    ".hero-title-wrapper",
+                    ".hero-subtitle",
+                    ".hero-actions",
+                    ".hero-stats-item",
+                    ".hero-carousel-wrapper",
+                    ".hero-carousel-actions",
+                    ".hero-carousel-actions .btn",
+                    ".scroll-cue",
+                ],
+                { x: 0, y: 0, opacity: 1 },
+            );
+            gsap.set(".hero-title-highlight", { backgroundPositionX: "0%" });
+            gsap.set(".green-plant-svg", { opacity: 1, display: "block", scale: 1 });
+            gsap.to("#mouse-icon .mouse-scroll-button", {
+                y: 4,
+                duration: 2,
+                ease: "power1.out",
+                repeat: -1,
+                opacity: 0.1,
+            });
+            return;
+        }
+
         const t = 1.8; // timeline duration
         const staggerDelay = t * 0.1;
 
         const scrollTimeilne = gsap.timeline({ defaults: { duration: 2, ease: "power1.out" } });
-        const heroMainTimeline = gsap.timeline({ defaults: { duration: t, ease: "power3.out" } });
+        // Delayed so the hero's own entrance starts right as the header
+        // finishes its slide-down (see site-header.tsx's HEADER_SLIDE_DURATION).
+        const heroMainTimeline = gsap
+            .timeline({ defaults: { duration: t, ease: "power3.out" } })
+            .delay(HEADER_SLIDE_DURATION);
+
+        gsap.set(".green-plant-svg", { opacity: 0, display: "block", scale: 0, transformOrigin: "bottom center" });
 
         scrollTimeilne
             .to(
@@ -113,8 +147,37 @@ export function HeroSection() {
                 },
                 "<",
             )
-            .add(scrollTimeilne, ">");
-    }, []);
+            .to(
+                ".hero-carousel-actions",
+                {
+                    opacity: 1,
+                    duration: t,
+                    ease: "expo.inOut",
+                },
+                "<",
+            )
+            .to(
+                ".green-plant-svg",
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: t * 0.45,
+                    ease: "bounce.out",
+                },
+                ">-=0.5",
+            )
+            .to(
+                ".hero-carousel-actions .btn",
+                {
+                    opacity: 1,
+                    duration: t * 0.45,
+                    ease: "power3.inOut",
+                    stagger: staggerDelay,
+                },
+                "<-=1.2",
+            )
+            .add(scrollTimeilne, ">+=1.5");
+    }, [playIntro]);
 
     return (
         <section className="relative grid h-auto w-full overflow-clip bg-[#0e2113] pb-12 xl:h-screen xl:max-h-245">
@@ -179,27 +242,67 @@ export function HeroSection() {
                             ))}
                         </div>
                     </div>
-                    <div className="col relative z-1 hidden items-center justify-end overflow-x-hidden pl-10 xl:flex">
-                        <Carousel
-                            slides={HERO_SLIDES.map((photo) => (
-                                <HeroCarouselSlide key={photo.src} src={photo.src} alt={photo.alt} />
-                            ))}
-                            slidesPerView={1}
-                            showArrows={false}
-                            showDots={false}
-                            thumbnailsMaxWidth={THUMBNAILS_MAX_WIDTH}
-                            loop={true}
-                            effect="fade"
-                            fadeCrossFade={true}
-                            className="hero-carousel-wrapper opacity-0"
-                            thumbnails={
-                                SHOW_THUMBNAILS
-                                    ? HERO_SLIDES.map((photo) => (
-                                          <HeroCarouselSlideThumb key={photo.src} src={photo.src} alt={photo.alt} />
-                                      ))
-                                    : undefined
-                            }
-                        />
+                    <div className="col relative z-1 hidden items-center justify-center xl:flex">
+                        <div className="grid w-full grid-cols-1 place-items-center gap-4">
+                            <div className="w-full px-10">
+                                <div className="overflow-x-hidden">
+                                    <Carousel
+                                        slides={HERO_SLIDES.map((photo) => (
+                                            <HeroCarouselSlide key={photo.src} src={photo.src} alt={photo.alt} />
+                                        ))}
+                                        slidesPerView={1}
+                                        showArrows={false}
+                                        showDots={false}
+                                        thumbnailsMaxWidth={THUMBNAILS_MAX_WIDTH}
+                                        loop={true}
+                                        effect="fade"
+                                        fadeCrossFade={true}
+                                        className="hero-carousel-wrapper w-full opacity-0"
+                                        thumbnails={
+                                            SHOW_THUMBNAILS
+                                                ? HERO_SLIDES.map((photo) => (
+                                                      <HeroCarouselSlideThumb
+                                                          key={photo.src}
+                                                          src={photo.src}
+                                                          alt={photo.alt}
+                                                      />
+                                                  ))
+                                                : undefined
+                                        }
+                                    />
+                                </div>
+
+                                <div className="absolute -right-10 bottom-30 z-9 -scale-x-100">
+                                    <div className="green-plant-svg hidden">
+                                        <GreenPlantSvg />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="hero-carousel-actions flex items-center justify-center gap-x-4 pt-8">
+                                <PillButton
+                                    variant="forrest-deep"
+                                    size="sm"
+                                    textClassName="text-white/50 hover:text-white uppercase !text-sm tracking-[2px] opacity-0"
+                                    icon="lucide:building-complex"
+                                    iconPosition="left"
+                                    iconSize={16}
+                                    animateIconOnHover={false}
+                                >
+                                    {`Commercial Landscaping`}
+                                </PillButton>
+                                <PillButton
+                                    variant="forrest-deep"
+                                    size="sm"
+                                    textClassName="text-white/50 hover:text-white uppercase !text-sm tracking-[2px] opacity-0"
+                                    icon="lucide:house"
+                                    iconPosition="left"
+                                    iconSize={16}
+                                    animateIconOnHover={false}
+                                >
+                                    {`Residential Landscaping`}
+                                </PillButton>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="absolute inset-0 z-0 flex h-full w-full items-center justify-center">
@@ -251,7 +354,7 @@ export function HeroSection() {
                                         cy="203.5"
                                         r="3.5"
                                         fill="#F89C1C"
-                                        fill-opacity="0.7"
+                                        fillOpacity="0.7"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -260,7 +363,7 @@ export function HeroSection() {
                                         cy="424.5"
                                         r="4.5"
                                         fill="#61A229"
-                                        fill-opacity="0.9"
+                                        fillOpacity="0.9"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -269,7 +372,7 @@ export function HeroSection() {
                                         cy="422.5"
                                         r="2.5"
                                         fill="#FAFBF8"
-                                        fill-opacity="0.6"
+                                        fillOpacity="0.6"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -278,7 +381,7 @@ export function HeroSection() {
                                         cy="573"
                                         r="4"
                                         fill="#F89C1C"
-                                        fill-opacity="0.6"
+                                        fillOpacity="0.6"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -287,7 +390,7 @@ export function HeroSection() {
                                         cy="583"
                                         r="3"
                                         fill="#61A229"
-                                        fill-opacity="0.7"
+                                        fillOpacity="0.7"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -296,17 +399,17 @@ export function HeroSection() {
                                         cy="42.5"
                                         r="2.5"
                                         fill="#FBBD5E"
-                                        fill-opacity="0.8"
+                                        fillOpacity="0.8"
                                         className="orbit-dot-particle"
                                     />
-                                    <circle id="particle_11" cx="302" cy="92" r="2" fill="#FAFBF8" fill-opacity="0.4" />
+                                    <circle id="particle_11" cx="302" cy="92" r="2" fill="#FAFBF8" fillOpacity="0.4" />
                                     <circle
                                         id="particle_12"
                                         cx="63.5"
                                         cy="263.5"
                                         r="3.5"
                                         fill="#61A229"
-                                        fill-opacity="0.5"
+                                        fillOpacity="0.5"
                                         className="orbit-dot-particle"
                                     />
                                     <circle
@@ -315,7 +418,7 @@ export function HeroSection() {
                                         cy="322"
                                         r="2"
                                         fill="#FBBD5E"
-                                        fill-opacity="0.9"
+                                        fillOpacity="0.9"
                                         className="orbit-dot-particle"
                                     />
                                     <g id="Frame 33"></g>
@@ -327,9 +430,6 @@ export function HeroSection() {
 
                 {/* Floating scroll cue — legitimate small overlay, unrelated to content column's x-axis */}
                 <div className="scroll-cue absolute -bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0">
-                    <p className="text-muted text-center font-sans text-xs font-bold tracking-[2.4px] whitespace-nowrap">
-                        SCROLL
-                    </p>
                     <div className="mouse text-muted flex items-center justify-center">
                         <svg
                             id="mouse-icon"
