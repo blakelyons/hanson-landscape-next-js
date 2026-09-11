@@ -7,6 +7,11 @@ not `next export`.
 
 ## One-time droplet setup
 
+Run `npm run provision-droplet` locally — it walks through creating the
+droplet, SSH keys, a GitHub deploy key, server bootstrap (Node/Nginx/PM2/
+certbot), first build, DNS, and TLS, step by step. Manually, the same
+procedure is:
+
 1. Install Node (match `.nvmrc`), PM2 (`npm i -g pm2`), and Nginx.
 2. Clone the repo, copy `.env.example` to `.env.local` (or `.env.production`)
    and fill in real values.
@@ -20,9 +25,14 @@ not `next export`.
 
 ## Redeploys
 
+From your laptop:
+
 ```bash
-git pull
-npm ci
-npm run build
-pm2 reload ecosystem.config.js
+npm run deploy
 ```
+
+Pushes the current branch, then SSHes into the droplet and runs
+`deploy/deploy.sh` (`git pull && npm ci && npm run build && pm2 reload
+ecosystem.config.js`). Requires committed changes (fails on a dirty tree) and
+a droplet reachable at the IP hardcoded in `deploy/remote-deploy.sh` (or
+cached in `deploy/.wizard-state` by the provisioning wizard).

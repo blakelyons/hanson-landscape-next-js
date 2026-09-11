@@ -37,3 +37,4 @@ _to_delete/
 
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo
+deploy/.wizard-state
