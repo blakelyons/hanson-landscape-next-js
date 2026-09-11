@@ -1,3 +1,5 @@
+import { ArrowLink } from "@/components/ui/arrow-link";
+
 <div className="relative h-125 w-7xl shrink-0 overflow-clip">
     <div className="absolute top-0 left-0 flex w-7xl items-center justify-between">
         <div className="relative flex h-125 w-97 shrink-0 flex-col items-center justify-end overflow-clip rounded-xl px-7 py-8">

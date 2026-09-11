@@ -1,7 +1,7 @@
 # Deployment (DigitalOcean Droplet)
 
-Standard Node build, not a static export — `FORMSTACK_API_KEY` and other
-server-only env vars require a live Node process (App Router API routes /
+Standard Node build, not a static export — server-only env vars (contact
+form API keys, etc) require a live Node process (App Router API routes /
 server actions), so `next build && next start` behind Nginx is the target,
 not `next export`.
 

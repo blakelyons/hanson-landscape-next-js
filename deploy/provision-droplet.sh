@@ -275,15 +275,11 @@ pause
 # ── Stage 6: env vars + first build + pm2 ──────────────────────────────────
 stage "Server env vars, first build, PM2 start"
 say "These populate .env.production on the droplet (per .env.example) — never stored locally."
-ask_secret FORMSTACK_API_KEY_REMOTE "FORMSTACK_API_KEY:"
-ask FORMSTACK_CONTACT_FORM_ID_REMOTE "FORMSTACK_CONTACT_FORM_ID:"
 ask SITE_URL_REMOTE "NEXT_PUBLIC_SITE_URL (e.g. https://preview.hansonlandscape.com):"
 ssh "root@$DROPLET_IP" bash -s <<REMOTE
 set -euo pipefail
 cd /var/www/hanson-landscape
 cat > .env.production <<ENVEOF
-FORMSTACK_API_KEY=${FORMSTACK_API_KEY_REMOTE}
-FORMSTACK_CONTACT_FORM_ID=${FORMSTACK_CONTACT_FORM_ID_REMOTE}
 NEXT_PUBLIC_SITE_URL=${SITE_URL_REMOTE}
 ENVEOF
 npm ci
