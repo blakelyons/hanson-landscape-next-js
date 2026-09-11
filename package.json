@@ -8,6 +8,8 @@
         "start": "next start",
         "deploy": "bash deploy/remote-deploy.sh",
         "provision-droplet": "bash deploy/provision-droplet.sh",
+        "provision-security": "bash deploy/harden-server.sh",
+        "provision-cloudflare": "bash deploy/setup-cloudflare.sh",
         "lint": "eslint",
         "test": "vitest run",
         "test:watch": "vitest",
