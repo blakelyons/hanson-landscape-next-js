@@ -87,6 +87,14 @@ body {
 .route-transition-fade {
     opacity: 0;
 }
+/* Header logo/nav resting (hidden) position, pre-JS — a real percentage
+   translate (not a pixel-based Tailwind spacing value) so GSAP's yPercent
+   cache imports it correctly on first touch instead of splitting between a
+   stale plain-pixel `y` and an untouched `yPercent` (see the entrance
+   effect in site-header.tsx for the longer version of this). */
+.header-item-hidden {
+    transform: translateY(-100%);
+}
 
 @layer base {
     a {

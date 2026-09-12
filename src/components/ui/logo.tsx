@@ -6,13 +6,21 @@ type LogoProps = {
     effectiveVariant?: SiteHeaderVariant;
     className?: string;
     size?: "sm" | "md" | "lg";
+    id?: string;
 };
 
-export function Logo({ isScrolled = false, effectiveVariant = "solid", className = "", size = "lg" }: LogoProps) {
+export function Logo({
+    isScrolled = false,
+    effectiveVariant = "solid",
+    className = "",
+    size = "lg",
+    id = "logo",
+}: LogoProps) {
     return (
         <TransitionLink
             href="/"
-            className={`logo block shrink-0 transition-all duration-300 ${
+            id={id}
+            className={`logo block shrink-0 transition-[height,width,margin-top] duration-300 ${
                 isScrolled
                     ? "h-25 w-31.5"
                     : size === "sm"

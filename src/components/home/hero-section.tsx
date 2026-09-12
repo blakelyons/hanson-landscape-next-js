@@ -5,7 +5,6 @@ import { Logo } from "@/components/ui/logo";
 import { Carousel } from "@/components/ui/carousel";
 import { HeroCarouselSlide, HeroCarouselSlideThumb } from "@/components/home/hero-carousel-slide";
 import { GreenPlantSvg } from "@/components/ui/green-plant-leaf-svg";
-import { HEADER_SLIDE_DURATION } from "@/components/layout/site-header";
 
 gsap.registerPlugin(DrawSVGPlugin);
 

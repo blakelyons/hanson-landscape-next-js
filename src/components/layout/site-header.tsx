@@ -81,7 +81,7 @@ const headerContainerClasses: Record<SiteHeaderVariant, string> = {
 const DRAWER_REVEAL_DELAY_MS = 300;
 
 // Exported so HeroSection can delay its own entrance until this finishes.
-export const HEADER_SLIDE_DURATION = 0.6;
+export const HEADER_SLIDE_DURATION = 1.2;
 
 // Active-link highlighting is an interior-page (solid) affordance — the
 // homepage's transparent overlay header keeps its original plain-text nav
@@ -158,6 +158,7 @@ export function SiteHeader({
     // page to its bottom edge, captured before any scroll happens).
     useEffect(() => {
         const header = headerRef.current;
+
         if (!header) return;
         const threshold = header.offsetTop + header.offsetHeight;
 
@@ -167,45 +168,62 @@ export function SiteHeader({
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Initial slide-down from the CSS-hidden resting position (-translate-y-100
-    // on the header element). Gated by playIntro so a page that opts out (e.g.
-    // a revisit to "/" after the intro has already played once) just shows the
-    // header in place instead of replaying the slide.
+    // Initial slide-down from the CSS-hidden resting position
+    // (.header-item-hidden on the logo and nav — the header bar itself never
+    // moves, only these two pieces, staggered). Gated by playIntro so a page
+    // that opts out (e.g. a revisit to "/" after the intro has already
+    // played once) just shows them in place instead of replaying the slide.
     useGSAP(() => {
-        // y: 0 forces out the plain-pixel baseline GSAP parses from the CSS
-        // class's translateY(-400px) (Tailwind's -translate-y-100 spacing
-        // value, not a percentage) on first touch — without it, yPercent
-        // tracks separately from that imported pixel `y` and a later
-        // `yPercent: 0` leaves the -400px sitting there untouched (same
-        // xPercent/x gotcha documented in route-transition-overlay.tsx).
-        gsap.set(headerRef.current, { y: 0, yPercent: -100 });
+        const logo = headerRef.current?.querySelector("#logo");
+        const globalNav = headerRef.current?.querySelector("#global-nav");
+        if (!logo || !globalNav) return;
+
+        // y: 0 forces out the plain-pixel baseline GSAP parses from the
+        // computed matrix on first touch. GSAP only ever sees the resolved
+        // (pixel) matrix from getComputedStyle, never the original CSS
+        // declaration — so even though .header-item-hidden's translateY is
+        // written as a percentage, GSAP has no way to know that and imports
+        // it as plain `y` pixels, leaving its internal `yPercent` at 0. This
+        // re-establishes yPercent as the actual baseline before animating it
+        // (same xPercent/x gotcha documented in route-transition-overlay.tsx).
+        gsap.set([logo, globalNav], { y: 0, yPercent: -100, opacity: 0 });
 
         if (!playIntro) {
-            gsap.set(headerRef.current, { yPercent: 0 });
+            gsap.set([logo, globalNav], { yPercent: 0, opacity: 1 });
             return;
         }
-        gsap.to(headerRef.current, { yPercent: 0, duration: HEADER_SLIDE_DURATION, ease: "power2.inOut" });
+        const tl = gsap.timeline({ defaults: { duration: HEADER_SLIDE_DURATION, ease: "power2.inOut" } });
+        tl.to([logo, globalNav], { yPercent: 0, opacity: 1 });
     }, [playIntro]);
 
     const effectiveVariant: SiteHeaderVariant = isScrolled ? "solid" : variant;
 
-    // Once the header has scrolled out of view (isScrolled), it's parked
-    // off-screen (yPercent -100, unseen since it just left the viewport).
-    // After a beat, it slides down into view like a drawer. Scrolling back
-    // up before that delay fires cancels the pending reveal.
+    // Once the header has scrolled out of view (isScrolled), the logo/nav
+    // are parked off-screen (yPercent -100, unseen since they just left the
+    // viewport). After a beat, they slide down into view like a drawer.
+    // Scrolling back up before that delay fires cancels the pending reveal.
     useGSAP(() => {
         if (prevIsScrolledRef.current === isScrolled) return;
         prevIsScrolledRef.current = isScrolled;
 
+        const logo = headerRef.current?.querySelector("#logo");
+        const globalNav = headerRef.current?.querySelector("#global-nav");
+        if (!logo || !globalNav) return;
+
         if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
 
         if (isScrolled) {
-            gsap.set(headerRef.current, { yPercent: -100 });
+            gsap.set([logo, globalNav], { yPercent: -100, opacity: 0 });
             revealTimerRef.current = setTimeout(() => {
-                gsap.to(headerRef.current, { yPercent: 0, duration: 0.6, ease: "power2.out" });
+                gsap.to([logo, globalNav], {
+                    yPercent: 0,
+                    opacity: 1,
+                    duration: HEADER_SLIDE_DURATION,
+                    ease: "power2.out",
+                });
             }, DRAWER_REVEAL_DELAY_MS);
         } else {
-            gsap.set(headerRef.current, { yPercent: 0 });
+            gsap.set([logo, globalNav], { yPercent: 0, opacity: 1 });
         }
 
         return () => {
@@ -225,7 +243,7 @@ export function SiteHeader({
         if (!nav || !target || !pill) return;
 
         const { x, y, width, height } = getPillTargetRect(nav.getBoundingClientRect(), target.getBoundingClientRect());
-        gsap.to(pill, { x, y, width, height, opacity: 1, duration: 0.2, ease: "power2.inOut" });
+        gsap.to(pill, { x, y, width, height, opacity: 1, duration: 0.6, ease: "power2.inOut" });
     };
 
     const hidePill = () => {
@@ -239,7 +257,7 @@ export function SiteHeader({
             {isScrolled && variant === "solid" && <div className="h-(--header-height) w-full" aria-hidden />}
             <header
                 ref={headerRef}
-                className={`global-header -translate-y-100 ${headerContainerClasses[effectiveVariant]} ${
+                className={`global-header ${headerContainerClasses[effectiveVariant]} ${
                     isScrolled ? "fixed top-0" : effectiveVariant === "transparent" ? "absolute top-3.25" : "relative"
                 }`}
             >
@@ -247,15 +265,17 @@ export function SiteHeader({
                     className={`container flex h-full ${effectiveVariant === "solid" ? "items-center" : "items-start"} justify-between`}
                 >
                     <Logo
+                        id="logo"
                         isScrolled={isScrolled || pathname !== "/"}
                         effectiveVariant={effectiveVariant}
-                        className="hidden lg:block"
+                        className="header-item-hidden hidden opacity-0 lg:block"
                         size={isScrolled || pathname !== "/" ? "md" : "lg"}
                     />
                     <nav
+                        id="global-nav"
                         ref={navRef}
                         onMouseLeave={hidePill}
-                        className={`relative hidden flex-1 items-center justify-end gap-2 lg:flex xl:gap-4 ${effectiveVariant === "transparent" ? "mt-10" : ""}`}
+                        className={`header-item-hidden relative hidden flex-1 items-center justify-end gap-2 opacity-0 lg:flex xl:gap-4 ${effectiveVariant === "transparent" ? "mt-10" : ""}`}
                     >
                         <div
                             ref={pillRef}
