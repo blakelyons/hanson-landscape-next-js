@@ -6,8 +6,8 @@ const BADGES = [
 
 export function TrustBar() {
     return (
-        <div className="flex h-14.25 w-full items-center border-b border-[#eee] bg-white">
-            <div className="container flex items-center justify-center gap-16">
+        <div className="flex h-auto w-full items-center border-b border-[#eee] bg-white py-4 lg:py-6 xl:h-14.25 xl:py-0">
+            <div className="container flex flex-wrap items-center justify-center gap-4 lg:gap-8 xl:gap-16">
                 {BADGES.map((badge) => (
                     <div key={badge.label} className="flex h-4 shrink-0 items-center gap-2">
                         <span className="size-2 shrink-0 rounded-full" style={{ backgroundColor: badge.color }} />

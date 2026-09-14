@@ -75,9 +75,9 @@ export function SiteFooter() {
                         </div>
                     </div>
 
-                    <PartnerLogos className="mt-10 flex flex-wrap items-center gap-4 self-end" />
+                    <PartnerLogos className="mt-10 flex flex-wrap items-center justify-center gap-4 self-end lg:justify-start" />
 
-                    <div className="mt-10 flex w-full items-center justify-between border-t border-[rgba(255,255,255,0.5)] pt-8 font-sans text-base leading-4 font-normal text-[rgba(255,255,255,0.5)]">
+                    <div className="mt-10 flex w-full flex-wrap items-center justify-between border-t border-[rgba(255,255,255,0.5)] pt-8 font-sans text-base leading-4 font-normal text-[rgba(255,255,255,0.5)]">
                         <p className="shrink-0 whitespace-nowrap">© 2026 Hanson Landscape. All rights reserved.</p>
                         <p className="shrink-0 whitespace-pre">{`Privacy Policy   |   Site Map`}</p>
                     </div>

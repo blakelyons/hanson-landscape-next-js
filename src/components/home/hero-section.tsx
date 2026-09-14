@@ -229,7 +229,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                             {HERO_STATS.map((stat, index) => (
                                 <div key={stat.value} className="contents">
                                     <div className="hero-stats-item flex -translate-x-24 flex-col items-center gap-1 text-center opacity-0 xl:items-start xl:text-left">
-                                        <p className="font-serif-display text-4xl font-normal text-[#fafbf8] not-italic">
+                                        <p className="font-serif-display text-3xl font-normal text-[#fafbf8] not-italic lg:text-5xl">
                                             {stat.value}
                                         </p>
                                         <p className="text-center font-sans text-sm font-normal text-[rgba(250,251,248,0.55)] xl:text-left">
@@ -284,7 +284,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                     variant="forrest-deep"
                                     size="sm"
                                     textClassName="text-white/50 hover:text-white uppercase !text-sm tracking-[2px] opacity-0"
-                                    icon="lucide:building-complex"
+                                    icon="lucide:building-2"
                                     iconPosition="left"
                                     iconSize={16}
                                     animateIconOnHover={false}
@@ -430,7 +430,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                 </div>
 
                 {/* Floating scroll cue — legitimate small overlay, unrelated to content column's x-axis */}
-                <div className="scroll-cue absolute -bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0">
+                <div className="lg:flexscroll-cue absolute -bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0">
                     <div className="mouse text-muted flex items-center justify-center">
                         <svg
                             id="mouse-icon"

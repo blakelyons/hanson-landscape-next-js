@@ -69,37 +69,37 @@ export function ProcessSection() {
     return (
         <section
             ref={container}
-            className="our-process-section bg-neutral-25 relative hidden w-full flex-col items-center justify-center py-20 xl:flex"
+            className="our-process-section bg-neutral-25 relative flex w-full flex-col items-center justify-center py-20"
         >
             <div className="relative container flex flex-col items-center justify-center gap-12">
                 <SectionIntro
                     animateEntrance
-                    className="w-170"
+                    className="w-full max-w-170"
                     eyebrow="Our process"
                     heading="How We Bring Your Project to Life"
                 />
 
-                <div className="process-steps w-285 rounded-xl border border-neutral-200 bg-white px-12 py-10">
-                    <div className="grid grid-cols-4 items-end gap-x-8">
+                <div className="process-steps w-full max-w-285 rounded-xl border border-neutral-200 bg-white px-4 py-10 lg:px-12">
+                    <div className="hidden grid-cols-4 items-end gap-x-4 gap-y-6 md:grid lg:gap-x-8 lg:gap-y-0">
                         {STEPS.map((step) => (
                             <div
                                 key={`${step.number}-title`}
-                                className="process-steps__step-header flex flex-col items-center gap-2 text-center"
+                                className="process-steps__step-header flex flex-col items-center justify-center gap-4 text-center lg:gap-6"
                             >
                                 <div
-                                    className="size-12 shrink-0"
+                                    className="shrink-0 text-4xl lg:text-5xl"
                                     style={step.iconColor ? { color: step.iconColor } : undefined}
                                 >
-                                    <Icon icon={step.iconName} width={48} height={48} ssr />
+                                    <Icon icon={step.iconName} width="1em" height="1em" ssr />
                                 </div>
-                                <p className="process-steps__step-title font-sans text-lg leading-7 font-bold whitespace-nowrap text-black">
+                                <h4 className="process-steps__step-title text-center font-sans text-sm leading-7 font-bold text-black lg:text-lg">
                                     {step.title}
-                                </p>
+                                </h4>
                             </div>
                         ))}
                     </div>
 
-                    <div className="relative mt-10 grid grid-cols-4 items-center gap-x-8">
+                    <div className="relative mt-6 hidden grid-cols-4 items-center gap-x-4 gap-y-6 md:grid lg:mt-10 lg:gap-x-8 lg:gap-y-0">
                         <div className="absolute inset-x-6 top-1/2 h-px -translate-y-1/2 bg-neutral-200" />
                         {STEPS.map((step) => (
                             <div
@@ -113,16 +113,37 @@ export function ProcessSection() {
                         ))}
                     </div>
 
-                    <div className="mt-6 grid grid-cols-4 gap-x-8 text-center font-sans text-sm leading-[18px] font-normal text-black">
+                    <div className="mt-4 grid grid-cols-1 gap-x-4 gap-y-6 text-center font-sans text-sm leading-4.5 font-normal text-black md:grid-cols-4 lg:mt-6 lg:gap-x-8 lg:gap-y-0">
                         {STEPS.map((step) => (
-                            <p key={`${step.number}-desc`} className="mx-auto w-45.75">
-                                {step.description}
-                            </p>
+                            <div key={`${step.number}-desc`}>
+                                <div className="rounded-lg bg-neutral-100 p-4 md:rounded-none md:bg-transparent lg:p-0">
+                                    <div
+                                        key={`${step.number}-title`}
+                                        className="process-steps__step-header flex flex-col items-center gap-4 text-center md:hidden"
+                                    >
+                                        <div
+                                            key={`${step.number}-bullet`}
+                                            className="bg-light-green-cta relative z-10 mx-auto flex size-12 shrink-0 flex-col items-center justify-center rounded-full"
+                                        >
+                                            <p className="w-full text-center font-sans text-lg leading-7 font-bold text-black">
+                                                {step.number}
+                                            </p>
+                                        </div>
+                                        <h4 className="process-steps__step-title text-md flex items-center gap-2 font-sans text-lg leading-7 font-bold whitespace-nowrap text-black">
+                                            <span className="text-forrest text-2xl md:hidden">
+                                                <Icon icon={step.iconName} width="1em" height="1em" ssr />
+                                            </span>
+                                            <span>{step.title}</span>
+                                        </h4>
+                                    </div>
+                                    <p className="mx-auto mt-4 text-sm lg:mt-0 lg:text-base">{step.description}</p>
+                                </div>
+                            </div>
                         ))}
                     </div>
 
-                    <div className="bg-primary-light mt-10 flex w-full items-center justify-between gap-8 rounded-xl px-12 py-4.5">
-                        <p className="font-sans text-sm leading-[18px] font-semibold whitespace-nowrap text-black">
+                    <div className="bg-primary-light mt-10 grid w-full grid-cols-1 items-center justify-between gap-8 rounded-xl px-12 py-4.5 md:grid-cols-[minmax(0,1fr)_auto]">
+                        <p className="font-sans text-sm leading-4.5 font-semibold text-black">
                             Are You Prepared to Get Started on a Gorgeous Outdoor Area?
                         </p>
                         <PillButton

@@ -13,7 +13,7 @@ export type HeroCarouselSlideProps = {
 
 export const HeroCarouselSlideThumb = ({ src, alt = "Home Hero Carousel Slide" }: HeroCarouselSlideProps) => {
     return (
-        <div className="relative size-20 shrink-0 rounded-xl shadow-lg shadow-black/40">
+        <div className="relative size-20 shrink-0 rounded-xl shadow-lg shadow-black/40 transition-shadow duration-300 ease-in-out hover:shadow-lg/0">
             <Image
                 src={src}
                 alt={alt}
