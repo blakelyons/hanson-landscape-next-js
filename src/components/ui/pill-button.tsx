@@ -7,6 +7,7 @@ type PillButtonVariant =
     | "primary"
     | "primary-dark"
     | "forrest-deep"
+    | "forrest-light"
     | "outline-primary"
     | "outline-primary-dark"
     | "outline-secondary"
@@ -19,6 +20,8 @@ const variantSurfaceClasses: Record<PillButtonVariant, string> = {
     "primary-dark": "bg-primary-dark hover:bg-primary border border-primary-dark hover:border-primary",
     "forrest-deep":
         "bg-forrest-deep hover:bg-forrest-light-2 border border-forrest-deep-border hover:border-forrest-light-2-border",
+    "forrest-light":
+        "bg-forrest-light hover:bg-forrest-light-2 border border-forrest-light hover:border-forrest-light-2-border",
     "outline-primary": "border bg-transparent border-primary hover:border-primary-light",
     "outline-white": "border bg-transparent border-white hover:border-white-light hover:border-primary",
     "outline-primary-dark": "border bg-transparent border-primary-dark hover:border-primary",

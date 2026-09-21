@@ -243,7 +243,7 @@ export function SiteHeader({
         if (!nav || !target || !pill) return;
 
         const { x, y, width, height } = getPillTargetRect(nav.getBoundingClientRect(), target.getBoundingClientRect());
-        gsap.to(pill, { x, y, width, height, opacity: 1, duration: 0.6, ease: "power2.inOut" });
+        gsap.to(pill, { x, y, width, height, opacity: 1, duration: 0.3, ease: "power2.inOut" });
     };
 
     const hidePill = () => {
@@ -311,7 +311,7 @@ export function SiteHeader({
                             href="#"
                             onMouseEnter={() => setMailOpen(true)}
                             onMouseLeave={() => setMailOpen(false)}
-                            className="group hover:bg-primary-light group bg-primary flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black transition-all duration-300 ease-in-out xl:text-base"
+                            className="group hover:bg-primary-light bg-primary flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black transition-all duration-300 ease-in-out xl:text-base"
                         >
                             <MailToMailOpenIcon open={mailOpen} className="transition-all duration-300 ease-in-out" />
                             <span className="transition-all duration-300 ease-in-out">Contact Us</span>

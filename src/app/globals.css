@@ -19,6 +19,12 @@
     /* Brand tokens — mirrors the Figma variable names used in the design file */
     --color-white: #ffffff;
     --color-black: #000000;
+
+    --color-autumn-red: #9f3322;
+    --color-autumn-red-light: #c44330;
+    --color-autumn-red-dark: #7a271a;
+    --color-autumn-red-dark-2: #4a160f;
+    --color-autumn-red-light-2: #c44330;
     --color-forrest: #2b6733;
     --color-forrest-light: #3a8545;
     --color-forrest-dark: #1e4a25;
@@ -33,6 +39,7 @@
     --color-neutral-25: #f6f8f6;
     --color-primary: #f89c1c;
     --color-primary-light: #fbbd5e;
+    --color-primary-light-2: #ffe0b0;
     --color-primary-dark: #d4820f;
     --color-primary-dark-2: #7c4e0e;
     --color-secondary: #2b6733;
@@ -70,20 +77,28 @@ body {
     @apply max-w-360 px-8;
 }
 
-.container--xl {
-    @apply max-w-480;
-}
-
-.container--md {
-    @apply max-w-400;
+.container--xs {
+    @apply max-w-160;
 }
 
 .container--sm {
+    @apply max-w-4xl;
+}
+
+.container--md {
+    @apply max-w-5xl;
+}
+
+.container--lg {
     @apply max-w-7xl;
 }
 
-.container--xs {
-    @apply max-w-240;
+.container--xl {
+    @apply max-w-360;
+}
+
+.container--xxl {
+    @apply max-w-384;
 }
 
 /* Route transition overlay's resting (hidden) position, applied before any

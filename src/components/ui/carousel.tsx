@@ -19,6 +19,7 @@ export type CarouselProps = {
     thumbnailsMaxWidth?: number;
     className?: string;
     loop?: boolean;
+    centeredSlides?: boolean;
     autoplay?: boolean | number;
     spaceBetween?: number;
     effect?: "slide" | "fade";
@@ -38,6 +39,7 @@ export function Carousel({
     thumbnailsSpaceBetween = 16,
     thumbnailsMaxWidth,
     loop = false,
+    centeredSlides = false,
     autoplay = false,
     spaceBetween = 16,
     effect = "slide",
@@ -87,8 +89,6 @@ export function Carousel({
             <div className="relative flex w-full items-center gap-4">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay, EffectFade]}
-                    observer
-                    observeParents
                     slidesPerView={slidesPerView}
                     slidesPerGroup={1}
                     spaceBetween={spaceBetween}
@@ -98,6 +98,7 @@ export function Carousel({
                     onSwiper={setMainSwiper}
                     onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                     effect={effect}
+                    centeredSlides={centeredSlides}
                     fadeEffect={{ crossFade: fadeCrossFade }}
                     pagination={
                         showDots && paginationEl

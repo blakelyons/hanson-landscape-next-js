@@ -3,6 +3,7 @@
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { SectionIntro } from "@/components/ui/section-intro";
 import { Icon } from "@/components/ui/icon";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -57,11 +58,11 @@ function ServiceCard({
                 style={{ backgroundColor: iconBg }}
             >
                 <div
-                    className="service-card__icon-icon size-6 shrink-0"
+                    className="service-card__icon-icon size-7 shrink-0"
                     style={iconColor ? { color: iconColor } : undefined}
                 >
                     {iconName ? (
-                        <Icon icon={iconName} className="size-full" />
+                        <Icon icon={iconName} className="size-full" width="1em" height="1em" ssr={true} />
                     ) : (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img alt="" className="block size-full max-w-none" src={icon} />

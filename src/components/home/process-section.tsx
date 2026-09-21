@@ -104,7 +104,7 @@ export function ProcessSection() {
                         {STEPS.map((step) => (
                             <div
                                 key={`${step.number}-bullet`}
-                                className="bg-light-green-cta relative z-10 mx-auto flex size-12 shrink-0 flex-col items-center justify-center rounded-full"
+                                className="bg-primary-light-2 relative z-10 mx-auto flex size-12 shrink-0 flex-col items-center justify-center rounded-full"
                             >
                                 <p className="w-full text-center font-sans text-lg leading-7 font-bold text-black">
                                     {step.number}
@@ -116,14 +116,14 @@ export function ProcessSection() {
                     <div className="mt-4 grid grid-cols-1 gap-x-4 gap-y-6 text-center font-sans text-sm leading-4.5 font-normal text-black md:grid-cols-4 lg:mt-6 lg:gap-x-8 lg:gap-y-0">
                         {STEPS.map((step) => (
                             <div key={`${step.number}-desc`}>
-                                <div className="rounded-lg bg-neutral-100 p-4 md:rounded-none md:bg-transparent lg:p-0">
+                                <div className="bg-light-green-cta rounded-lg border border-neutral-100 p-6 md:rounded-none md:border-none md:bg-transparent lg:p-0">
                                     <div
                                         key={`${step.number}-title`}
                                         className="process-steps__step-header flex flex-col items-center gap-4 text-center md:hidden"
                                     >
                                         <div
                                             key={`${step.number}-bullet`}
-                                            className="bg-light-green-cta relative z-10 mx-auto flex size-12 shrink-0 flex-col items-center justify-center rounded-full"
+                                            className="bg-primary-light relative z-10 mx-auto flex size-12 shrink-0 flex-col items-center justify-center rounded-full"
                                         >
                                             <p className="w-full text-center font-sans text-lg leading-7 font-bold text-black">
                                                 {step.number}
@@ -142,17 +142,11 @@ export function ProcessSection() {
                         ))}
                     </div>
 
-                    <div className="bg-primary-light mt-10 grid w-full grid-cols-1 items-center justify-between gap-8 rounded-xl px-12 py-4.5 md:grid-cols-[minmax(0,1fr)_auto]">
-                        <p className="font-sans text-sm leading-4.5 font-semibold text-black">
+                    <div className="bg-primary-light mt-10 grid w-full grid-cols-1 items-center justify-between gap-4 rounded-xl px-12 py-4.5 text-center md:grid-cols-[minmax(0,1fr)_auto] xl:gap-8 xl:text-left">
+                        <p className="font-sans text-sm leading-4.5 font-semibold text-balance text-black xl:text-pretty">
                             Are You Prepared to Get Started on a Gorgeous Outdoor Area?
                         </p>
-                        <PillButton
-                            variant="primary"
-                            size="sm"
-                            textClassName="text-[#1a2e1a]"
-                            icon="ci:arrow-right-lg"
-                            iconSize={12}
-                        >
+                        <PillButton variant="forrest-light" size="sm" icon="ci:arrow-right-lg" iconSize={12}>
                             Get In Touch
                         </PillButton>
                     </div>

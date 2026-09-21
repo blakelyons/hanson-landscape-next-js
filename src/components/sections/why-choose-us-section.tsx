@@ -56,7 +56,7 @@ export function WhyChooseUsSection() {
                             >
                                 Discover More
                             </PillButton>
-                            <div className="pointer-events-none mt-6 hidden h-25 w-43.75 md:block lg:mt-6 xl:-translate-x-10">
+                            <div className="pointer-events-none mt-6 hidden h-25 w-43.75 md:block xl:mt-6">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     alt=""
@@ -72,7 +72,7 @@ export function WhyChooseUsSection() {
                                     className="grid place-items-center gap-6 text-center xl:grid-cols-[48px_min-content] xl:place-items-start xl:text-left"
                                 >
                                     <div className="flex size-10.25 shrink-0 items-center justify-center">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        {}
                                         <span className="text-forrest shrink-0 items-center justify-center text-5xl">
                                             <Icon icon={feature.icon} />
                                         </span>
@@ -90,10 +90,10 @@ export function WhyChooseUsSection() {
                         </div>
                     </div>
                 </div>
-                <div className="relative top-0 right-0 left-0 z-0 container grid h-full w-full grid-cols-1 gap-8 xl:absolute xl:grid-cols-2">
+                <div className="relative top-0 right-0 left-0 z-0 grid h-full w-full grid-cols-1 gap-8 xl:absolute xl:grid-cols-2 xl:px-8">
                     <div className="hidden xl:block"></div>
                     <div className="right-0 z-0 flex h-full w-full shrink-0 items-center rounded-xl">
-                        <div className="pointer-events-none relative inset-0 mx-auto h-full max-h-64 w-full max-w-204 overflow-hidden rounded-xl xl:max-h-none xl:max-w-none">
+                        <div className="pointer-events-none relative inset-0 mx-auto h-full max-h-64 w-full overflow-hidden rounded-xl xl:max-h-none xl:max-w-none">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 alt="Landscaping project"

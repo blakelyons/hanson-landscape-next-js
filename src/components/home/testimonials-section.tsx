@@ -1,15 +1,16 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { SectionIntro } from "@/components/ui/section-intro";
 import { Icon } from "@/components/ui/icon";
 import { Carousel } from "@/components/ui/carousel";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useWindowWidth } from "@/hooks/use-media-query";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TESTIMONIALS = [
+export const TESTIMONIALS = [
     {
         quote: '"Hanson Landscape transformed our backyard into an oasis. The attention to detail was incredible and the team was professional throughout."',
         name: "Sarah M.",
@@ -29,7 +30,7 @@ const TESTIMONIALS = [
 
 function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number]) {
     return (
-        <div className="testimonial-card border-forrest-light-2-border bg-forrest-light-2 flex w-84 shrink-0 flex-col items-start gap-7.5 rounded-xl border p-8">
+        <div className="testimonial-card border-forrest-light-2-border bg-forrest-light-2 flex w-full shrink-0 flex-col items-start gap-7.5 overflow-hidden rounded-xl border p-8">
             <div className="testimonial-card__stars flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, index) => (
                     <div key={index} className="text-primary star size-5 shrink-0">
@@ -37,7 +38,7 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
                     </div>
                 ))}
             </div>
-            <p className="testimonial-card__quote w-69.25 font-sans text-sm leading-6 font-normal text-white italic">
+            <p className="testimonial-card__quote w-full font-sans text-sm leading-6 font-normal text-white italic">
                 {quote}
             </p>
             <p className="testimonial-card__name font-sans text-sm leading-none font-normal whitespace-nowrap text-white italic">
@@ -53,6 +54,15 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
 
 export function TestimonialsSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const windowWidth = useWindowWidth();
+
+    const slidesPerView = useMemo(() => {
+        if (windowWidth && windowWidth < 980) return 1;
+        if (windowWidth && windowWidth < 1280) return 2;
+        if (windowWidth && windowWidth > 1280) return 3;
+        if (windowWidth && windowWidth > 1440) return 4;
+        return 1;
+    }, [windowWidth]);
 
     useGSAP(
         () => {
@@ -62,7 +72,7 @@ export function TestimonialsSection() {
 
             gsap.set(".testimonial-card__stars .star", {
                 opacity: 0,
-                x: -10,
+                x: 16,
             });
 
             const tl = gsap.timeline({
@@ -81,14 +91,16 @@ export function TestimonialsSection() {
                 const name = card.querySelector(".testimonial-card__name");
                 const cardStart = index * cardStagger;
 
+                if (!quote || !name) return;
+
                 gsap.set([quote, name], {
                     opacity: 0,
-                    y: 10,
+                    x: 16,
                 });
 
                 tl.to(stars, { opacity: 1, x: 0, stagger: 0.05 }, cardStart)
-                    .to(quote, { opacity: 1, y: 0 }, cardStart + 0.5)
-                    .to(name, { opacity: 1, y: 0 }, cardStart + 0.9);
+                    .to(quote, { opacity: 1, x: 0 }, cardStart + 0.5)
+                    .to(name, { opacity: 1, x: 0 }, cardStart + 0.9);
             });
         },
         { scope: sectionRef },
@@ -108,27 +120,28 @@ export function TestimonialsSection() {
                     headingClassName="text-white"
                     animateEntrance
                 />
-                {/* w-282 (1128px) = 3 cards * 336px + 2 gaps * 60px, so Swiper's numeric
-                    slidesPerView divides evenly back to the card's own fixed width. */}
-                <div className="w-full">
-                    {TESTIMONIALS.length > 3 ? (
-                        <Carousel
-                            slides={TESTIMONIALS.map((testimonial, index) => (
-                                <TestimonialCard key={index} {...testimonial} />
-                            ))}
-                            slidesPerView={3}
-                            spaceBetween={32}
-                            showDots={false}
-                            showArrows
-                            loop
-                        />
-                    ) : (
-                        <div className="flex flex-row flex-wrap items-center justify-center gap-8">
-                            {TESTIMONIALS.map((testimonial, index) => (
-                                <TestimonialCard key={index} {...testimonial} />
-                            ))}
-                        </div>
-                    )}
+                <div className="container">
+                    <div className="w-full">
+                        {TESTIMONIALS.length > 3 || TESTIMONIALS.length > slidesPerView ? (
+                            <Carousel
+                                slides={TESTIMONIALS.map((testimonial, index) => (
+                                    <TestimonialCard key={index} {...testimonial} />
+                                ))}
+                                centeredSlides={false}
+                                slidesPerView={TESTIMONIALS.length > 3 ? slidesPerView : 1}
+                                spaceBetween={32}
+                                showDots={false}
+                                showArrows
+                                loop
+                            />
+                        ) : (
+                            <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+                                {TESTIMONIALS.map((testimonial, index) => (
+                                    <TestimonialCard key={index} {...testimonial} />
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

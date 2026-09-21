@@ -1,0 +1,50 @@
+.portfolio-bento-grid__featured-image {
+    grid-area: featured-image;
+}
+
+.portfolio-bento-grid__project-1 {
+    grid-area: image-1;
+}
+
+.portfolio-bento-grid__project-2 {
+    grid-area: image-2;
+}
+
+.portfolio-bento-grid__project-3 {
+    grid-area: image-3;
+}
+
+.portfolio-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(240px, 1fr) minmax(240px, 1fr);
+    grid-template-areas:
+        "featured-image image-1 image-2"
+        "featured-image image-3 image-3";
+    gap: 1rem;
+    grid-auto-flow: column dense;
+    transition: all 300ms ease-in-out;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .portfolio-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: minmax(240px, 1fr) minmax(240px, 1fr) minmax(240px, 1fr);
+        grid-template-areas:
+            "featured-image image-1"
+            "featured-image image-2"
+            "image-3 image-3";
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: minmax(340px, 1fr) 220px 220px;
+        grid-template-areas:
+            "featured-image featured-image"
+            "image-1 image-2"
+            "image-3 image-3";
+    }
+}

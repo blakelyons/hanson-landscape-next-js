@@ -11,14 +11,21 @@ export type HeroCarouselSlideProps = {
     alt?: string;
 };
 
-export const HeroCarouselSlideThumb = ({ src, alt = "Home Hero Carousel Slide" }: HeroCarouselSlideProps) => {
+export const HeroCarouselSlideThumb = ({
+    src,
+    alt = "Home Hero Carousel Slide",
+    eager = false,
+}: HeroCarouselSlideProps & { eager?: boolean }) => {
     return (
         <div className="relative size-20 shrink-0 rounded-xl shadow-lg shadow-black/40 transition-shadow duration-300 ease-in-out hover:shadow-lg/0">
             <Image
                 src={src}
                 alt={alt}
                 fill
+                sizes="80px"
                 className="pointer-events-none absolute inset-0 size-full rounded-xl object-cover"
+                loading={eager ? "eager" : undefined}
+                preload={eager}
             />
         </div>
     );
@@ -59,6 +66,7 @@ export function HeroCarouselSlide({ src, alt = "Home Hero Carousel Slide" }: Her
                     src={src}
                     alt={alt}
                     fill
+                    sizes="(min-width: 1280px) 50vw, 100vw"
                     className="pointer-events-none absolute inset-0 z-10 size-full max-w-none rounded-2xl object-cover"
                     loading="eager"
                     preload={true}

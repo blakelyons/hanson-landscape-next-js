@@ -7,7 +7,7 @@ import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesSection } from "@/components/home/services-section";
 import { AboutSection } from "@/components/home/about-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
-import { PortfolioBento } from "@/components/home/portfolio-bento";
+import { PortfolioBentoGrid } from "@/components/portfolio-bento-grid/portfolio-bento-grid";
 import { CtaSection } from "@/components/sections/cta-section";
 import { WhyChooseUsSection } from "@/components/sections/why-choose-us-section";
 import { ProcessSection } from "@/components/home/process-section";
@@ -33,7 +33,7 @@ export default function Home() {
             <ServicesSection />
             <AboutSection />
             <TestimonialsSection />
-            <PortfolioBento />
+            <PortfolioBentoGrid />
             <CtaSection />
             <WhyChooseUsSection />
             <ProcessSection />

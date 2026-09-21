@@ -261,11 +261,12 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                         className="hero-carousel-wrapper w-full opacity-0"
                                         thumbnails={
                                             SHOW_THUMBNAILS
-                                                ? HERO_SLIDES.map((photo) => (
+                                                ? HERO_SLIDES.map((photo, index) => (
                                                       <HeroCarouselSlideThumb
                                                           key={photo.src}
                                                           src={photo.src}
                                                           alt={photo.alt}
+                                                          eager={index < visibleThumbnailCount}
                                                       />
                                                   ))
                                                 : undefined
@@ -430,7 +431,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                 </div>
 
                 {/* Floating scroll cue — legitimate small overlay, unrelated to content column's x-axis */}
-                <div className="lg:flexscroll-cue absolute -bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0">
+                <div className="scroll-cue absolute -bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0 lg:flex">
                     <div className="mouse text-muted flex items-center justify-center">
                         <svg
                             id="mouse-icon"
