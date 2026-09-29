@@ -1,35 +1,43 @@
 "use client";
-
+import { useRef } from "react";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import "./portfolio-bento-grid.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function PortfolioBentoGrid() {
-    useEffect(() => {
-        const featuredProjectCard = document.querySelector(".featured-project-card");
-        if (featuredProjectCard) {
-            gsap.set(featuredProjectCard, { yPercent: 150 });
+    const featuredProjectGrid = useRef<HTMLDivElement>(null);
+    const featuredProjectCardInfo = useRef<HTMLDivElement>(null);
 
-            gsap.to(featuredProjectCard, {
-                yPercent: 0,
-                duration: 0.5,
-                ease: "power2.inOut",
+    useGSAP(
+        () => {
+            const featuredProjectImages = document.querySelectorAll(".portfolio-bento-grid__image");
+
+            const tl = gsap.timeline({ defaults: { duration: 0.5, ease: "power2.inOut" } });
+
+            tl.to(featuredProjectImages, {
+                opacity: 1,
+                stagger: 0.12,
                 scrollTrigger: {
-                    trigger: featuredProjectCard,
-                    start: "top bottom-=32px",
-                    end: "top center-=5%",
+                    trigger: featuredProjectGrid.current,
+                    start: "top center",
+                    end: "bottom center+=25%",
+                    markers: true,
                 },
             });
-        }
-    }, []);
+        },
+        { scope: featuredProjectGrid },
+    );
 
     return (
-        <section className="relative flex w-full flex-col items-center overflow-clip">
-            <div className="container flex flex-col items-end justify-center gap-4 pt-12 pb-20">
+        <section
+            className="featured-project-grid relative flex w-full flex-col items-center overflow-clip"
+            ref={featuredProjectGrid}
+        >
+            <div className="container flex flex-col items-end justify-center gap-4 py-20">
                 <ArrowLink
                     href="#"
                     icon="lucide:arrow-right"
@@ -42,7 +50,7 @@ export function PortfolioBentoGrid() {
 
                 <div className="portfolio-bento-grid gap-8">
                     {/* Featured Image */}
-                    <div className="portfolio-bento-grid__featured-image relative flex h-full w-full shrink-0 flex-col items-center justify-end overflow-clip rounded-xl px-7 py-8">
+                    <div className="portfolio-bento-grid__featured-image portfolio-bento-grid__image relative flex h-full w-full shrink-0 flex-col items-center justify-end overflow-clip rounded-xl px-7 py-8 opacity-0">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -51,7 +59,10 @@ export function PortfolioBentoGrid() {
                                 src="/images/home/project-photo-1.jpg"
                             />
                         </div>
-                        <div className="featured-project-card relative flex w-full shrink-0 flex-col items-start gap-2.5 overflow-hidden rounded-lg bg-white px-3.5 py-4 drop-shadow-[0px_4px_3px_rgba(0,0,0,0.1),0px_2px_2px_rgba(0,0,0,0.06)]">
+                        <div
+                            ref={featuredProjectCardInfo}
+                            className="featured-project-card relative flex w-full shrink-0 flex-col items-start gap-2.5 overflow-hidden rounded-lg bg-white px-3.5 py-4 drop-shadow-[0px_4px_3px_rgba(0,0,0,0.1),0px_2px_2px_rgba(0,0,0,0.06)]"
+                        >
                             <p className="font-serif-display w-full text-xl leading-5.5 font-normal text-black not-italic">
                                 Project Name
                             </p>
@@ -72,7 +83,7 @@ export function PortfolioBentoGrid() {
                     </div>
 
                     {/* Project 1 */}
-                    <div className="portfolio-bento-grid__project-1 relative h-full w-full shrink-0 rounded-xl">
+                    <div className="portfolio-bento-grid__image portfolio-bento-grid__project-1 relative h-full w-full shrink-0 rounded-xl opacity-0">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -84,7 +95,7 @@ export function PortfolioBentoGrid() {
                     </div>
 
                     {/* Project 2 */}
-                    <div className="portfolio-bento-grid__project-2 relative h-full w-full shrink-0 rounded-xl">
+                    <div className="portfolio-bento-grid__image portfolio-bento-grid__project-2 relative h-full w-full shrink-0 rounded-xl opacity-0">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -96,7 +107,7 @@ export function PortfolioBentoGrid() {
                     </div>
 
                     {/* Project 3 */}
-                    <div className="portfolio-bento-grid__project-3 relative h-full w-full shrink-0 rounded-xl">
+                    <div className="portfolio-bento-grid__image portfolio-bento-grid__project-3 relative h-full w-full shrink-0 rounded-xl opacity-0">
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img

@@ -198,32 +198,34 @@ export function SiteHeader({
 
     const effectiveVariant: SiteHeaderVariant = isScrolled ? "solid" : variant;
 
-    // Once the header has scrolled out of view (isScrolled), the logo/nav
-    // are parked off-screen (yPercent -100, unseen since they just left the
-    // viewport). After a beat, they slide down into view like a drawer.
-    // Scrolling back up before that delay fires cancels the pending reveal.
+    // Once the header has scrolled out of view (isScrolled), the whole bar
+    // is parked off-screen (yPercent -100, unseen since it just left the
+    // viewport — the CSS class swap to `fixed top-0` happens the same tick,
+    // so this hides that jump instead of the bar snapping into place). After
+    // a beat, it slides down into view like a drawer, with the logo/nav
+    // fading in along the way. Scrolling back up before that delay fires
+    // cancels the pending reveal.
     useGSAP(() => {
         if (prevIsScrolledRef.current === isScrolled) return;
         prevIsScrolledRef.current = isScrolled;
 
-        const logo = headerRef.current?.querySelector("#logo");
-        const globalNav = headerRef.current?.querySelector("#global-nav");
-        if (!logo || !globalNav) return;
+        const header = headerRef.current;
+        const logo = header?.querySelector("#logo");
+        const globalNav = header?.querySelector("#global-nav");
+        if (!header || !logo || !globalNav) return;
 
         if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
 
         if (isScrolled) {
-            gsap.set([logo, globalNav], { yPercent: -100, opacity: 0 });
+            gsap.set(header, { yPercent: -100 });
+            gsap.set([logo, globalNav], { opacity: 0 });
             revealTimerRef.current = setTimeout(() => {
-                gsap.to([logo, globalNav], {
-                    yPercent: 0,
-                    opacity: 1,
-                    duration: HEADER_SLIDE_DURATION,
-                    ease: "power2.out",
-                });
+                gsap.to(header, { yPercent: 0, duration: HEADER_SLIDE_DURATION, ease: "power2.out" });
+                gsap.to([logo, globalNav], { opacity: 1, duration: HEADER_SLIDE_DURATION, ease: "power2.out" });
             }, DRAWER_REVEAL_DELAY_MS);
         } else {
-            gsap.set([logo, globalNav], { yPercent: 0, opacity: 1 });
+            gsap.set(header, { yPercent: 0 });
+            gsap.set([logo, globalNav], { opacity: 1 });
         }
 
         return () => {
@@ -258,7 +260,11 @@ export function SiteHeader({
             <header
                 ref={headerRef}
                 className={`global-header ${headerContainerClasses[effectiveVariant]} ${
-                    isScrolled ? "fixed top-0" : effectiveVariant === "transparent" ? "absolute top-3.25" : "relative"
+                    isScrolled
+                        ? "fixed top-0 shadow-md"
+                        : effectiveVariant === "transparent"
+                          ? "absolute top-3.25"
+                          : "relative"
                 }`}
             >
                 <div

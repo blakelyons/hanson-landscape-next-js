@@ -207,3 +207,16 @@ radio,
 checkbox {
     @apply focus:border-primary transition-colors duration-300 ease-in-out focus:outline-none;
 }
+
+.glow--primary {
+    transition: box-shadow 0.3s ease-in-out;
+    will-change: box-shadow;
+    &:hover {
+        box-shadow: 0 0 10px 0 var(--color-forrest-light);
+    }
+}
+
+.portfolio-bento-grid__image {
+    transition: opacity 0.3s ease-in-out;
+    will-change: opacity;
+}

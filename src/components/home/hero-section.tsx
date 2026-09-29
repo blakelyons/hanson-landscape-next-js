@@ -101,6 +101,11 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
         });
 
         heroMainTimeline
+            .to(".hero-section-background", {
+                opacity: 1,
+                duration: t,
+                ease: "expo.inOut",
+            })
             .to(
                 [".hero-eyebrow", ".hero-title-wrapper", ".hero-subtitle"],
                 {
@@ -110,7 +115,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                     stagger: staggerDelay,
                     ease: "expo.inOut",
                 },
-                "<",
+                "<+=0.2",
             )
             .to(
                 ".hero-title-highlight",
@@ -289,6 +294,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                     iconPosition="left"
                                     iconSize={16}
                                     animateIconOnHover={false}
+                                    className="glow--primary"
                                 >
                                     {`Commercial Landscaping`}
                                 </PillButton>
@@ -300,6 +306,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                     iconPosition="left"
                                     iconSize={16}
                                     animateIconOnHover={false}
+                                    className="glow--primary"
                                 >
                                     {`Residential Landscaping`}
                                 </PillButton>
@@ -307,7 +314,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                         </div>
                     </div>
 
-                    <div className="absolute inset-0 z-0 flex h-full w-full items-center justify-center">
+                    <div className="hero-section-background absolute inset-0 z-0 flex h-full w-full items-center justify-center opacity-0">
                         {/* Decorative background layers — legitimately absolute, scoped to this section's 1440 column */}
                         <div className="absolute -top-15 -right-16 size-245">
                             <div className="absolute inset-[-32.65%]">

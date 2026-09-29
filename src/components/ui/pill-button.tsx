@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
+import { MorphIcon } from "@/components/ui/morph-icon";
 
 type PillButtonVariant =
     | "secondary"
@@ -40,6 +41,8 @@ type PillButtonProps = {
     size?: PillButtonSize;
     textClassName?: string;
     icon?: string;
+    /** Iconify name to morph `icon` into on hover/focus (GSAP MorphSVG). Needs `icon` set. */
+    iconHover?: string;
     iconSize?: number;
     iconPosition?: "left" | "right";
     animateIconOnHover?: boolean;
@@ -52,6 +55,7 @@ export function PillButton({
     size = "md",
     textClassName = "text-white",
     icon,
+    iconHover,
     iconSize = 14,
     iconPosition = "right",
     animateIconOnHover = false,
@@ -66,7 +70,15 @@ export function PillButton({
             {...props}
         >
             <span className="transition-all duration-300 ease-in-out">{children}</span>
-            {icon ? (
+            {icon && iconHover ? (
+                <MorphIcon
+                    icon={icon}
+                    hoverIcon={iconHover}
+                    className={`shrink-0 transition-transform duration-300 ease-in-out ${animateIconOnHover ? "group-hover:translate-x-1" : ""}`}
+                    width={iconSize}
+                    height={iconSize}
+                />
+            ) : icon ? (
                 <Icon
                     icon={icon}
                     className={`shrink-0 transition-transform duration-300 ease-in-out ${animateIconOnHover ? "group-hover:translate-x-1" : ""}`}

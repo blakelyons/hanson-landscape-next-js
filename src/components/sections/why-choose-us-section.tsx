@@ -17,7 +17,7 @@ const FEATURES = [
 
 export function WhyChooseUsSection() {
     return (
-        <section className="relative w-full py-20">
+        <section className="relative flex h-dvh w-full items-center justify-center py-20">
             <div className="relative container flex flex-col-reverse gap-8 xl:block">
                 <div className="grid grid-cols-1 gap-y-8">
                     <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">

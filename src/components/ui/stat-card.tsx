@@ -2,7 +2,7 @@ export function StatCard({
     value,
     label,
     className = "flex w-auto max-w-35 flex-col items-start text-forrest",
-    valueClassName = "font-serif-display text-4xl",
+    valueClassName = "font-serif-display text-5xl",
     labelClassName = "font-mono-stat text-sm uppercase",
 }: {
     value: string;

@@ -87,7 +87,7 @@ export function ProcessSection() {
                                 className="process-steps__step-header flex flex-col items-center justify-center gap-4 text-center lg:gap-6"
                             >
                                 <div
-                                    className="shrink-0 text-4xl lg:text-5xl"
+                                    className="shrink-0 text-5xl lg:text-5xl"
                                     style={step.iconColor ? { color: step.iconColor } : undefined}
                                 >
                                     <Icon icon={step.iconName} width="1em" height="1em" ssr />
