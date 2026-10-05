@@ -16,6 +16,11 @@ export type MenuItem = {
 
 const menuLeaf = (slug: string, label: string): MenuItem => ({ label, href: servicePath(slug) });
 
+export const ABOUT_MENU: MenuItem[] = [
+    { label: "About Us", href: "/about" },
+    { label: "Blog", href: "/blog" },
+];
+
 export const SERVICES_MENU: MenuItem[] = [
     {
         label: "Residential Services",

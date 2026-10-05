@@ -17,10 +17,13 @@ Status: reference
 - Homepage testimonials now use the real ones
 - Footer Blog link
 
-## Still open
-- Header nav has no Blog link (design has none); footer + site map only
-- Unused temp components (`temp-portfolio-bento.tsx`, `why-choose-us-section-temp.tsx`): not imported anywhere; "View Project" link left as `#`. Delete?
+## Wired
+- Blog: sub-nav under About (desktop hover dropdown with About Us + Blog; mobile indented link). Also footer + site map.
+- Temp components deleted.
 
-## Contact form open items
+## Still open
+- Nothing link-related.
+
+## Contact form open items (Formstack may be dropped; see decision)
 - Set FORMSTACK_API_KEY + FORMSTACK_CONTACT_FORM_ID; map field names (name, email, phone, service, message) to real Formstack field IDs in app/api/contact/route.ts
 - "Attach File" uploads are dropped by the API route until Formstack has a file field

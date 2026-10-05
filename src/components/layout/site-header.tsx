@@ -7,7 +7,8 @@ import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import { TransitionLink } from "@/components/transitions/transition-link";
-import { ServicesNavDropdown } from "./nav-dropdown";
+import { NavDropdown, ServicesNavDropdown } from "./nav-dropdown";
+import { ABOUT_MENU, type MenuItem } from "./chevron-to-leaf-icon";
 import { MobileNav } from "./mobile-nav";
 import { getPillTargetRect } from "@/lib/nav-pill";
 import { Logo } from "@/components/ui/logo";
@@ -60,11 +61,13 @@ export type NavLinkData = {
     label: string;
     href: string;
     icon: string;
+    /** Optional sub-nav: renders a hover dropdown (desktop) / indented links (mobile). */
+    menu?: MenuItem[];
 };
 
 export const NAV_LINKS: NavLinkData[] = [
     { label: "Home", href: "/", icon: "lucide:house" },
-    { label: "About", href: "/about", icon: "lucide:hard-hat" },
+    { label: "About", href: "/about", icon: "lucide:hard-hat", menu: ABOUT_MENU },
 ];
 
 export const NAV_LINKS_AFTER: NavLinkData[] = [
@@ -289,16 +292,35 @@ export function SiteHeader({
                             aria-hidden
                             className="bg-primary pointer-events-none absolute top-0 left-0 -z-10 rounded-full opacity-0"
                         />
-                        {NAV_LINKS.map((link) => (
-                            <NavLink
-                                key={link.label}
-                                link={link}
-                                active={effectiveVariant === "solid" && pathname === link.href}
-                                variant={effectiveVariant}
-                                registerItem={registerItem}
-                                onHoverEnter={() => showPillAt(link.label)}
-                            />
-                        ))}
+                        {NAV_LINKS.map((link) =>
+                            link.menu ? (
+                                <NavDropdown
+                                    key={link.label}
+                                    label={link.label}
+                                    href={link.href}
+                                    items={link.menu}
+                                    pillKey={link.label}
+                                    active={
+                                        effectiveVariant === "solid" &&
+                                        link.menu.some(
+                                            (item) => item.href === pathname || pathname.startsWith(`${item.href}/`),
+                                        )
+                                    }
+                                    variant={effectiveVariant}
+                                    registerItem={registerItem}
+                                    onHoverEnter={() => showPillAt(link.label)}
+                                />
+                            ) : (
+                                <NavLink
+                                    key={link.label}
+                                    link={link}
+                                    active={effectiveVariant === "solid" && pathname === link.href}
+                                    variant={effectiveVariant}
+                                    registerItem={registerItem}
+                                    onHoverEnter={() => showPillAt(link.label)}
+                                />
+                            ),
+                        )}
                         <ServicesNavDropdown
                             variant={effectiveVariant}
                             registerItem={registerItem}

@@ -8,6 +8,11 @@ vi.mock("next/navigation", () => ({
     usePathname: usePathnameMock,
 }));
 
+// TransitionLink needs a mounted app router + transition provider; swap in a plain anchor.
+vi.mock("@/components/transitions/transition-link", () => ({
+    TransitionLink: ({ href, ...props }: { href: string } & React.ComponentProps<"a">) => <a href={href} {...props} />,
+}));
+
 describe("SiteHeader", () => {
     it("marks Home active and About inactive at / (solid variant)", () => {
         usePathnameMock.mockReturnValue("/");

@@ -47,7 +47,7 @@ function MenuNode({ item }: { item: MenuItem }) {
         >
             <TransitionLink
                 href={item.href ?? "#"}
-                className="hover:text-primary group flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-forrest-deep"
+                className="hover:text-primary group hover:bg-forrest-deep flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors"
             >
                 {item.label}
                 {hasChildren ? (
@@ -63,7 +63,7 @@ function MenuNode({ item }: { item: MenuItem }) {
     );
 }
 
-function ServicesMenuPanel() {
+function DropdownPanel({ items }: { items: MenuItem[] }) {
     const ref = useDropdownEnter<HTMLDivElement>();
 
     return (
@@ -75,7 +75,7 @@ function ServicesMenuPanel() {
                 ref={ref}
                 className="flex min-w-55 flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
             >
-                {SERVICES_MENU.map((item) => (
+                {items.map((item) => (
                     <MenuNode key={item.label} item={item} />
                 ))}
             </div>
@@ -83,11 +83,23 @@ function ServicesMenuPanel() {
     );
 }
 
-export function ServicesNavDropdown({
+export function NavDropdown({
+    label,
+    href = "#",
+    items,
+    pillKey,
+    active = false,
     variant = "transparent",
     registerItem,
     onHoverEnter,
 }: {
+    label: string;
+    href?: string;
+    items: MenuItem[];
+    /** Key the header's hover pill uses to find this trigger. */
+    pillKey: string;
+    /** Interior (solid) pages only: highlight the trigger as the current section. */
+    active?: boolean;
     variant?: SiteHeaderVariant;
     registerItem?: (key: string, el: HTMLAnchorElement | null) => void;
     onHoverEnter?: () => void;
@@ -106,21 +118,27 @@ export function ServicesNavDropdown({
             }}
             onMouseLeave={() => setOpen(false)}
         >
-            <Link
-                ref={(el) => registerItem?.("services", el)}
-                href="#"
+            <TransitionLink
+                ref={(el) => registerItem?.(pillKey, el)}
+                href={href}
                 className={
                     variant === "solid"
-                        ? `is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-colors duration-200 delay-300 ease-in-out lg:text-base ${
-                              open ? "text-white" : "text-forrest hover:text-white"
+                        ? `is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap transition-colors delay-300 duration-200 ease-in-out lg:text-base ${
+                              active ? "bg-primary text-white" : open ? "text-white" : "text-forrest hover:text-white"
                           }`
                         : "is-dropdown-link flex items-center gap-3 rounded-full px-5 py-2.5 font-sans text-sm leading-normal font-medium whitespace-nowrap text-white transition-all duration-300 ease-in-out hover:text-white lg:text-base"
                 }
             >
-                <span>Our Services</span>
+                <span>{label}</span>
                 <ChevronToLeafIcon open={open} className="services-chevron text-sm" />
-            </Link>
-            {open ? <ServicesMenuPanel /> : null}
+            </TransitionLink>
+            {open ? <DropdownPanel items={items} /> : null}
         </div>
     );
+}
+
+export function ServicesNavDropdown(
+    props: Pick<Parameters<typeof NavDropdown>[0], "variant" | "registerItem" | "onHoverEnter">,
+) {
+    return <NavDropdown {...props} label="Our Services" items={SERVICES_MENU} pillKey="services" />;
 }

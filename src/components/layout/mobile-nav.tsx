@@ -237,15 +237,24 @@ export function MobileNav() {
                     </div>
                     <div ref={itemsRef} className="flex h-full flex-1 flex-col gap-6 p-8">
                         {NAV_LINKS.map((link) => (
-                            <TransitionLink
-                                key={link.label}
-                                href={link.href}
-                                onClick={closeMobileNav}
-                                className={drawerLinkClasses}
-                            >
-                                <Icon icon={link.icon} className="size-5" />
-                                {link.label}
-                            </TransitionLink>
+                            <div key={link.label} className="flex flex-col gap-4">
+                                <TransitionLink href={link.href} onClick={closeMobileNav} className={drawerLinkClasses}>
+                                    <Icon icon={link.icon} className="size-5" />
+                                    {link.label}
+                                </TransitionLink>
+                                {link.menu
+                                    ?.filter((item) => item.href !== link.href)
+                                    .map((item) => (
+                                        <TransitionLink
+                                            key={item.label}
+                                            href={item.href ?? "#"}
+                                            onClick={closeMobileNav}
+                                            className={`${drawerLinkClasses} border-primary ml-2.5 border-l-2 pl-4`}
+                                        >
+                                            {item.label}
+                                        </TransitionLink>
+                                    ))}
+                            </div>
                         ))}
                         <AccordionRow item={OUR_SERVICES_ITEM} depth={0} onNavigate={closeMobileNav} />
                         {NAV_LINKS_AFTER.map((link) => (
