@@ -38,6 +38,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
         if (!playIntro) {
             gsap.set(
                 [
+                    ".hero-section-background",
                     ".hero-eyebrow",
                     ".hero-title-wrapper",
                     ".hero-subtitle",
