@@ -22,6 +22,7 @@ const GROUPS: MapGroup[] = [
             { label: "Portfolio", href: "/portfolio" },
             { label: "Testimonials", href: "/testimonials" },
             { label: "Careers", href: "/careers" },
+            { label: "Blog", href: "/blog" },
             { label: "Contact", href: "/contact" },
         ],
     },

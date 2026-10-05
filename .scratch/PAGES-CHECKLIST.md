@@ -34,20 +34,22 @@ Source: Yoast page/post sitemaps, fetched 2026-10-05. Old site is WordPress. Leg
 - [x] `/portfolio/lighting-nightscapes` — redirect to /portfolio (Project Type, search only)
 - [x] `/portfolio/water-features` — redirect to /portfolio (Project Type, search only)
 
-### Blog (decision needed)
-Old site has `/blog/` and ~35 posts, almost all 2013–2014 (checklists, mowing tips, award news, snow stats). Options: (a) drop and 301 to home/relevant service page, (b) rebuild blog index + posts, (c) migrate only evergreen ones. Not scheduled.
-- [ ] Decide blog scope: drop / full migrate / selective
-- [ ] `/blog` index
-- [ ] `/category/seasonal-news`
-- Posts (all dated 2013–2014, slugs at hansonlandscape.com/{slug}): unilock-century-club-award (x2), landscaping-ideas-to-consider (x2), lawn-mowing-tips-for-dry-weather (x2), hello-world, may/june/july/august/september landscape checklists, general-information-on-lawn-mowing, portfolio-of-work, around-the-office, snow-removal-services, retaining-walls, project-armor-up(-2013), uses-and-benefits-of-brick-pavers, landscaping-maintenance-what-is-included, nightscapes-what-are-they, mulch-why-and-how-much, hanson-landscape-on-linkedin, landscaper-of-the-year, landscaping-worth-investment, hanson-landscape-named-landscaper-year-finalist, choose-landscaper, winter-storms, chicago-snowfall-numbers, included-snow-removal-services, snow-removal, grubs-and-their-effects, customer-service-and-taking-the-extra-steps
-- Note: old post `/residential-landscape-design/` (2014) is shadowed by the page of the same slug; ignore.
+### Blog — migrated (all 30 unique posts)
+Source: WP REST API. Content in `src/content/blog.ts`, images in `public/images/blog/{slug}/`. Dates are 2013–2017, so content is dated; consider a refresh pass.
+- [x] `/blog` index
+- [x] `/blog/[slug]` x30 (old URLs `/{slug}` and `/yyyy/mm/{slug}` 301 here)
+- [x] `/category/seasonal-news` -> `/blog`
+- Skipped: `hello-world` (WordPress boilerplate) -> redirects to `/blog`; old post `residential-landscape-design` (shadowed by the service page; its text is residential design portfolio chatter)
+- Duplicates merged: lawn-mowing-tips-for-dry-weather-2, landscaping-ideas-to-consider-2, hanson-receives-unilock-century-club-award-2 -> canonical posts
+- 5 images referenced by old posts return 404 on the live site and were omitted
+- Not migrated: post categories/tags (single category), author pages, feed
 
 ### Redirects to configure at deploy
 - [x] `/career-oppurtonities` -> `/careers`
 - [x] `/contact/request-a-quote` -> `/contact` (next.config.ts)
 - [x] `/portfolio/{residential,commercial-2,landscape-maintenance,lighting-nightscapes,water-features}` -> `/portfolio`
 - [x] `/site-map` kept, no redirect needed
-- [ ] Blog URLs per blog decision
+- [x] Blog URLs (generated in next.config.ts from blog data)
 - [ ] `/author/hanson-landscape/`, `/feed/`, `/wp-json/` — no action, just let 404
 
 ## Not on old site but in new design

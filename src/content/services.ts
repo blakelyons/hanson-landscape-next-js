@@ -234,6 +234,12 @@ export function getServicePagesBySector(sector: Sector): ServicePage[] {
     return SERVICE_PAGES.filter((page) => page.sector === sector);
 }
 
+/** Options for the contact/consultation form's service dropdown. */
+export const SERVICE_OPTIONS = [
+    ...SERVICE_PAGES.map((page) => ({ value: page.slug, label: page.title })),
+    { value: "other", label: "Other / Not sure yet" },
+];
+
 export const servicePath = (slug: string) => `/${slug}`;
 
 export function getServicePageBySlug(slug: string): ServicePage | undefined {

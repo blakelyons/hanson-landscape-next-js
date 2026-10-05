@@ -51,6 +51,7 @@ export function WhyChooseUsSection() {
                             <PillButton
                                 variant="primary"
                                 size="md"
+                                href="/about"
                                 textClassName="text-primary-dark-2 mt-8"
                                 icon="lucide:arrow-right"
                             >

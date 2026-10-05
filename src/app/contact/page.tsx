@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
 import { ContactForm } from "@/components/contact/contact-form";
-import { SERVICE_PAGES } from "@/content/services";
+import { SERVICE_OPTIONS } from "@/content/services";
 import { SITE_CONTACT } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -11,11 +11,6 @@ export const metadata: Metadata = {
     description:
         "Request a free quote or book a consultation with Hanson Landscape. Call (630) 556-4120 or send us a message. Serving Chicagoland.",
 };
-
-const SERVICE_OPTIONS = [
-    ...SERVICE_PAGES.map((page) => ({ value: page.slug, label: page.title })),
-    { value: "other", label: "Other / Not sure yet" },
-];
 
 const INFO = [
     { label: "CALL US", value: SITE_CONTACT.phone, href: SITE_CONTACT.phoneHref, valueClass: "text-[#1a2e1a]" },

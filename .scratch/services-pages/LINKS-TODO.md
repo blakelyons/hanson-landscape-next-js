@@ -11,11 +11,15 @@ Status: reference
 ## Wired (pages pass)
 - Testimonials, Careers, Privacy Policy, Site Map: header nav + footer
 
+## Wired (final pass)
+- Why Choose Us "Discover More" -> /about
+- Homepage consultation form now uses ContactForm (-> /api/contact)
+- Homepage testimonials now use the real ones
+- Footer Blog link
+
 ## Still open
-- Why Choose Us "Discover More" (decide target, likely /about)
-- Homepage "temp-portfolio-bento" "View Project" (temp component)
-- Homepage ConsultationSection form: not wired to /api/contact; reuse ContactForm or link to /contact
-- Homepage testimonials still use placeholder "Sarah M." x3; swap for CLIENT_TESTIMONIALS (and fix testimonials-section tests)
+- Header nav has no Blog link (design has none); footer + site map only
+- Unused temp components (`temp-portfolio-bento.tsx`, `why-choose-us-section-temp.tsx`): not imported anywhere; "View Project" link left as `#`. Delete?
 
 ## Contact form open items
 - Set FORMSTACK_API_KEY + FORMSTACK_CONTACT_FORM_ID; map field names (name, email, phone, service, message) to real Formstack field IDs in app/api/contact/route.ts

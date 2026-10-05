@@ -15,7 +15,9 @@ describe("TestimonialsSection", () => {
         const { container, getAllByText } = render(<TestimonialsSection />);
 
         expect(container.querySelector(".swiper")).toBeInTheDocument();
-        expect(getAllByText(TESTIMONIALS[0].name).length).toBeGreaterThanOrEqual(TESTIMONIALS.length);
+        for (const { name } of TESTIMONIALS.slice(0, 3)) {
+            expect(getAllByText(name).length).toBeGreaterThanOrEqual(1);
+        }
     });
 
     it("locks the carousel width so slidesPerView=3 divides back to each card's 336px width", () => {

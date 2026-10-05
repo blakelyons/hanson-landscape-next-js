@@ -12,6 +12,7 @@ const MENU_COLUMNS: { heading: string; href?: string; items: FooterItem[] }[] = 
             { label: "Portfolio", href: "/portfolio" },
             { label: "Testimonials", href: "/testimonials" },
             { label: "Careers", href: "/careers" },
+            { label: "Blog", href: "/blog" },
         ],
     },
     {

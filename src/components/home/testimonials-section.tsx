@@ -7,26 +7,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useWindowWidth } from "@/hooks/use-media-query";
+import { CLIENT_TESTIMONIALS } from "@/content/testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const TESTIMONIALS = [
-    {
-        quote: '"Hanson Landscape transformed our backyard into an oasis. The attention to detail was incredible and the team was professional throughout."',
-        name: "Sarah M.",
-        location: "Naperville, IL",
-    },
-    {
-        quote: '"Hanson Landscape transformed our backyard into an oasis. The attention to detail was incredible and the team was professional throughout."',
-        name: "Sarah M.",
-        location: "Naperville, IL",
-    },
-    {
-        quote: '"Hanson Landscape transformed our backyard into an oasis. The attention to detail was incredible and the team was professional throughout."',
-        name: "Sarah M.",
-        location: "Naperville, IL",
-    },
-];
+export const TESTIMONIALS = CLIENT_TESTIMONIALS;
 
 export function TestimonialCard({
     quote,

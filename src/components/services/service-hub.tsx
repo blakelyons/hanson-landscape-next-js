@@ -2,10 +2,9 @@ import Image from "next/image";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
-import { PillButton } from "@/components/ui/pill-button";
+import { QuoteCard } from "@/components/ui/quote-card";
 import { TransitionLink } from "@/components/transitions/transition-link";
 import { getServicePagesBySector, servicePath, type SectorHub } from "@/content/services";
-import { CONTACT_PATH } from "@/content/site";
 
 export function ServiceHub({ hub }: { hub: SectorHub }) {
     const pages = getServicePagesBySector(hub.sector);
@@ -56,12 +55,7 @@ export function ServiceHub({ hub }: { hub: SectorHub }) {
                     ))}
                 </div>
 
-                <div className="border-forrest/15 mx-auto flex w-full max-w-240 flex-col items-start justify-between gap-6 rounded-xl border bg-[#f6f7f4] p-8 sm:flex-row sm:items-center">
-                    <p className="font-serif-display text-forrest text-2xl leading-8">{hub.ctaHeading}</p>
-                    <PillButton variant="secondary" size="md" icon="lucide:arrow-right" animateIconOnHover href={CONTACT_PATH}>
-                        Get a Free Quote
-                    </PillButton>
-                </div>
+                <QuoteCard heading={hub.ctaHeading} />
             </section>
             <SiteFooter />
         </div>

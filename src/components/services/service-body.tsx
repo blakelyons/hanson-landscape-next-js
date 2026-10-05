@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon";
-import { PillButton } from "@/components/ui/pill-button";
+import { QuoteCard } from "@/components/ui/quote-card";
 import type { ServicePage } from "@/content/services";
 import { contactPath } from "@/content/site";
 
@@ -63,18 +63,7 @@ export function ServiceBody({ page }: { page: ServicePage }) {
                 ) : null}
             </div>
 
-            <div className="border-forrest/15 mx-auto flex w-full max-w-240 flex-col items-start justify-between gap-6 rounded-xl border bg-[#f6f7f4] p-8 sm:flex-row sm:items-center">
-                <p className="font-serif-display text-forrest text-2xl leading-8">{page.ctaHeading}</p>
-                <PillButton
-                    variant="secondary"
-                    size="md"
-                    icon="lucide:arrow-right"
-                    animateIconOnHover
-                    href={contactPath(page.slug)}
-                >
-                    Get a Free Quote
-                </PillButton>
-            </div>
+            <QuoteCard heading={page.ctaHeading} href={contactPath(page.slug)} />
         </section>
     );
 }

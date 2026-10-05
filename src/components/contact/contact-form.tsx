@@ -12,9 +12,11 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function ContactForm({
     serviceOptions,
     defaultService,
+    showAttachment = true,
 }: {
     serviceOptions: SelectOption[];
     defaultService?: string;
+    showAttachment?: boolean;
 }) {
     const [status, setStatus] = useState<Status>("idle");
 
@@ -89,15 +91,17 @@ export function ContactForm({
                     />
                 </div>
             </div>
-            <div className="grid gap-2">
-                <Label htmlFor="attachment">Attach File</Label>
-                <input
-                    id="attachment"
-                    name="attachment"
-                    type="file"
-                    className="bg-light-green-cta file:text-forrest w-full rounded-md px-3 py-2 font-sans text-sm text-black/60 file:mr-3 file:rounded file:border-0 file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-medium"
-                />
-            </div>
+            {showAttachment ? (
+                <div className="grid gap-2">
+                    <Label htmlFor="attachment">Attach File</Label>
+                    <input
+                        id="attachment"
+                        name="attachment"
+                        type="file"
+                        className="bg-light-green-cta file:text-forrest w-full rounded-md px-3 py-2 font-sans text-sm text-black/60 file:mr-3 file:rounded file:border-0 file:bg-white file:px-3 file:py-1.5 file:text-sm file:font-medium"
+                    />
+                </div>
+            ) : null}
             <div className="grid gap-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea

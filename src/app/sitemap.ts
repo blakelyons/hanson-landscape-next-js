@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/content/projects";
+import { BLOG_POSTS } from "@/content/blog";
 import { SECTOR_HUBS, SERVICE_PAGES } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "weekly",
             priority: 1,
         },
-        ...["testimonials", "careers", "privacy-policy", "site-map"].map((path) => ({
+        ...["testimonials", "careers", "blog", "privacy-policy", "site-map"].map((path) => ({
             url: `${baseUrl}/${path}`,
             lastModified: new Date(),
             changeFrequency: "yearly" as const,
@@ -41,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: "monthly" as const,
             priority: 0.7,
+        })),
+        ...BLOG_POSTS.map((post) => ({
+            url: `${baseUrl}/blog/${post.slug}`,
+            lastModified: new Date(post.date),
+            changeFrequency: "yearly" as const,
+            priority: 0.4,
         })),
         ...PROJECTS.map((project) => ({
             url: `${baseUrl}/portfolio/${project.slug}`,
