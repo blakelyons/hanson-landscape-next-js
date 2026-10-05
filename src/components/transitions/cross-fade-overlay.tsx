@@ -22,6 +22,9 @@ export function useCrossFadeTransition() {
     const close = useCallback(
         () =>
             new Promise<void>((resolve) => {
+                // Kill any in-flight reveal/close so rapid navigation can't leave two
+                // tweens fighting over opacity (the later-created one wins the render).
+                gsap.killTweensOf(overlayRef.current);
                 gsap.to(overlayRef.current, {
                     opacity: 1,
                     duration: CLOSE_DURATION,
@@ -33,6 +36,7 @@ export function useCrossFadeTransition() {
     );
 
     const reveal = useCallback(() => {
+        gsap.killTweensOf(overlayRef.current);
         gsap.to(overlayRef.current, {
             opacity: 0,
             duration: REOPEN_DURATION,

@@ -1,9 +1,10 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { PageTransitionType } from "@/lib/page-transitions";
 import { useIrisLeafTransition } from "@/components/transitions/iris-leaf-overlay";
 import { useCrossFadeTransition } from "@/components/transitions/cross-fade-overlay";
@@ -33,9 +34,18 @@ import { Logo } from "@/components/ui/logo";
 const CLOSE_DURATION = 0.35;
 const REOPEN_DELAY = 0.8;
 const REOPEN_DURATION = 0.35;
+// If router.push never lands on a new pathname (failed navigation, same route),
+// reveal anyway so the cover can never get stuck on screen.
+const NAVIGATION_TIMEOUT_MS = 8000;
+
+gsap.registerPlugin(ScrollTrigger);
 
 type RouteTransitionContextValue = {
-    beginTransition: (type: PageTransitionType) => Promise<void>;
+    /**
+     * Plays the close animation, navigates, and reveals once the route has changed.
+     * Latest call wins: if the user clicks again mid-transition, earlier calls never push.
+     */
+    navigate: (href: string, type: PageTransitionType) => Promise<void>;
 };
 
 const RouteTransitionContext = createContext<RouteTransitionContextValue | null>(null);
@@ -50,7 +60,12 @@ export function RouteTransitionProvider({ children }: { children: ReactNode }) {
     const pathname = usePathname();
     const leftDoorRef = useRef<HTMLDivElement>(null);
     const rightDoorRef = useRef<HTMLDivElement>(null);
-    const pendingReopenRef = useRef<PageTransitionType | null>(null);
+    const router = useRouter();
+    // Which transition's cover is currently (or about to be) closed and needs revealing.
+    const activeTypeRef = useRef<PageTransitionType | null>(null);
+    // Increments per navigate() call so a stale click can tell it lost to a newer one.
+    const navTokenRef = useRef(0);
+    const watchdogRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const logoRef = useRef<HTMLDivElement>(null);
     const irisLeaf = useIrisLeafTransition();
     const crossFade = useCrossFadeTransition();
@@ -68,6 +83,7 @@ export function RouteTransitionProvider({ children }: { children: ReactNode }) {
 
     const closeDoors = () =>
         new Promise<void>((resolve) => {
+            gsap.killTweensOf([leftDoorRef.current, rightDoorRef.current, logoRef.current]);
             const tl = gsap.timeline({ defaults: { duration: 0.35, ease: "power2.inOut" } });
             tl.to(logoRef.current!, {
                 opacity: 1,
@@ -89,6 +105,7 @@ export function RouteTransitionProvider({ children }: { children: ReactNode }) {
         });
 
     const reopenDoors = () => {
+        gsap.killTweensOf([leftDoorRef.current, rightDoorRef.current, logoRef.current]);
         gsap.to(logoRef.current!, {
             opacity: 0,
             duration: 0.35,
@@ -108,24 +125,64 @@ export function RouteTransitionProvider({ children }: { children: ReactNode }) {
         });
     };
 
-    const beginTransition = (type: PageTransitionType) => {
-        pendingReopenRef.current = type;
-        if (type === "iris-leaf") return irisLeaf.close();
-        if (type === "cross-fade") return crossFade.close();
-        return closeDoors();
-    };
+    const revealActive = useCallback(() => {
+        const type = activeTypeRef.current;
+        if (!type) return;
+        activeTypeRef.current = null;
+        if (watchdogRef.current) clearTimeout(watchdogRef.current);
 
-    // Route has swapped behind the (now fully closed) overlay — reopen it.
-    useEffect(() => {
-        const type = pendingReopenRef.current;
-        pendingReopenRef.current = null;
         if (type === "iris-leaf") irisLeaf.reveal();
         else if (type === "cross-fade") crossFade.reveal();
         else if (type === "doors-forrest") reopenDoors();
-    }, [pathname, irisLeaf, crossFade]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- reopenDoors only touches refs
+    }, [irisLeaf, crossFade]);
+
+    const navigate = useCallback(
+        (href: string, type: PageTransitionType) => {
+            const token = ++navTokenRef.current;
+            if (watchdogRef.current) clearTimeout(watchdogRef.current);
+            activeTypeRef.current = type;
+
+            const close =
+                type === "iris-leaf" ? irisLeaf.close() : type === "cross-fade" ? crossFade.close() : closeDoors();
+
+            return close.then(() => {
+                if (token !== navTokenRef.current) return; // a newer click took over
+                router.push(href);
+                watchdogRef.current = setTimeout(revealActive, NAVIGATION_TIMEOUT_MS);
+            });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- closeDoors only touches refs
+        [irisLeaf, crossFade, router, revealActive],
+    );
+
+    // Route has swapped behind the (now fully closed) cover. Re-measure ScrollTriggers
+    // against the new page's final layout, then reopen a frame later so the new page's
+    // entrance animations don't start in the middle of that mount's main-thread work.
+    useEffect(() => {
+        if (!activeTypeRef.current) return;
+        let secondFrame = 0;
+        const firstFrame = requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+            secondFrame = requestAnimationFrame(revealActive);
+        });
+        return () => {
+            cancelAnimationFrame(firstFrame);
+            cancelAnimationFrame(secondFrame);
+        };
+    }, [pathname, revealActive]);
+
+    useEffect(
+        () => () => {
+            if (watchdogRef.current) clearTimeout(watchdogRef.current);
+        },
+        [],
+    );
+
+    const contextValue = useMemo(() => ({ navigate }), [navigate]);
 
     return (
-        <RouteTransitionContext.Provider value={{ beginTransition }}>
+        <RouteTransitionContext.Provider value={contextValue}>
             {children}
             <div aria-hidden className="pointer-events-none fixed inset-0 z-100">
                 <div

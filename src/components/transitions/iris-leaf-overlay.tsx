@@ -46,6 +46,7 @@ export function useIrisLeafTransition() {
     const close = useCallback(
         () =>
             new Promise<void>((resolve) => {
+                gsap.killTweensOf([svgRef.current, pathRef.current]);
                 gsap.timeline({ onComplete: resolve })
                     .to(svgRef.current, { scale: LEAF_HOLD_SCALE, duration: GROW_DURATION, ease: "power2.out" })
                     .to(
@@ -59,6 +60,7 @@ export function useIrisLeafTransition() {
     );
 
     const reveal = useCallback(() => {
+        gsap.killTweensOf(svgRef.current);
         gsap.to(svgRef.current, {
             opacity: 0,
             duration: REOPEN_DURATION,
