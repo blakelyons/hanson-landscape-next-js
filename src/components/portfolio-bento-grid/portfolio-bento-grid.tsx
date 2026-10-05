@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { PROJECTS } from "@/content/projects";
 import "./portfolio-bento-grid.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 export function PortfolioBentoGrid() {
+    const [featured, project1, project2, project3] = PROJECTS;
     const featuredProjectGrid = useRef<HTMLDivElement>(null);
     const featuredProjectCardInfo = useRef<HTMLDivElement>(null);
 
@@ -25,7 +27,6 @@ export function PortfolioBentoGrid() {
                     trigger: featuredProjectGrid.current,
                     start: "top center",
                     end: "bottom center+=25%",
-                    markers: true,
                 },
             });
         },
@@ -39,7 +40,7 @@ export function PortfolioBentoGrid() {
         >
             <div className="container flex flex-col items-end justify-center gap-4 py-20">
                 <ArrowLink
-                    href="#"
+                    href="/portfolio"
                     icon="lucide:arrow-right"
                     iconSize={14}
                     textClassName="text-forrest text-base font-medium"
@@ -54,9 +55,9 @@ export function PortfolioBentoGrid() {
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                alt="Hanson Landscape featured project"
+                                alt={featured.cover.alt}
                                 className="absolute h-full w-full object-cover"
-                                src="/images/home/project-photo-1.jpg"
+                                src={featured.cover.src}
                             />
                         </div>
                         <div
@@ -64,14 +65,14 @@ export function PortfolioBentoGrid() {
                             className="featured-project-card relative flex w-full shrink-0 flex-col items-start gap-2.5 overflow-hidden rounded-lg bg-white px-3.5 py-4 drop-shadow-[0px_4px_3px_rgba(0,0,0,0.1),0px_2px_2px_rgba(0,0,0,0.06)]"
                         >
                             <p className="font-serif-display w-full text-xl leading-5.5 font-normal text-black not-italic">
-                                Project Name
+                                {featured.title}
                             </p>
                             <p className="w-full min-w-full font-sans text-sm leading-4.5 font-normal text-black">
-                                Non officia ullamco aute sit nulla ea magna ullamco.
+                                {featured.summary}
                             </p>
                             <div className="border-light-green-cta flex w-full shrink-0 items-center justify-end gap-2.5 border-t pt-3">
                                 <ArrowLink
-                                    href="#"
+                                    href={`/portfolio/${featured.slug}`}
                                     icon="lucide:arrow-right"
                                     iconSize={14}
                                     textClassName="text-forrest text-xs font-medium"
@@ -87,9 +88,9 @@ export function PortfolioBentoGrid() {
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                alt="Hanson Landscape project 2"
+                                alt={project1.cover.alt}
                                 className="pointer-events-none absolute inset-0 size-full max-w-none rounded-xl object-cover object-center"
-                                src="/images/home/project-photo-2.jpg"
+                                src={project1.cover.src}
                             />
                         </div>
                     </div>
@@ -99,9 +100,9 @@ export function PortfolioBentoGrid() {
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                alt="Hanson Landscape project 3"
+                                alt={project2.cover.alt}
                                 className="pointer-events-none absolute inset-0 size-full max-w-none rounded-xl object-cover object-center"
-                                src="/images/home/project-photo-4.jpg"
+                                src={project2.cover.src}
                             />
                         </div>
                     </div>
@@ -111,9 +112,9 @@ export function PortfolioBentoGrid() {
                         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                alt="Hanson Landscape project 4"
+                                alt={project3.cover.alt}
                                 className="pointer-events-none absolute inset-0 size-full max-w-none rounded-xl object-cover object-center"
-                                src="/images/home/project-photo-3.jpg"
+                                src={project3.cover.src}
                             />
                         </div>
                     </div>

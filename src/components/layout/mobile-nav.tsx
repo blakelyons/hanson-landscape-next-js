@@ -11,6 +11,7 @@ import { NAV_LINKS, NAV_LINKS_AFTER } from "./site-header";
 import { ChevronToLeafIcon, SERVICES_MENU, type MenuItem } from "./chevron-to-leaf-icon";
 import { Logo } from "@/components/ui/logo";
 import { Icon } from "@/components/ui/icon";
+import { CONTACT_PATH } from "@/content/site";
 
 gsap.registerPlugin(MorphSVGPlugin);
 
@@ -99,7 +100,7 @@ function AccordionRow({ item, depth, onNavigate }: { item: MenuItem; depth: numb
 
     if (!hasChildren) {
         return (
-            <Link href="#" onClick={onNavigate} className={`${drawerLinkClasses} ${indentClass}`}>
+            <Link href={item.href ?? "#"} onClick={onNavigate} className={`${drawerLinkClasses} ${indentClass}`}>
                 {item.label}
             </Link>
         );
@@ -261,7 +262,7 @@ export function MobileNav() {
                     </div>
                     <div className="mt-auto flex-0 px-8">
                         <Link
-                            href="#"
+                            href={CONTACT_PATH}
                             onClick={closeMobileNav}
                             className="bg-primary mt-auto flex h-11 items-center justify-center rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black"
                         >

@@ -60,7 +60,8 @@ for (const iconRef of [...usedIcons].sort()) {
     if (!data) {
         throw new Error(`Icon "${iconRef}" not found in @iconify-json/${prefix}`);
     }
-    output[iconRef] = data;
+    const { hidden: _hidden, ...icon } = data;
+    output[iconRef] = icon;
 }
 
 const outPath = path.join(repoRoot, "src/components/ui/icons.generated.ts");

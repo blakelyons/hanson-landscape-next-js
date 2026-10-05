@@ -11,6 +11,7 @@ import { ServicesNavDropdown } from "./nav-dropdown";
 import { MobileNav } from "./mobile-nav";
 import { getPillTargetRect } from "@/lib/nav-pill";
 import { Logo } from "@/components/ui/logo";
+import { CONTACT_PATH } from "@/content/site";
 gsap.registerPlugin(MorphSVGPlugin);
 
 export type SiteHeaderVariant = "transparent" | "solid";
@@ -67,8 +68,8 @@ export const NAV_LINKS: NavLinkData[] = [
 ];
 
 export const NAV_LINKS_AFTER: NavLinkData[] = [
-    { label: "Portfolio", href: "#", icon: "lucide:briefcase" },
-    { label: "Testimonials", href: "#", icon: "lucide:star" },
+    { label: "Portfolio", href: "/portfolio", icon: "lucide:briefcase" },
+    { label: "Testimonials", href: "/testimonials", icon: "lucide:star" },
 ];
 
 const headerContainerClasses: Record<SiteHeaderVariant, string> = {
@@ -314,7 +315,7 @@ export function SiteHeader({
                             />
                         ))}
                         <Link
-                            href="#"
+                            href={CONTACT_PATH}
                             onMouseEnter={() => setMailOpen(true)}
                             onMouseLeave={() => setMailOpen(false)}
                             className="group hover:bg-primary-light bg-primary flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full px-8 font-sans text-sm font-medium whitespace-nowrap text-black transition-all duration-300 ease-in-out xl:text-base"

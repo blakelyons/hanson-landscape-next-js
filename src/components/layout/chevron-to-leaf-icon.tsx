@@ -4,21 +4,36 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useGSAP } from "@gsap/react";
+import { SECTOR_HUBS, servicePath } from "@/content/services";
 gsap.registerPlugin(MorphSVGPlugin);
 
 export type MenuItem = {
     label: string;
+    /** Group headers link to their sector hub and also open a submenu. */
+    href?: string;
     children?: MenuItem[];
 };
+
+const menuLeaf = (slug: string, label: string): MenuItem => ({ label, href: servicePath(slug) });
 
 export const SERVICES_MENU: MenuItem[] = [
     {
         label: "Residential Services",
-        children: [{ label: "Item 1" }, { label: "Item 2" }],
+        href: servicePath(SECTOR_HUBS.residential.slug),
+        children: [
+            menuLeaf("residential-landscape-design", "Landscape Design"),
+            menuLeaf("residential-landscape-construction", "Landscape Construction"),
+        ],
     },
     {
         label: "Commercial Services",
-        children: [{ label: "Item 1" }, { label: "Item 2" }],
+        href: servicePath(SECTOR_HUBS.commercial.slug),
+        children: [
+            menuLeaf("commercial-landscape-maintenance", "Landscape Maintenance"),
+            menuLeaf("commercial-landscape-construction", "Landscape Construction"),
+            menuLeaf("commercial-landscape-enhancement", "Landscape Enhancement"),
+            menuLeaf("snow-and-ice-management", "Snow & Ice Management"),
+        ],
     },
 ];
 

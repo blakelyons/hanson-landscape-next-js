@@ -11,6 +11,7 @@ import { useRef } from "react";
 const SERVICES = [
     {
         title: "Design",
+        href: "/residential-landscape-design",
         description: "Professional landscape design tailored to your vision, property, and lifestyle.",
         iconName: "lucide:pencil",
         iconColor: "#1E4A25",
@@ -18,6 +19,7 @@ const SERVICES = [
     },
     {
         title: "Build",
+        href: "/residential-landscape-construction",
         description: "Expert construction from pavers and retaining walls to water features and outdoor living.",
         iconName: "lucide:shovel",
         iconColor: "#F89C1C",
@@ -25,6 +27,7 @@ const SERVICES = [
     },
     {
         title: "Maintain",
+        href: "/commercial-landscape-maintenance",
         description: "Complete maintenance including mowing, seasonal cleanup, and snow removal year-round.",
         icon: "/images/home/plant-icon.svg",
         iconBg: "rgba(159,51,34,0.1)",
@@ -42,6 +45,7 @@ function ServiceCard({
     iconName,
     iconColor,
     iconBg,
+    href,
     className,
 }: ServiceCardProps &
     (typeof SERVICES)[number] & {
@@ -78,7 +82,7 @@ function ServiceCard({
                 </p>
             </div>
             <ArrowLink
-                href="#"
+                href={href}
                 icon="lucide:arrow-right"
                 iconWidth={12}
                 iconHeight={14}

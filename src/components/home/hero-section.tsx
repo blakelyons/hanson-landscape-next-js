@@ -9,6 +9,7 @@ import { GreenPlantSvg } from "@/components/ui/green-plant-leaf-svg";
 gsap.registerPlugin(DrawSVGPlugin);
 
 import { PillButton } from "@/components/ui/pill-button";
+import { CONTACT_PATH } from "@/content/site";
 
 const HERO_STATS = [
     { value: "25+", label: "Years of craftsmanship" },
@@ -216,6 +217,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                             <PillButton
                                 variant="primary"
                                 size="lg"
+                                href={CONTACT_PATH}
                                 textClassName="text-forrest-dark-2"
                                 icon="lucide:move-right"
                                 animateIconOnHover={true}
@@ -225,6 +227,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                             <PillButton
                                 variant="outline-white"
                                 size="lg"
+                                href="/portfolio"
                                 textClassName="text-[#fafbf8] hover:text-white font-medium"
                             >
                                 View Our Work
@@ -295,6 +298,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                     iconSize={16}
                                     animateIconOnHover={false}
                                     className="glow--primary"
+                                    href="/commercial-services"
                                 >
                                     {`Commercial Landscaping`}
                                 </PillButton>
@@ -307,6 +311,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                                     iconSize={16}
                                     animateIconOnHover={false}
                                     className="glow--primary"
+                                    href="/residential-services"
                                 >
                                     {`Residential Landscaping`}
                                 </PillButton>

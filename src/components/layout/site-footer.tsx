@@ -1,19 +1,36 @@
-import { FooterColumn } from "./footer-column";
+import { FooterColumn, type FooterItem } from "./footer-column";
+import { servicePath } from "@/content/services";
 import { PartnerLogos } from "@/components/ui/partner-logos";
 import Link from "next/link";
+import { SITE_CONTACT } from "@/content/site";
 
-const MENU_COLUMNS = [
+const MENU_COLUMNS: { heading: string; href?: string; items: FooterItem[] }[] = [
     {
         heading: "COMPANY",
-        items: ["About Us", "Portfolio", "Testimonials", "Careers"],
+        items: [
+            { label: "About Us", href: "/about" },
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Testimonials", href: "/testimonials" },
+            { label: "Careers", href: "/careers" },
+        ],
     },
     {
         heading: "COMMERCIAL SERVICES",
-        items: ["Landscape Maintenance", "Landscape Construction", "Landscape Enhancement", "Snow & Ice Management"],
+        href: "/commercial-services",
+        items: [
+            { label: "Landscape Maintenance", href: servicePath("commercial-landscape-maintenance") },
+            { label: "Landscape Construction", href: servicePath("commercial-landscape-construction") },
+            { label: "Landscape Enhancement", href: servicePath("commercial-landscape-enhancement") },
+            { label: "Snow & Ice Management", href: servicePath("snow-and-ice-management") },
+        ],
     },
     {
         heading: "RESIDENTIAL SERVICES",
-        items: ["Landscape Design", "Landscape Construction"],
+        href: "/residential-services",
+        items: [
+            { label: "Landscape Design", href: servicePath("residential-landscape-design") },
+            { label: "Landscape Construction", href: servicePath("residential-landscape-construction") },
+        ],
     },
 ];
 
@@ -52,6 +69,7 @@ export function SiteFooter() {
                                 <FooterColumn
                                     key={column.heading}
                                     heading={column.heading}
+                                    headingHref={column.href}
                                     items={column.items}
                                     className="flex w-full flex-col items-start gap-4"
                                 />
@@ -66,7 +84,9 @@ export function SiteFooter() {
                                             <Link href="tel:6305564120">(630) 556-4120</Link>
                                         </p>
                                         <p className="mb-0 leading-4">&#8203;</p>
-                                        <p className="text-forrest mb-0 leading-4">info@hansonlandscape.com</p>
+                                        <p className="text-forrest mb-0 leading-4">
+                                            <Link href={SITE_CONTACT.emailHref}>{SITE_CONTACT.email}</Link>
+                                        </p>
                                         <p className="mb-0 leading-4">&#8203;</p>
                                         <p className="leading-4">Chicagoland Area</p>
                                     </div>
@@ -79,7 +99,15 @@ export function SiteFooter() {
 
                     <div className="mt-10 flex w-full flex-wrap items-center justify-between border-t border-[rgba(255,255,255,0.5)] pt-8 font-sans text-base leading-4 font-normal text-[rgba(255,255,255,0.5)]">
                         <p className="shrink-0 whitespace-nowrap">© 2026 Hanson Landscape. All rights reserved.</p>
-                        <p className="shrink-0 whitespace-pre">{`Privacy Policy   |   Site Map`}</p>
+                        <p className="shrink-0 whitespace-pre">
+                            <Link href="/privacy-policy" className="hover:text-primary transition-colors">
+                                Privacy Policy
+                            </Link>
+                            {"   |   "}
+                            <Link href="/site-map" className="hover:text-primary transition-colors">
+                                Site Map
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>

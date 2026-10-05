@@ -20,6 +20,22 @@ _Avoid_: Slider, gallery
 The non-carousel rendering state of the Carousel component: slides laid out in a single flex row with no Swiper involved. Used whenever a Carousel instance's slide count doesn't exceed its configured `slidesPerView` (e.g. Testimonials at 3 or fewer cards, or the Family-Owned section below its own threshold).
 _Avoid_: Testimonial grid, testimonial list
 
+**Project**:
+One finished property Hanson Landscape worked on (e.g. a single backyard patio build). The unit shown on the Portfolio page; each Project has its own detail page and may be tagged with one or more Services.
+_Avoid_: Portfolio item, case study, gallery item
+
+**Sector**:
+Whether a Project is Residential or Commercial. Exactly one per Project. The only Portfolio filter chips (plus "All Projects").
+_Avoid_: Category, market
+
+**Service**:
+A kind of work Hanson Landscape performs, as listed in the site nav/footer (e.g. Landscape Design, Landscape Construction, Landscape Maintenance, Landscape Enhancement, Snow & Ice Management). A Project is tagged with one or more Services. Shown on the Project card; searchable; not a filter chip.
+_Avoid_: Category, offering
+
+**Project Type**:
+A finer description of what a Project physically is (e.g. Lighting & Nightscapes, Water Features, Patio & Hardscape). A Project has zero or more. Searchable; not a filter chip.
+_Avoid_: Category, tag (when Service is meant)
+
 **Icon**:
 A single-concept, thin/flat glyph — an arrow, phone, house, building, star, shovel, cursor, pencil. Swap-eligible for an Iconify equivalent rendered through the `Icon` component, regardless of the pixel size of its current usage slot.
 _Avoid_: Glyph, symbol (when the asset is actually an Illustration, see below)

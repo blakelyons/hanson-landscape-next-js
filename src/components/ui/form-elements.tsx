@@ -54,6 +54,7 @@ type SelectProps = {
     disabled?: boolean;
     required?: boolean;
     className?: string;
+    triggerClassName?: string;
 };
 
 function SelectPanel({
@@ -121,6 +122,7 @@ function Select({
     disabled = false,
     required = false,
     className = "",
+    triggerClassName = "",
 }: SelectProps) {
     const [open, setOpen] = useState(false);
     const [internalValue, setInternalValue] = useState(
@@ -170,7 +172,7 @@ function Select({
                 aria-haspopup="listbox"
                 aria-expanded={open}
                 onClick={() => setOpen((isOpen) => !isOpen)}
-                className={`${FIELD_BASE} flex items-center justify-between gap-2 text-left`}
+                className={`${FIELD_BASE} flex items-center justify-between gap-2 text-left ${triggerClassName}`}
             >
                 <span className={selectedOption ? "text-gray-900" : "text-gray-400"}>
                     {selectedOption?.label ?? placeholder}

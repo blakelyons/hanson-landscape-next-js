@@ -1,3 +1,5 @@
+"use client";
+
 import { addIcon, Icon as IconifyIcon, type IconProps as IconifyIconProps } from "@iconify/react";
 import { generatedIcons } from "@/components/ui/icons.generated";
 

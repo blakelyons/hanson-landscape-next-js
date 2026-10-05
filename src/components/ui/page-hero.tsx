@@ -8,58 +8,27 @@ type PageHeroProps = {
 export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHeroProps) {
     return (
         <section className="relative w-full overflow-clip bg-[#0e2113]">
-            {/* Decorative background — fixed treatment shared across all interior pages, not parameterized */}
-            <div className="pointer-events-none absolute inset-0 overflow-clip">
-                <div className="absolute -top-32 -left-24 size-150 max-w-none">
-                    <div className="absolute inset-[-32.65%]">
+            <div className="relative container">
+                {/* Decorative background — fixed treatment shared across all interior pages, not parameterized */}
+                <div className="pointer-events-none absolute inset-0 flex h-full w-full items-center justify-end overflow-clip">
+                    <div className="jusfity-end absolute top-0 right-0 z-1 flex h-full items-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img alt="" className="block size-full max-w-none" src="/images/home/bg-glow.svg" />
+                        <img
+                            alt="Heaer Background Dots"
+                            className="block size-full max-w-none py-1"
+                            src="/images/leaf-particles.svg"
+                        />
+                    </div>
+                    <div className="absolute top-0 right-0 z-2 flex h-full items-center justify-end">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            alt="Heaer Background Leaves"
+                            className="block size-full max-w-none py-2"
+                            src="/images/Leaves.svg"
+                        />
                     </div>
                 </div>
-                <div className="absolute top-0 -right-10 size-75 max-w-none opacity-80">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute inset-0 block size-full max-w-none"
-                        src="/images/home/leaf-particles.svg"
-                    />
-                </div>
-                <div className="absolute top-[10%] right-[12%] h-17.5 w-22.5 max-w-none -rotate-[22deg]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute inset-0 block size-full max-w-none"
-                        src="/images/home/page-hero-leaves-1.svg"
-                    />
-                </div>
-                <div className="absolute top-[42%] right-[6%] h-15 w-23.75 max-w-none rotate-[62deg]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute inset-0 block size-full max-w-none"
-                        src="/images/home/page-hero-leaves-2.svg"
-                    />
-                </div>
-                <div className="absolute top-[55%] right-[2%] h-15.5 w-24.5 max-w-none -scale-x-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute inset-0 block size-full max-w-none"
-                        src="/images/home/page-hero-leaves-3.svg"
-                    />
-                </div>
-                <div className="absolute top-[62%] right-[16%] h-11.5 w-25 max-w-none -scale-x-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute inset-0 block size-full max-w-none"
-                        src="/images/home/page-hero-leaves-4.svg"
-                    />
-                </div>
-            </div>
-
-            <div className="relative container">
-                <div className="relative z-10 flex flex-col items-start gap-3.5 px-30 py-16">
+                <div className="relative z-10 flex flex-col items-start gap-3.5 py-16">
                     <p className="font-sans text-sm font-normal whitespace-pre-wrap text-[rgba(250,251,248,0.6)]">
                         {breadcrumb}
                     </p>

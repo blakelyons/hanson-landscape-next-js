@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { TransitionLink } from "@/components/transitions/transition-link";
 import type { SiteHeaderVariant } from "./site-header";
 import { ChevronToLeafIcon, SERVICES_MENU, type MenuItem } from "./chevron-to-leaf-icon";
 gsap.registerPlugin(MorphSVGPlugin);
@@ -44,9 +45,9 @@ function MenuNode({ item }: { item: MenuItem }) {
             onMouseEnter={() => hasChildren && setOpen(true)}
             onMouseLeave={() => hasChildren && setOpen(false)}
         >
-            <Link
-                href="#"
-                className="hover:text-primary group flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-[#29462f]"
+            <TransitionLink
+                href={item.href ?? "#"}
+                className="hover:text-primary group flex items-center justify-between gap-6 rounded-lg px-4 py-2 font-sans text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-forrest-deep"
             >
                 {item.label}
                 {hasChildren ? (
@@ -56,7 +57,7 @@ function MenuNode({ item }: { item: MenuItem }) {
                         className="text-muted text-xs transition-transform duration-300 ease-in-out group-hover:translate-x-1"
                     />
                 ) : null}
-            </Link>
+            </TransitionLink>
             {hasChildren && open ? <SubmenuPanel items={item.children!} /> : null}
         </div>
     );

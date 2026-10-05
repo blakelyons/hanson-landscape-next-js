@@ -6,6 +6,8 @@ export type PageTransitionType = "doors-forrest" | "iris-leaf" | "cross-fade" | 
 export const PAGE_TRANSITIONS: Record<string, PageTransitionType> = {
     "/": "cross-fade",
     "/about": "cross-fade",
+    "/portfolio": "cross-fade",
+    "/contact": "cross-fade",
 };
 
 export const DEFAULT_PAGE_TRANSITION: PageTransitionType = "cross-fade";

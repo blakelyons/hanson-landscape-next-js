@@ -3,6 +3,11 @@ import { render, screen, fireEvent, within } from "@testing-library/react";
 import { useUIStore } from "@/store/ui-store";
 import { MobileNav } from "./mobile-nav";
 
+// TransitionLink needs a mounted app router + transition provider; swap in a plain anchor.
+vi.mock("@/components/transitions/transition-link", () => ({
+    TransitionLink: ({ href, ...props }: { href: string } & React.ComponentProps<"a">) => <a href={href} {...props} />,
+}));
+
 function stubMatchMedia() {
     vi.stubGlobal(
         "matchMedia",
@@ -99,16 +104,16 @@ describe("MobileNav", () => {
         const residentialButton = within(drawer).getByRole("button", { name: "Residential Services" });
 
         expect(residentialButton).toHaveAttribute("aria-expanded", "false");
-        expect(within(drawer).queryByRole("link", { name: "Item 1" })).not.toBeInTheDocument();
+        expect(within(drawer).queryByRole("link", { name: "Landscape Design" })).not.toBeInTheDocument();
 
         fireEvent.click(residentialButton);
         expect(residentialButton).toHaveAttribute("aria-expanded", "true");
-        expect(within(drawer).getAllByRole("link", { name: "Item 1" })).toHaveLength(1);
-        expect(within(drawer).getAllByRole("link", { name: "Item 2" })).toHaveLength(1);
+        expect(within(drawer).getAllByRole("link", { name: "Landscape Design" })).toHaveLength(1);
+        expect(within(drawer).getAllByRole("link", { name: "Landscape Construction" })).toHaveLength(1);
 
         fireEvent.click(residentialButton);
         expect(residentialButton).toHaveAttribute("aria-expanded", "false");
-        expect(within(drawer).queryByRole("link", { name: "Item 1" })).not.toBeInTheDocument();
+        expect(within(drawer).queryByRole("link", { name: "Landscape Design" })).not.toBeInTheDocument();
     });
 
     it("closes the whole drawer when a leaf-level service item is clicked", () => {
@@ -120,7 +125,7 @@ describe("MobileNav", () => {
         fireEvent.click(within(drawer).getByRole("button", { name: "Residential Services" }));
         expect(useUIStore.getState().isMobileNavOpen).toBe(true);
 
-        fireEvent.click(within(drawer).getAllByRole("link", { name: "Item 1" })[0]);
+        fireEvent.click(within(drawer).getAllByRole("link", { name: "Landscape Design" })[0]);
         expect(useUIStore.getState().isMobileNavOpen).toBe(false);
     });
 });

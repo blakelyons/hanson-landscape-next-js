@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CONTACT_PATH } from "@/content/site";
 
 gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger);
 
@@ -146,7 +147,7 @@ export function ProcessSection() {
                         <p className="font-sans text-sm leading-4.5 font-semibold text-balance text-black xl:text-pretty">
                             Are You Prepared to Get Started on a Gorgeous Outdoor Area?
                         </p>
-                        <PillButton variant="forrest-light" size="sm" icon="ci:arrow-right-lg" iconSize={12}>
+                        <PillButton variant="forrest-light" size="sm" icon="ci:arrow-right-lg" iconSize={12} href={CONTACT_PATH}>
                             Get In Touch
                         </PillButton>
                     </div>

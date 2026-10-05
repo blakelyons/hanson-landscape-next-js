@@ -42,8 +42,8 @@ describe("SiteHeader", () => {
 
         expect(nav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
         expect(nav.getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
-        expect(nav.getByRole("link", { name: "Portfolio" })).toHaveAttribute("href", "#");
-        expect(nav.getByRole("link", { name: "Testimonials" })).toHaveAttribute("href", "#");
+        expect(nav.getByRole("link", { name: "Portfolio" })).toHaveAttribute("href", "/portfolio");
+        expect(nav.getByRole("link", { name: "Testimonials" })).toHaveAttribute("href", "/testimonials");
     });
 
     it("renders the solid variant with an opaque background, transparent variant without", () => {

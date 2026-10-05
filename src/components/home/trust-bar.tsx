@@ -1,6 +1,6 @@
 const BADGES = [
     { color: "var(--color-primary)", label: "CAMME Award Winner", icon: "lucide:trophy" },
-    { color: "var(--color-forrest-light)", label: "Family Owned", icon: "lucide:user-group" },
+    { color: "var(--color-forrest-light)", label: "Family Owned", icon: "lucide:users" },
     { color: "var(--color-autumn-red-light)", label: "100% Satisfaction", icon: "lucide:smile" },
 ];
 

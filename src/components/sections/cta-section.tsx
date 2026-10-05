@@ -5,6 +5,7 @@ import { PillButton } from "@/components/ui/pill-button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CONTACT_PATH, SITE_CONTACT } from "@/content/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -150,10 +151,10 @@ export function CtaSection() {
                             {`Get a free, no-obligation quote. We'll visit your property and bring your vision to life.`}
                         </h3>
                         <div className="cta-actions flex translate-y-6 flex-wrap items-center justify-center gap-4.5 pt-6 opacity-0">
-                            <PillButton variant="secondary" size="md" textClassName="text-white">
+                            <PillButton variant="secondary" size="md" textClassName="text-white" href={CONTACT_PATH}>
                                 Get a Free Quote
                             </PillButton>
-                            <PillButton variant="primary-dark" size="md" icon="lucide:phone">
+                            <PillButton variant="primary-dark" size="md" icon="lucide:phone" href={SITE_CONTACT.phoneHref}>
                                 Call Us Today
                             </PillButton>
                         </div>

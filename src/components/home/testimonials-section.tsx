@@ -28,7 +28,17 @@ export const TESTIMONIALS = [
     },
 ];
 
-function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number]) {
+export function TestimonialCard({
+    quote,
+    name,
+    location,
+    title,
+}: {
+    quote: string;
+    name: string;
+    location?: string;
+    title?: string;
+}) {
     return (
         <div className="testimonial-card border-forrest-light-2-border bg-forrest-light-2 flex w-full shrink-0 flex-col items-start gap-7.5 overflow-hidden rounded-xl border p-8">
             <div className="testimonial-card__stars flex items-center gap-0.5">
@@ -38,15 +48,18 @@ function TestimonialCard({ quote, name, location }: (typeof TESTIMONIALS)[number
                     </div>
                 ))}
             </div>
+            {title ? <h3 className="font-serif-display text-xl leading-7 text-white">{title}</h3> : null}
             <p className="testimonial-card__quote w-full font-sans text-sm leading-6 font-normal text-white italic">
                 {quote}
             </p>
             <p className="testimonial-card__name font-sans text-sm leading-none font-normal whitespace-nowrap text-white italic">
                 <span className="leading-6 font-bold italic">{name}</span>
-                <span className="leading-6">
-                    <br aria-hidden />
-                    {location}
-                </span>
+                {location ? (
+                    <span className="leading-6">
+                        <br aria-hidden />
+                        {location}
+                    </span>
+                ) : null}
             </p>
         </div>
     );

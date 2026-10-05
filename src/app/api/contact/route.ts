@@ -19,9 +19,16 @@ export async function POST(request: Request) {
 
     let body: Record<string, unknown>;
     try {
-        body = await request.json();
+        if (request.headers.get("content-type")?.includes("multipart/form-data")) {
+            // TODO: file uploads (the /contact form's "Attach File") are dropped here until the
+            // Formstack form defines a file field. Only text fields are forwarded.
+            const formData = await request.formData();
+            body = Object.fromEntries([...formData.entries()].filter(([, value]) => typeof value === "string"));
+        } else {
+            body = await request.json();
+        }
     } catch {
-        return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+        return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
     }
 
     const fields = Object.entries(body).map(([field, value]) => ({
