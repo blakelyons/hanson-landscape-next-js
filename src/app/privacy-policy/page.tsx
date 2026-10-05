@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "How Hanson Landscape collects, uses and protects information submitted through hansonlandscape.com.",
 };
 
-// DRAFT: generic policy written from what the site actually does (contact form -> Formstack).
+// DRAFT: generic policy written from what the site actually does (contact form -> email via Resend).
 // Needs client / legal review before launch. Update the date below when approved.
 const LAST_UPDATED = "October 2026";
 
@@ -49,9 +49,9 @@ export default function PrivacyPolicyPage() {
                         <h2 className="font-serif-display text-forrest text-2xl">Who we share it with</h2>
                         <p className="font-sans text-base leading-7 text-black/70">
                             We share information only with service providers that help us run the site and handle your
-                            requests, such as our form-processing provider (Formstack) and hosting and analytics
-                            providers, and only as needed to provide those services. We may also disclose information
-                            when required by law.
+                            requests, such as our email delivery provider (Resend) and hosting and analytics providers,
+                            and only as needed to provide those services. We may also disclose information when required
+                            by law.
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">

@@ -21,7 +21,7 @@ wired in later for the blog/portfolio; for now content is hardcoded.
   no theme variants defined yet.
 - **Iconify** (`@iconify/react`, runtime API) with **Lucide** as the
   default set — see `src/lib/icon-config.ts` to enable more icon sets.
-- **Formstack** contact form proxied through `src/app/api/contact/route.ts`
+- **Contact form** emailed via Resend from `src/app/api/contact/route.ts` (swappable provider)
   (keeps the API key server-side) — example client form in
   `src/components/ui/contact-form-example.tsx`.
 - **Vitest** + **React Testing Library** for unit/component tests.
@@ -32,7 +32,7 @@ wired in later for the blog/portfolio; for now content is hardcoded.
 
 ```bash
 npm install
-cp .env.example .env.local   # fill in Formstack keys, site URL
+cp .env.example .env.local   # set RESEND_API_KEY + CONTACT_TO_EMAIL, site URL
 npm run dev
 ```
 
@@ -54,7 +54,7 @@ src/
   components/
     providers/         client providers mounted in the root layout
     ui/                 shared UI components
-  lib/                 server/shared utilities (formstack.ts, icon-config.ts)
+  lib/                 server/shared utilities (contact-email.ts, icon-config.ts)
   store/               Zustand stores
   styles/              SASS partials (imported once from the root layout)
   hooks/               shared React hooks

@@ -19,6 +19,7 @@ export function ContactForm({
     showAttachment?: boolean;
 }) {
     const [status, setStatus] = useState<Status>("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -26,9 +27,13 @@ export function ContactForm({
 
         try {
             const response = await fetch("/api/contact", { method: "POST", body: new FormData(event.currentTarget) });
-            if (!response.ok) throw new Error("Submission failed");
+            if (!response.ok) {
+                const body = (await response.json().catch(() => null)) as { error?: string } | null;
+                throw new Error(body?.error ?? "Submission failed");
+            }
             setStatus("success");
-        } catch {
+        } catch (error) {
+            setErrorMessage(error instanceof Error ? error.message : "");
             setStatus("error");
         }
     }
@@ -44,6 +49,11 @@ export function ContactForm({
 
     return (
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5">
+            {/* Honeypot: hidden from people, tempting to bots. The API route drops submissions that fill it. */}
+            <div aria-hidden className="absolute -left-2499.75 h-0 w-0 overflow-hidden">
+                <label htmlFor="website">Website</label>
+                <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 <div className="grid gap-2">
                     <Label htmlFor="name">Your Name</Label>
@@ -123,7 +133,7 @@ export function ContactForm({
                 </button>
                 {status === "error" ? (
                     <p role="alert" className="font-sans text-sm text-red-700">
-                        Something went wrong. Please try again or call us.
+                        {errorMessage || "Something went wrong."} Please try again or call us.
                     </p>
                 ) : null}
             </div>

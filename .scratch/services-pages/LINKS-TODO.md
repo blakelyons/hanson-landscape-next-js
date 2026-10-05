@@ -24,6 +24,8 @@ Status: reference
 ## Still open
 - Nothing link-related.
 
-## Contact form open items (Formstack may be dropped; see decision)
-- Set FORMSTACK_API_KEY + FORMSTACK_CONTACT_FORM_ID; map field names (name, email, phone, service, message) to real Formstack field IDs in app/api/contact/route.ts
-- "Attach File" uploads are dropped by the API route until Formstack has a file field
+## Contact form (email via Resend; Formstack dropped)
+- Done: /api/contact validates, honeypot, rate limit, attachments (10 MB, pdf/jpg/png/webp/heic/doc/docx), emails CONTACT_TO_EMAIL with Reply-To = visitor
+- TODO to go live: create Resend account (use blake@blakelyons.com), set RESEND_API_KEY in .env.local / server env
+- TODO at launch: verify hansonlandscape.com in Resend, set CONTACT_FROM_EMAIL to e.g. website@hansonlandscape.com, set CONTACT_TO_EMAIL to Hanson's inbox
+- Optional: Cloudflare Turnstile if spam appears
