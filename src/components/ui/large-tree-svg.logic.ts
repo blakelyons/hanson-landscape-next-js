@@ -176,3 +176,49 @@ export function resolveWindMode(input: {
     if (input.isMobileViewport) return "scrub";
     return input.configuredMode;
 }
+
+// Mouse Wind tunables — feel knobs, all in viewBox units / degrees / viewBox units per ms.
+export const MOUSE_WIND_RADIUS = 90;
+export const MOUSE_WIND_MAX_ROTATION = 14;
+export const MOUSE_WIND_DEAD_ZONE_SPEED = 0.05;
+export const MOUSE_WIND_FULL_SPEED = 3;
+
+/** Converts a client-space point to viewBox space for an `xMidYMid meet` SVG. */
+export function clientToViewBox(
+    client: Point,
+    rect: { left: number; top: number; width: number; height: number },
+    viewBox: { width: number; height: number },
+): Point {
+    const scale = Math.min(rect.width / viewBox.width, rect.height / viewBox.height);
+    const offsetX = (rect.width - viewBox.width * scale) / 2;
+    const offsetY = (rect.height - viewBox.height * scale) / 2;
+    return {
+        x: (client.x - rect.left - offsetX) / scale,
+        y: (client.y - rect.top - offsetY) / scale,
+    };
+}
+
+/** 1 at the leaf, easing to 0 at `radius` and beyond. */
+export function windDistanceFalloff(distanceToLeaf: number, radius: number): number {
+    if (distanceToLeaf >= radius) return 0;
+    return (1 - distanceToLeaf / radius) ** 2;
+}
+
+/** 0 up to the dead-zone, then an eased (sqrt) rise to 1 at full speed. */
+export function windSpeedStrength(speed: number): number {
+    if (speed <= MOUSE_WIND_DEAD_ZONE_SPEED) return 0;
+    const t = Math.min((speed - MOUSE_WIND_DEAD_ZONE_SPEED) / (MOUSE_WIND_FULL_SPEED - MOUSE_WIND_DEAD_ZONE_SPEED), 1);
+    return Math.sqrt(t);
+}
+
+/**
+ * Rotation (degrees, positive = clockwise) a Leaf gets from the cursor passing at `speed`.
+ * Swings away from the cursor by horizontal side of the base; 0 when directly above/below.
+ */
+export function mouseWindRotation(input: { base: Point; cursor: Point; speed: number }): number {
+    const { base, cursor, speed } = input;
+    const dx = base.x - cursor.x;
+    if (dx === 0) return 0;
+    const strength = windDistanceFalloff(distance(base, cursor), MOUSE_WIND_RADIUS) * windSpeedStrength(speed);
+    return Math.sign(dx) * strength * MOUSE_WIND_MAX_ROTATION;
+}

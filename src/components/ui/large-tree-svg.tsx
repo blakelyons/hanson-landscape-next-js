@@ -57,6 +57,7 @@ export function LargeTreeSvg() {
     const leafRefs = useRef<(SVGPathElement | null)[]>([]);
     const swayGroupRefs = useRef<(SVGGElement | null)[]>([]);
     const gustGroupRefs = useRef<(SVGGElement | null)[]>([]);
+    const mouseWindGroupRefs = useRef<(SVGGElement | null)[]>([]);
 
     const swayParams = useMemo(
         () =>
@@ -68,7 +69,7 @@ export function LargeTreeSvg() {
         [],
     );
 
-    const physicsLeafIndexes = useMemo(() => {
+    const scrollGustPool = useMemo(() => {
         const indexes = LEAF_PATHS.map((_, i) => i);
         return shuffled(indexes).slice(0, Math.min(PHYSICS_LEAF_COUNT, indexes.length));
     }, []);
@@ -116,7 +117,7 @@ export function LargeTreeSvg() {
             });
 
             const fireGust = contextSafe(() => {
-                const sample = shuffled(physicsLeafIndexes).slice(0, GUST_SAMPLE_SIZE);
+                const sample = shuffled(scrollGustPool).slice(0, GUST_SAMPLE_SIZE);
                 sample.forEach((i) => {
                     const group = gustGroupRefs.current[i];
                     const base = basePointById.get(LEAF_PATHS[i].id);
@@ -218,27 +219,33 @@ export function LargeTreeSvg() {
                                     gustGroupRefs.current[i] = el;
                                 }}
                             >
-                                <path
+                                <g
                                     ref={(el) => {
-                                        dotRefs.current[i] = el;
+                                        mouseWindGroupRefs.current[i] = el;
                                     }}
-                                    className="tree-leaf-dot"
-                                    d={circlePathD(cx, cy, DOT_RADIUS)}
-                                    fill={leaf.fill}
-                                    style={{ opacity: 1 }}
-                                />
-                                <path
-                                    ref={(el) => {
-                                        leafRefs.current[i] = el;
-                                    }}
-                                    className="tree-leaf-shape"
-                                    id={leaf.id}
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d={leaf.d}
-                                    fill={leaf.fill}
-                                    style={{ opacity: 0 }}
-                                />
+                                >
+                                    <path
+                                        ref={(el) => {
+                                            dotRefs.current[i] = el;
+                                        }}
+                                        className="tree-leaf-dot"
+                                        d={circlePathD(cx, cy, DOT_RADIUS)}
+                                        fill={leaf.fill}
+                                        style={{ opacity: 1 }}
+                                    />
+                                    <path
+                                        ref={(el) => {
+                                            leafRefs.current[i] = el;
+                                        }}
+                                        className="tree-leaf-shape"
+                                        id={leaf.id}
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d={leaf.d}
+                                        fill={leaf.fill}
+                                        style={{ opacity: 0 }}
+                                    />
+                                </g>
                             </g>
                         </g>
                     );
