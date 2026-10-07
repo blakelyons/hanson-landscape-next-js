@@ -26,8 +26,8 @@ const SWAY_CYCLES = 5;
 const GUST_COOLDOWN_MS = 600;
 const GUST_SAMPLE_SIZE = 4;
 const MOUSE_WIND_KICK_DURATION = 0.15;
-const MOUSE_WIND_SETTLE_DURATION = 1.6;
-const MOUSE_WIND_SETTLE_EASE = "elastic.out(1, 0.4)";
+const MOUSE_WIND_SETTLE_DURATION = 2.4;
+const MOUSE_WIND_SETTLE_EASE = "elastic.out(1, 0.3)";
 const GROWTH_START = "top center";
 const GROWTH_END = "top top+=20%";
 
