@@ -181,10 +181,10 @@ export function resolveWindMode(input: {
 }
 
 // Mouse Wind tunables — feel knobs, all in viewBox units / degrees / viewBox units per ms.
-export const MOUSE_WIND_RADIUS = 90;
-export const MOUSE_WIND_MAX_ROTATION = 14;
+export const MOUSE_WIND_RADIUS = 110;
+export const MOUSE_WIND_MAX_ROTATION = 24;
 export const MOUSE_WIND_DEAD_ZONE_SPEED = 0.05;
-export const MOUSE_WIND_FULL_SPEED = 3;
+export const MOUSE_WIND_FULL_SPEED = 1.5;
 
 /** Converts a client-space point to viewBox space for an `xMidYMid meet` SVG. */
 export function clientToViewBox(client: Point, rect: Rect, viewBox: Size): Point {
@@ -197,10 +197,10 @@ export function clientToViewBox(client: Point, rect: Rect, viewBox: Size): Point
     };
 }
 
-/** 1 at the leaf, easing to 0 at `radius` and beyond. */
+/** 1 at the leaf, staying strong through most of the radius, then dropping to 0 at `radius` and beyond. */
 export function mouseWindDistanceFalloff(distanceToLeaf: number, radius: number): number {
     if (distanceToLeaf >= radius) return 0;
-    return (1 - distanceToLeaf / radius) ** 2;
+    return 1 - (distanceToLeaf / radius) ** 2;
 }
 
 /** 0 up to the dead-zone, then an eased (sqrt) rise to 1 at full speed. */
