@@ -7,6 +7,8 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { QuoteCard } from "@/components/ui/quote-card";
 import { PostBody } from "@/components/blog/post-body";
 import { BLOG_POSTS, BLOG_SLUG_ALIASES, formatPostDate, getAdjacentPosts, getBlogPostBySlug } from "@/content/blog";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, blogPostingJsonLd } from "@/lib/structured-data";
 
 type BlogPostPageProps = { params: Promise<{ slug: string }> };
 
@@ -18,7 +20,24 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     const { slug } = await params;
     const post = getBlogPostBySlug(slug);
     if (!post) return {};
-    return { title: post.title, description: post.excerpt };
+    const image = post.blocks.find((block) => block.type === "image");
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            type: "article",
+            publishedTime: post.date,
+            title: post.title,
+            description: post.excerpt,
+            ...(image?.type === "image"
+                ? {
+                      images: [
+                          { url: image.src, width: image.width, height: image.height, alt: image.alt || post.title },
+                      ],
+                  }
+                : {}),
+        },
+    };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -34,6 +53,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd
+                data={[
+                    breadcrumbJsonLd([
+                        { name: "Blog", path: "/blog" },
+                        { name: post.title, path: `/blog/${post.slug}` },
+                    ]),
+                    blogPostingJsonLd(post),
+                ]}
+            />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb={`Home  /  Blog  /  ${post.title}`}
@@ -45,7 +73,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <ArrowLink href="/blog" icon="lucide:arrow-left" iconSize={14} iconPosition="left" className="w-fit">
                     Back to Blog
                 </ArrowLink>
-                <PostBody blocks={post.blocks} />
+                <PostBody blocks={post.blocks} fallbackAlt={post.title} />
                 <nav
                     aria-label="More posts"
                     className="border-forrest/15 mx-auto flex w-full max-w-180 flex-col justify-between gap-4 border-y py-6 sm:flex-row"

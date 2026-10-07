@@ -6,6 +6,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { ServiceBody } from "@/components/services/service-body";
 import { SERVICE_PAGES, getServicePageBySlug } from "@/content/services";
 import { SECTOR_LABELS } from "@/content/projects";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, serviceCrumbs, serviceJsonLd } from "@/lib/structured-data";
 
 type ServicePageProps = { params: Promise<{ serviceSlug: string }> };
 
@@ -20,7 +22,15 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     const { serviceSlug } = await params;
     const page = getServicePageBySlug(serviceSlug);
     if (!page) return {};
-    return { title: page.title, description: page.description };
+    return {
+        title: page.title,
+        description: page.description,
+        openGraph: {
+            title: page.title,
+            description: page.description,
+            images: [{ url: page.image.src, alt: page.image.alt }],
+        },
+    };
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -30,6 +40,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd(serviceCrumbs(page)), serviceJsonLd(page)]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb={`Home  /  ${SECTOR_LABELS[page.sector]} Services  /  ${page.service}`}

@@ -11,11 +11,18 @@ Build passes (65 static pages). 71/71 tests pass. Redirects verified against `ne
 - [x] Site-wide metadata: replace the TODO default description in `src/app/layout.tsx`; add Open Graph / Twitter share image; confirm `robots.ts` and `sitemap.ts` output.
 - [x] Check `next.config.ts` redirects against the live-site URL list (hit each old URL in dev, expect 308 to the new page).
 
-## 2. SEO (the main reason to rebuild the site)
-- [ ] LocalBusiness structured data (JSON-LD): name, phone (630) 556-4120, email, service area Chicagoland, hours if known.
-- [ ] Per-page titles/descriptions: service pages and hubs are written; review blog post titles/descriptions (currently first sentence of the post).
-- [ ] Redirect map QA: old service URLs are kept 1:1; old blog URLs (`/{slug}`, `/yyyy/mm/{slug}`) and portfolio categories redirect. Re-test after the production build.
-- [ ] Submit the new `sitemap.xml` in Google Search Console at launch.
+## 2. SEO (code work DONE 2026-10-08; analytics/Search Console intentionally left out)
+- [x] JSON-LD: site-wide `HomeAndConstructionBusiness` + `WebSite` (layout), `Service` on service pages, `BlogPosting` on posts, `BreadcrumbList` on every interior page (`src/lib/structured-data.ts`, tested).
+- [x] Home page now has its own title/description (page split into a server `page.tsx` + client `components/home/home-page.tsx`).
+- [x] Titles/descriptions: audited; blog excerpts rewritten to end at sentence boundaries and fit 160 chars (`src/lib/seo-lengths.test.ts` keeps it that way).
+- [x] Per-page Open Graph images for services, blog posts (first image) and portfolio projects; default branded card for the rest.
+- [x] Custom 404 (noindex, no bogus canonical) with helpful links.
+- [x] Blog images without alt text fall back to the post title.
+- [x] Performance: four oversized originals (12.7 MB, 8 MB...) recompressed to ~1 MB each; consultation background now uses next/image.
+- [ ] Confirm business address and hours, then fill `BUSINESS.address` / `BUSINESS.openingHours` in `src/content/site.ts` (JSON-LD picks them up automatically; omitted until confirmed).
+- [ ] Add social profile URLs (`sameAs`) if Hanson has them.
+- [ ] LEFT OUT FOR NOW: Google Analytics / Tag Manager, Search Console verification + sitemap submission, Google Business Profile, Core Web Vitals check on the live URL (run PageSpeed Insights after deploy).
+- [ ] Redirect map QA re-test after deploy (covered by `src/lib/redirects.test.ts` in code).
 
 ## 3. Content needing client / Blake input
 - [ ] Real photos for the 6 service pages, 2 hubs and blog cards (currently placeholder project photos, `src/content/services.ts`).

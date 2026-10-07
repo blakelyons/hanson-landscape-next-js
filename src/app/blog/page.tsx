@@ -5,6 +5,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PostCard } from "@/components/blog/post-card";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BLOG_POSTS } from "@/content/blog";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Blog",
@@ -14,6 +16,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Blog", path: "/blog" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Blog"

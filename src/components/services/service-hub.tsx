@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
@@ -11,6 +13,7 @@ export function ServiceHub({ hub }: { hub: SectorHub }) {
 
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={breadcrumbJsonLd([{ name: hub.title, path: servicePath(hub.slug) }])} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb={`Home  /  ${hub.title}`}

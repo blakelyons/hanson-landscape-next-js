@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { BlogBlock } from "@/content/blog";
 
 // `html` fields are first-party migrated content (see src/content/blog.ts header).
-export function PostBody({ blocks }: { blocks: BlogBlock[] }) {
+export function PostBody({ blocks, fallbackAlt = "" }: { blocks: BlogBlock[]; fallbackAlt?: string }) {
     return (
         <div className="mx-auto flex w-full max-w-180 flex-col gap-6">
             {blocks.map((block, index) => {
@@ -42,7 +42,7 @@ export function PostBody({ blocks }: { blocks: BlogBlock[] }) {
                             <Image
                                 key={index}
                                 src={block.src}
-                                alt={block.alt}
+                                alt={block.alt || fallbackAlt}
                                 width={block.width}
                                 height={block.height}
                                 sizes="(min-width: 768px) 720px, 100vw"

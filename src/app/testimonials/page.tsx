@@ -5,6 +5,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { TestimonialCard } from "@/components/home/testimonials-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { CLIENT_TESTIMONIALS } from "@/content/testimonials";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Testimonials",
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
 export default function TestimonialsPage() {
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Testimonials", path: "/testimonials" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Testimonials"

@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
 import { PillButton } from "@/components/ui/pill-button";
 import { SITE_CONTACT } from "@/content/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Careers",
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
 export default function CareersPage() {
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Careers", path: "/careers" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Careers"

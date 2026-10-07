@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -5,6 +6,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SERVICE_OPTIONS } from "@/content/services";
 import { SITE_CONTACT } from "@/content/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Contact Us",
@@ -26,6 +29,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Contact"
@@ -36,12 +40,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
             <section className="relative flex w-full items-start overflow-clip py-10 md:py-20">
                 <div aria-hidden className="pointer-events-none absolute inset-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                        alt=""
-                        className="absolute size-full max-w-none object-cover"
-                        src="/images/home/consultation-bg.jpg"
-                    />
+                    <Image alt="" fill sizes="100vw" className="object-cover" src="/images/home/consultation-bg.jpg" />
                     <div className="from-neutral-25 absolute inset-0 bg-linear-to-b to-[rgba(242,242,242,0)] to-[50.481%]" />
                 </div>
                 <div className="relative container flex justify-center lg:justify-end">

@@ -1,0 +1,44 @@
+"use client";
+import { useEffect, useState } from "react";
+import { SiteHeader } from "@/components/layout/site-header";
+import { HeroSection } from "@/components/home/hero-section";
+import { peekHomeIntroFlag, markHomeIntroPlayed } from "@/lib/home-intro";
+import { TrustBar } from "@/components/home/trust-bar";
+import { ServicesSection } from "@/components/home/services-section";
+import { AboutSection } from "@/components/home/about-section";
+import { TestimonialsSection } from "@/components/home/testimonials-section";
+import { PortfolioBentoGrid } from "@/components/portfolio-bento-grid/portfolio-bento-grid";
+import { CtaSection } from "@/components/sections/cta-section";
+import { WhyChooseUsSection } from "@/components/sections/why-choose-us-section";
+import { ProcessSection } from "@/components/home/process-section";
+import { ConsultationSection } from "@/components/home/consultation-section";
+import { SiteFooter } from "@/components/layout/site-footer";
+
+export function HomePage() {
+    // Read once per mount (pure — safe under Strict Mode's dev double-invoke);
+    // the actual "mark as played" mutation happens in the effect below, so it
+    // persists across client-side navigation and resets on a hard reload.
+    const [playIntro] = useState(peekHomeIntroFlag);
+    useEffect(() => {
+        if (playIntro) markHomeIntroPlayed();
+    }, [playIntro]);
+
+    return (
+        <div className="flex w-full flex-col bg-white">
+            <div className="relative">
+                <SiteHeader variant="transparent" playIntro={playIntro} />
+                <HeroSection playIntro={playIntro} />
+            </div>
+            <TrustBar />
+            <ServicesSection />
+            <AboutSection />
+            <TestimonialsSection />
+            <PortfolioBentoGrid />
+            <CtaSection />
+            <WhyChooseUsSection />
+            <ProcessSection />
+            <ConsultationSection />
+            <SiteFooter />
+        </div>
+    );
+}

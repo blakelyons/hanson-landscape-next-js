@@ -6,6 +6,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { PortfolioGrid } from "@/components/portfolio/portfolio-grid";
 import { CtaSection } from "@/components/sections/cta-section";
 import { PROJECTS } from "@/content/projects";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Portfolio",
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Portfolio", path: "/portfolio" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Portfolio"

@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
 import { SITE_CONTACT } from "@/content/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Privacy Policy",
@@ -16,6 +18,7 @@ const LAST_UPDATED = "October 2026";
 export default function PrivacyPolicyPage() {
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd data={[breadcrumbJsonLd([{ name: "Privacy Policy", path: "/privacy-policy" }])]} />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb="Home  /  Privacy Policy"

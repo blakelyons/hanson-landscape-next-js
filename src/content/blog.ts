@@ -24,7 +24,8 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "project-armor-up",
         title: "PROJECT ARMOR UP",
         date: "2017-09-13",
-        excerpt: "Our results of the 2013 “PROJECT ARMOR UP”",
+        excerpt:
+            "Hanson Landscape and Global Power & Construction hosted a 2013 fundraiser that restored and outfitted armored vehicles for the Kane County SWAT team.",
         blocks: [
             {
                 type: "paragraph",
@@ -84,7 +85,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "How to Choose a Landscaper",
         date: "2014-01-24",
         excerpt:
-            "It is no question that having an appealing landscaping design adds value to any property as well as draws attention. Whether it is a landscape design project such as…",
+            "It is no question that having an appealing landscaping design adds value to any property as well as draws attention.",
         blocks: [
             {
                 type: "heading",
@@ -143,7 +144,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Winter Storms",
         date: "2014-01-08",
         excerpt:
-            "Needless to say, it has been a crazy winter for Hanson Landscape and the entire state of Illinois as we look forward in 2014. Our plows and salters have been running…",
+            "Needless to say, it has been a crazy winter for Hanson Landscape and the entire state of Illinois as we look forward in 2014.",
         blocks: [
             {
                 type: "paragraph",
@@ -160,7 +161,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Hanson Landscape Named Landscaper of the Year Finalist",
         date: "2013-12-04",
         excerpt:
-            "Total Landscape Care named Dustin Hanson, owner of Hanson Landscape in Big Rock, Illinois, a 2014 Landscaper of the Year finalist. Presented by Case Construction…",
+            "Total Landscape Care named Dustin Hanson, owner of Hanson Landscape in Big Rock, Illinois, a 2014 Landscaper of the Year finalist.",
         blocks: [
             {
                 type: "paragraph",
@@ -196,8 +197,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "included-snow-removal-services",
         title: "What is Included in Snow Removal Services?",
         date: "2013-11-13",
-        excerpt:
-            "One of the main services that Hanson Landscape offers is snow removal and ice management. While it is obvious through the title of those services what types of…",
+        excerpt: "One of the main services that Hanson Landscape offers is snow removal and ice management.",
         blocks: [
             {
                 type: "paragraph",
@@ -218,7 +218,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Chicago Snowfall Numbers",
         date: "2013-10-14",
         excerpt:
-            "To go along with our recent postings for snow removal this winter, it would be good to give some insight towards the typical Chicago snowfall numbers. According to…",
+            "To go along with our recent postings for snow removal this winter, it would be good to give some insight towards the typical Chicago snowfall numbers.",
         blocks: [
             {
                 type: "paragraph",
@@ -255,7 +255,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "September Landscape Checklist",
         date: "2013-09-20",
         excerpt:
-            "Although it may be a bit late, here is the September landscape checklist brought to you by Autumn Tree. As usual, September can be an unpredictable month in terms of…",
+            "Although it may be a bit late, here is the September landscape checklist brought to you by Autumn Tree.",
         blocks: [
             {
                 type: "paragraph",
@@ -283,7 +283,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Is Landscaping Worth the Investment?",
         date: "2013-09-16",
         excerpt:
-            "When thinking about whether or not landscaping is worth the investment, one thing to certainly think about is the work you put into making the inside of your home…",
+            "When thinking about whether or not landscaping is worth the investment, one thing to certainly think about is the work you put into making the inside of…",
         blocks: [
             {
                 type: "paragraph",
@@ -311,7 +311,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Landscaper of the Year",
         date: "2013-09-04",
         excerpt:
-            "Hanson Landscape has recently received a nomination as a finalist for Landscaper of the Year through Total Landscape Care Magazine. The program recognizes the best…",
+            "Hanson Landscape has recently received a nomination as a finalist for Landscaper of the Year through Total Landscape Care Magazine.",
         blocks: [
             {
                 type: "paragraph",
@@ -328,7 +328,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Hanson Landscape on LinkedIn",
         date: "2013-08-26",
         excerpt:
-            "Hanson Landscape, as well as our general contractor company Global Power and Construction, and our biohazard recovery company Global Priority Cleanup have all joined…",
+            "Hanson Landscape, as well as our general contractor company Global Power and Construction, and our biohazard recovery company Global Priority Cleanup…",
         blocks: [
             {
                 type: "paragraph",
@@ -349,7 +349,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Snow Removal Services",
         date: "2013-08-06",
         excerpt:
-            "Although it is only August, it is a perfect time to begin considering snow removal services and needs. It is always a good idea to keep ahead of schedule for the…",
+            "Although it is only August, it is a perfect time to begin considering snow removal services and needs.",
         blocks: [
             {
                 type: "paragraph",
@@ -375,8 +375,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "snow-removal",
         title: "Snow Removal",
         date: "2013-08-06",
-        excerpt:
-            "Although it is only August, it is a perfect time to begin considering snow removal needs. It is always a good idea to keep ahead of schedule for the brutal winters of…",
+        excerpt: "Although it is only August, it is a perfect time to begin considering snow removal needs.",
         blocks: [
             {
                 type: "paragraph",
@@ -428,8 +427,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "grubs-and-their-effects",
         title: "Grubs and Their Effects",
         date: "2013-07-30",
-        excerpt:
-            "Grubs are an unpleasant occurrence every year for anybody with grass on their property. Grubs are larvae from beetles that usually lay eggs twice a year in the…",
+        excerpt: "Grubs are an unpleasant occurrence every year for anybody with grass on their property.",
         blocks: [
             {
                 type: "paragraph",
@@ -459,8 +457,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "customer-service-and-taking-the-extra-steps",
         title: "Customer Service and Taking the Extra Steps",
         date: "2013-07-26",
-        excerpt:
-            "Here at Hanson Landscape, we are continually striving to go above and beyond customer expectations. Our customers are the most important feature of our business and…",
+        excerpt: "Here at Hanson Landscape, we are continually striving to go above and beyond customer expectations.",
         blocks: [
             {
                 type: "paragraph",
@@ -490,7 +487,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Lawn Mowing Tips for Dry Weather",
         date: "2013-07-15",
         excerpt:
-            "Seeing as there is a fairly dry and hot week coming up in our service region, it is only fitting that we share tips for lawn mowing tips for dry weather such as when…",
+            "Seeing as there is a fairly dry and hot week coming up in our service region, it is only fitting that we share tips for lawn mowing tips for dry weather…",
         blocks: [
             {
                 type: "paragraph",
@@ -517,8 +514,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "around-the-office",
         title: "Around the Office",
         date: "2013-07-09",
-        excerpt:
-            "Many people don’t know that our office is located in a wooded area in Big Rock, IL. Since we are in this area, we just wanted to share a few pictures of what we see…",
+        excerpt: "Many people don’t know that our office is located in a wooded area in Big Rock, IL.",
         blocks: [
             {
                 type: "paragraph",
@@ -593,7 +589,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Portfolio of Work",
         date: "2013-06-25",
         excerpt:
-            "In case you haven’t checked out our portfolio yet, now is a good chance to get a glimpse at some of the work we have performed. Since Hanson provides many types of…",
+            "In case you haven’t checked out our portfolio yet, now is a good chance to get a glimpse at some of the work we have performed.",
         blocks: [
             {
                 type: "paragraph",
@@ -708,8 +704,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "project-armor-up-2013",
         title: "Project Armor Up 2013",
         date: "2013-06-19",
-        excerpt:
-            "Below is a description of Project Armor Up 2013 given through the Kane County SWAT Team. Our affiliate company, Global Priority Cleanup, is helping to host the…",
+        excerpt: "Below is a description of Project Armor Up 2013 given through the Kane County SWAT Team.",
         blocks: [
             {
                 type: "paragraph",
@@ -750,7 +745,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Retaining Walls",
         date: "2013-06-17",
         excerpt:
-            "Retaining walls are a great way to not only resist the pressure of soil or rocks, but they also add visual appeal to any landscaping scene. Retaining walls are…",
+            "Retaining walls are a great way to not only resist the pressure of soil or rocks, but they also add visual appeal to any landscaping scene.",
         blocks: [
             {
                 type: "paragraph",
@@ -792,7 +787,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Landscaping Maintenance-What is Included?",
         date: "2013-06-12",
         excerpt:
-            "The term “landscaping maintenance” can lead one to believe it includes a number of different services, but is a fairly vague term. Here at Hanson Landscape, our…",
+            "The term “landscaping maintenance” can lead one to believe it includes a number of different services, but is a fairly vague term.",
         blocks: [
             {
                 type: "paragraph",
@@ -816,8 +811,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "the-uses-and-benefits-of-brick-pavers",
         title: "The Uses and Benefits of Brick Pavers",
         date: "2013-06-04",
-        excerpt:
-            "Many individuals have either walked on or seen brick pavers at some point in their lives. However, not many people understand the benefits other than the visual…",
+        excerpt: "Many individuals have either walked on or seen brick pavers at some point in their lives.",
         blocks: [
             {
                 type: "paragraph",
@@ -845,7 +839,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "June Landscape Checklist",
         date: "2013-05-28",
         excerpt:
-            "Now that we are just a few days away from June, it is time for me to provide you with the June landscaping checklist in order to stay on schedule. This month’s…",
+            "Now that we are just a few days away from June, it is time for me to provide you with the June landscaping checklist in order to stay on schedule.",
         blocks: [
             {
                 type: "paragraph",
@@ -872,8 +866,7 @@ export const BLOG_POSTS: BlogPost[] = [
         slug: "landscaping-ideas-to-consider",
         title: "Landscaping Ideas to Consider",
         date: "2013-05-21",
-        excerpt:
-            "Seeing as spring is in full swing, it is time to fulfill your overall landscaping needs. However, many people are bored with the look of their yard, garden or other…",
+        excerpt: "Seeing as spring is in full swing, it is time to fulfill your overall landscaping needs.",
         blocks: [
             {
                 type: "paragraph",
@@ -900,7 +893,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Hanson Receives Unilock Century Club Award",
         date: "2013-05-14",
         excerpt:
-            "In recent news around the office, Hanson Landscape has just received their Unilock Century Club Award in recognition of outstanding sales performance for 2012. This…",
+            "In recent news around the office, Hanson Landscape has just received their Unilock Century Club Award in recognition of outstanding sales performance for…",
         blocks: [
             {
                 type: "paragraph",
@@ -920,7 +913,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Mulch – Why and How Much?",
         date: "2013-05-09",
         excerpt:
-            "As you already know, mulch is simply material placed over a soil surface for multiple reasons. But what are these reasons? Why pay money just to have something cover…",
+            "As you already know, mulch is simply material placed over a soil surface for multiple reasons. But what are these reasons?",
         blocks: [
             {
                 type: "paragraph",
@@ -941,7 +934,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "General Information on Lawn Mowing",
         date: "2013-05-06",
         excerpt:
-            "Many individuals that maintain their own yards and landscaping are not truly aware of the correct timing and length at which to mow their grass. This information is…",
+            "Many individuals that maintain their own yards and landscaping are not truly aware of the correct timing and length at which to mow their grass.",
         blocks: [
             {
                 type: "paragraph",
@@ -970,7 +963,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "Nightscapes: what are they?",
         date: "2013-05-02",
         excerpt:
-            "Nightscapes are an effective way to pick out details around your home or business and obscure other details through the use of light. Nightscapes essentially make a…",
+            "Nightscapes are an effective way to pick out details around your home or business and obscure other details through the use of light.",
         blocks: [
             {
                 type: "paragraph",
@@ -1001,7 +994,7 @@ export const BLOG_POSTS: BlogPost[] = [
         title: "May Landscape Checklist",
         date: "2013-04-30",
         excerpt:
-            "Spring is officially here in the Midwestern area, and it is important to keep up to date on all of your landscaping needs. Whether it be around the house or at work,…",
+            "Spring is officially here in the Midwestern area, and it is important to keep up to date on all of your landscaping needs.",
         blocks: [
             {
                 type: "paragraph",

@@ -46,6 +46,28 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                     </p>
                 </div>
             </div>
+            <div className="absolute top-0 left-0 z-0 h-full w-full">
+                <svg width="1418" height="402" viewBox="0 0 1418 402" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_982_32)">
+                        <ellipse cx="515" cy="402" rx="583" ry="490" fill="#3A8545" fill-opacity="0.35" />
+                    </g>
+                    <defs>
+                        <filter
+                            id="filter0_f_982_32"
+                            x="-388"
+                            y="-408"
+                            width="1806"
+                            height="1620"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                        >
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                            <feGaussianBlur stdDeviation="160" result="effect1_foregroundBlur_982_32" />
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
         </section>
     );
 }

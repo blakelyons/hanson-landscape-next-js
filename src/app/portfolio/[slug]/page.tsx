@@ -12,6 +12,8 @@ import { ProjectCard } from "@/components/portfolio/project-card";
 import { CtaSection } from "@/components/sections/cta-section";
 import { PROJECTS, SECTOR_LABELS, getProjectBySlug } from "@/content/projects";
 import { getRelatedProjects } from "@/lib/portfolio";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
@@ -23,7 +25,15 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     const { slug } = await params;
     const project = getProjectBySlug(slug);
     if (!project) return {};
-    return { title: project.title, description: project.summary };
+    return {
+        title: project.title,
+        description: project.summary,
+        openGraph: {
+            title: project.title,
+            description: project.summary,
+            images: [{ url: project.cover.src, alt: project.cover.alt }],
+        },
+    };
 }
 
 const FACT_VALUE_CLASS = "font-serif-display text-2xl leading-8";
@@ -37,6 +47,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
     return (
         <div className="flex w-full flex-col bg-white">
+            <JsonLd
+                data={[
+                    breadcrumbJsonLd([
+                        { name: "Portfolio", path: "/portfolio" },
+                        { name: project.title, path: `/portfolio/${project.slug}` },
+                    ]),
+                ]}
+            />
             <SiteHeader variant="solid" />
             <PageHero
                 breadcrumb={`Home  /  Portfolio  /  ${project.title}`}
@@ -46,7 +64,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             />
 
             <section className="container flex flex-col gap-12 py-12 lg:py-16">
-                <ArrowLink href="/portfolio" icon="lucide:arrow-left" iconSize={14} iconPosition="left" className="w-fit">
+                <ArrowLink
+                    href="/portfolio"
+                    icon="lucide:arrow-left"
+                    iconSize={14}
+                    iconPosition="left"
+                    className="w-fit"
+                >
                     Back to Portfolio
                 </ArrowLink>
 

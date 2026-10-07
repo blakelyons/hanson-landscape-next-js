@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Serif_Display, JetBrains_Mono, DM_Mono } from "next/font/google";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { AppProviders } from "@/components/providers/app-providers";
 import "./globals.css";
 import "@/styles/main.scss";
@@ -74,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             suppressHydrationWarning
         >
             <body className="flex min-h-full flex-col">
+                <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
                 <AppProviders>{children}</AppProviders>
             </body>
         </html>

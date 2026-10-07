@@ -125,7 +125,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         title: "Commercial Landscape Enhancement",
         tagline: "Seasonal color, fresh plantings and curb appeal that keep your property manicured all year.",
         description:
-            "Commercial landscape enhancement across Chicagoland: mulch, seasonal color, plantings, irrigation, aeration and the Commercial Pots Program from Hanson Landscape.",
+            "Commercial landscape enhancement in Chicagoland: mulch, seasonal color, plantings, irrigation, aeration and the Commercial Pots Program from Hanson Landscape.",
         image: { src: "/images/home/project-photo-4.jpg", alt: "Commercial landscape enhancement by Hanson Landscape" },
         introHeading: "Keep your property looking its best, every season",
         intro: "Our highly trained technicians refresh your grounds as the seasons change, and we shape one-of-a-kind outdoor spaces your employees, clients and residents will enjoy.",
