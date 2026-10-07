@@ -25,6 +25,9 @@ const DOT_RADIUS = 3;
 const SWAY_CYCLES = 5;
 const GUST_COOLDOWN_MS = 600;
 const GUST_SAMPLE_SIZE = 4;
+const MOUSE_WIND_KICK_DURATION = 0.15;
+const MOUSE_WIND_SETTLE_DURATION = 1.6;
+const MOUSE_WIND_SETTLE_EASE = "elastic.out(1, 0.4)";
 const GROWTH_START = "top center";
 const GROWTH_END = "top top+=20%";
 
@@ -178,16 +181,21 @@ export function LargeTreeSvg() {
                         if (!group || !base) return;
                         const rotation = mouseWindRotation({ base, cursor: point, speed });
                         if (rotation === 0) return;
-                        // Placeholder return-to-rest (yoyo); ticket 04 swaps in the inertia + elastic settle.
-                        gsap.to(group, {
-                            svgOrigin: `${base.x} ${base.y}`,
-                            rotation,
-                            duration: 0.2,
-                            ease: "power2.out",
-                            yoyo: true,
-                            repeat: 1,
-                            overwrite: "auto",
-                        });
+                        // Kick toward the target, then wobble back to rest. Killing the old tweens
+                        // first means a Leaf hit mid-swing re-kicks smoothly from where it is now.
+                        gsap.killTweensOf(group);
+                        gsap.timeline()
+                            .to(group, {
+                                svgOrigin: `${base.x} ${base.y}`,
+                                rotation,
+                                duration: MOUSE_WIND_KICK_DURATION,
+                                ease: "power2.out",
+                            })
+                            .to(group, {
+                                rotation: 0,
+                                duration: MOUSE_WIND_SETTLE_DURATION,
+                                ease: MOUSE_WIND_SETTLE_EASE,
+                            });
                     });
                 };
 
