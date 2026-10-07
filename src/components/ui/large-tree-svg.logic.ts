@@ -1,5 +1,8 @@
 export type Point = { x: number; y: number };
 
+export type Size = { width: number; height: number };
+export type Rect = Size & { left: number; top: number };
+
 type BoundingBox = { minX: number; minY: number; maxX: number; maxY: number };
 
 const CURVE_SAMPLES = 16;
@@ -184,11 +187,7 @@ export const MOUSE_WIND_DEAD_ZONE_SPEED = 0.05;
 export const MOUSE_WIND_FULL_SPEED = 3;
 
 /** Converts a client-space point to viewBox space for an `xMidYMid meet` SVG. */
-export function clientToViewBox(
-    client: Point,
-    rect: { left: number; top: number; width: number; height: number },
-    viewBox: { width: number; height: number },
-): Point {
+export function clientToViewBox(client: Point, rect: Rect, viewBox: Size): Point {
     const scale = Math.min(rect.width / viewBox.width, rect.height / viewBox.height);
     const offsetX = (rect.width - viewBox.width * scale) / 2;
     const offsetY = (rect.height - viewBox.height * scale) / 2;
@@ -199,13 +198,13 @@ export function clientToViewBox(
 }
 
 /** 1 at the leaf, easing to 0 at `radius` and beyond. */
-export function windDistanceFalloff(distanceToLeaf: number, radius: number): number {
+export function mouseWindDistanceFalloff(distanceToLeaf: number, radius: number): number {
     if (distanceToLeaf >= radius) return 0;
     return (1 - distanceToLeaf / radius) ** 2;
 }
 
 /** 0 up to the dead-zone, then an eased (sqrt) rise to 1 at full speed. */
-export function windSpeedStrength(speed: number): number {
+export function mouseWindSpeedStrength(speed: number): number {
     if (speed <= MOUSE_WIND_DEAD_ZONE_SPEED) return 0;
     const t = Math.min((speed - MOUSE_WIND_DEAD_ZONE_SPEED) / (MOUSE_WIND_FULL_SPEED - MOUSE_WIND_DEAD_ZONE_SPEED), 1);
     return Math.sqrt(t);
@@ -219,6 +218,7 @@ export function mouseWindRotation(input: { base: Point; cursor: Point; speed: nu
     const { base, cursor, speed } = input;
     const dx = base.x - cursor.x;
     if (dx === 0) return 0;
-    const strength = windDistanceFalloff(distance(base, cursor), MOUSE_WIND_RADIUS) * windSpeedStrength(speed);
+    const strength =
+        mouseWindDistanceFalloff(distance(base, cursor), MOUSE_WIND_RADIUS) * mouseWindSpeedStrength(speed);
     return Math.sign(dx) * strength * MOUSE_WIND_MAX_ROTATION;
 }

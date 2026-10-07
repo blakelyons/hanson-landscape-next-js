@@ -8,8 +8,8 @@ import {
     MOUSE_WIND_RADIUS,
     mouseWindRotation,
     resolveWindMode,
-    windDistanceFalloff,
-    windSpeedStrength,
+    mouseWindDistanceFalloff,
+    mouseWindSpeedStrength,
 } from "./large-tree-svg.logic";
 
 describe("computeLeafBasePoint", () => {
@@ -95,43 +95,45 @@ describe("clientToViewBox", () => {
     });
 });
 
-describe("windDistanceFalloff", () => {
+describe("mouseWindDistanceFalloff", () => {
     it("is 1 at the leaf and 0 at or beyond the radius", () => {
-        expect(windDistanceFalloff(0, MOUSE_WIND_RADIUS)).toBe(1);
-        expect(windDistanceFalloff(MOUSE_WIND_RADIUS, MOUSE_WIND_RADIUS)).toBe(0);
-        expect(windDistanceFalloff(MOUSE_WIND_RADIUS + 50, MOUSE_WIND_RADIUS)).toBe(0);
+        expect(mouseWindDistanceFalloff(0, MOUSE_WIND_RADIUS)).toBe(1);
+        expect(mouseWindDistanceFalloff(MOUSE_WIND_RADIUS, MOUSE_WIND_RADIUS)).toBe(0);
+        expect(mouseWindDistanceFalloff(MOUSE_WIND_RADIUS + 50, MOUSE_WIND_RADIUS)).toBe(0);
     });
 
     it("decreases monotonically with distance", () => {
-        const near = windDistanceFalloff(20, MOUSE_WIND_RADIUS);
-        const far = windDistanceFalloff(60, MOUSE_WIND_RADIUS);
+        const near = mouseWindDistanceFalloff(20, MOUSE_WIND_RADIUS);
+        const far = mouseWindDistanceFalloff(60, MOUSE_WIND_RADIUS);
 
         expect(near).toBeGreaterThan(far);
         expect(far).toBeGreaterThan(0);
     });
 });
 
-describe("windSpeedStrength", () => {
+describe("mouseWindSpeedStrength", () => {
     it("is 0 at or below the dead-zone speed", () => {
-        expect(windSpeedStrength(0)).toBe(0);
-        expect(windSpeedStrength(MOUSE_WIND_DEAD_ZONE_SPEED)).toBe(0);
+        expect(mouseWindSpeedStrength(0)).toBe(0);
+        expect(mouseWindSpeedStrength(MOUSE_WIND_DEAD_ZONE_SPEED)).toBe(0);
     });
 
     it("reaches 1 at full speed and never exceeds it", () => {
-        expect(windSpeedStrength(MOUSE_WIND_FULL_SPEED)).toBe(1);
-        expect(windSpeedStrength(MOUSE_WIND_FULL_SPEED * 10)).toBe(1);
+        expect(mouseWindSpeedStrength(MOUSE_WIND_FULL_SPEED)).toBe(1);
+        expect(mouseWindSpeedStrength(MOUSE_WIND_FULL_SPEED * 10)).toBe(1);
     });
 
     it("is eased: a speed halfway through the range already gives more than half strength", () => {
         const mid = (MOUSE_WIND_DEAD_ZONE_SPEED + MOUSE_WIND_FULL_SPEED) / 2;
 
-        expect(windSpeedStrength(mid)).toBeGreaterThan(0.5);
-        expect(windSpeedStrength(mid)).toBeLessThan(1);
+        expect(mouseWindSpeedStrength(mid)).toBeGreaterThan(0.5);
+        expect(mouseWindSpeedStrength(mid)).toBeLessThan(1);
     });
 });
 
 describe("mouseWindRotation", () => {
     const base = { x: 400, y: 400 };
+    const rotationWithCursorAt = (dx: number, speed = MOUSE_WIND_FULL_SPEED) =>
+        mouseWindRotation({ base, cursor: { x: base.x + dx, y: base.y }, speed });
 
     it("is 0 for a leaf outside the radius", () => {
         const cursor = { x: base.x - MOUSE_WIND_RADIUS - 1, y: base.y };
@@ -146,8 +148,8 @@ describe("mouseWindRotation", () => {
     });
 
     it("swings away from the cursor: positive when the cursor is left of the base, negative when right", () => {
-        const left = mouseWindRotation({ base, cursor: { x: base.x - 10, y: base.y }, speed: MOUSE_WIND_FULL_SPEED });
-        const right = mouseWindRotation({ base, cursor: { x: base.x + 10, y: base.y }, speed: MOUSE_WIND_FULL_SPEED });
+        const left = rotationWithCursorAt(-10);
+        const right = rotationWithCursorAt(10);
 
         expect(left).toBeGreaterThan(0);
         expect(right).toBeLessThan(0);
@@ -165,8 +167,8 @@ describe("mouseWindRotation", () => {
     });
 
     it("moves a nearer leaf more than a farther one at the same speed", () => {
-        const near = mouseWindRotation({ base, cursor: { x: base.x - 10, y: base.y }, speed: MOUSE_WIND_FULL_SPEED });
-        const far = mouseWindRotation({ base, cursor: { x: base.x - 60, y: base.y }, speed: MOUSE_WIND_FULL_SPEED });
+        const near = rotationWithCursorAt(-10);
+        const far = rotationWithCursorAt(-60);
 
         expect(near).toBeGreaterThan(far);
     });

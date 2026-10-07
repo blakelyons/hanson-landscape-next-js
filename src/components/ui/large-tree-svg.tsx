@@ -16,7 +16,7 @@ gsap.registerPlugin(MorphSVGPlugin, Physics2DPlugin, PhysicsPropsPlugin, Inertia
 
 // Tunable knobs for this experiment — swap the feel without touching the wiring below.
 const WIND_MODE: WindMode = "hybrid";
-const PHYSICS_LEAF_COUNT = 20;
+const SCROLL_GUST_POOL_SIZE = 20;
 
 const MOBILE_VIEWPORT_QUERY = "(max-width: 1023px)";
 const DOT_RADIUS = 3;
@@ -71,7 +71,7 @@ export function LargeTreeSvg() {
 
     const scrollGustPool = useMemo(() => {
         const indexes = LEAF_PATHS.map((_, i) => i);
-        return shuffled(indexes).slice(0, Math.min(PHYSICS_LEAF_COUNT, indexes.length));
+        return shuffled(indexes).slice(0, Math.min(SCROLL_GUST_POOL_SIZE, indexes.length));
     }, []);
 
     const { contextSafe } = useGSAP({ scope: containerRef });
