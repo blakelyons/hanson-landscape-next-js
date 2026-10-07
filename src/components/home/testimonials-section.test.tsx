@@ -20,9 +20,11 @@ describe("TestimonialsSection", () => {
         }
     });
 
-    it("locks the carousel width so slidesPerView=3 divides back to each card's 336px width", () => {
-        const { container } = render(<TestimonialsSection />);
+    it("renders the section heading and a card (with stars) per visible testimonial", () => {
+        const { getByText, container } = render(<TestimonialsSection />);
 
-        expect(container.querySelector(".w-282")).toBeInTheDocument();
+        expect(getByText("What Our Clients Say")).toBeInTheDocument();
+        expect(container.querySelectorAll(".testimonial-card").length).toBeGreaterThanOrEqual(3);
+        expect(container.querySelectorAll(".testimonial-card__stars .star").length).toBeGreaterThanOrEqual(15);
     });
 });

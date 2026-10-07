@@ -3,6 +3,7 @@ import { servicePath } from "@/content/services";
 import { PartnerLogos } from "@/components/ui/partner-logos";
 import Link from "next/link";
 import { SITE_CONTACT } from "@/content/site";
+import { Icon } from "@iconify/react";
 
 const MENU_COLUMNS: { heading: string; href?: string; items: FooterItem[] }[] = [
     {
@@ -61,7 +62,7 @@ export function SiteFooter() {
                                 Our Mission
                             </p>
                             <p className="w-full min-w-full font-sans text-lg leading-7 font-normal text-[rgba(255,255,255,0.5)]">
-                                {`Dolore sit laboris veniam aliquip. Cupidatat officia veniam adipisicing. Nisi aliqua duis ut nostrud aliquip sit. `}
+                                {`Outdoor spaces deserve the same care as the homes and buildings they surround. We design, build and maintain landscapes across Chicagoland, with hands-on attention from first sketch to year-round care.`}
                             </p>
                         </div>
 
@@ -76,13 +77,18 @@ export function SiteFooter() {
                                 />
                             ))}
                             <div className="flex w-full flex-col items-start gap-4">
-                                <p className="font-mono-label w-full text-base font-normal text-[rgba(255,255,255,0.35)]">
+                                <p className="font-mono-label w-full text-base font-normal text-white uppercase">
                                     Contact
                                 </p>
                                 <div className="flex w-full flex-col items-start gap-4">
                                     <div className="w-full font-sans text-base leading-none font-normal whitespace-pre-wrap text-[rgba(255,255,255,0.5)]">
                                         <p className="mb-0 leading-4">
-                                            <Link href="tel:6305564120">(630) 556-4120</Link>
+                                            <Link href="tel:6305564120" className="flex items-center gap-2">
+                                                <span className="icon">
+                                                    <Icon icon="lucide:phone" className="text-white" />
+                                                </span>
+                                                <span className="text-white">(630) 556-4120</span>
+                                            </Link>
                                         </p>
                                         <p className="mb-0 leading-4">&#8203;</p>
                                         <p className="text-forrest mb-0 leading-4">

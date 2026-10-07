@@ -15,7 +15,7 @@ export function FooterColumn({
 }) {
     return (
         <div className={className}>
-            <p className="font-mono-label w-full text-base font-normal text-nowrap text-[rgba(255,255,255,0.35)]">
+            <p className="font-mono-label w-full text-base font-normal text-nowrap text-white">
                 {headingHref ? (
                     <Link href={headingHref} className="hover:text-primary transition-colors">
                         {heading}

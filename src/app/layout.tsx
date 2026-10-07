@@ -40,11 +40,16 @@ export const metadata: Metadata = {
         default: "Hanson Landscape",
         template: "%s | Hanson Landscape",
     },
-    description: "TODO: replace with the real Hanson Landscape site description.",
+    description:
+        "Award-winning landscape design, construction and year-round care for residential and commercial properties across Chicagoland. Call (630) 556-4120 for a free quote.",
+    // Each page's own canonical URL, resolved against metadataBase.
+    alternates: { canonical: "./" },
     openGraph: {
         type: "website",
         siteName: "Hanson Landscape",
+        locale: "en_US",
     },
+    twitter: { card: "summary_large_image" },
     manifest: "/site.webmanifest",
     icons: {
         icon: [

@@ -55,19 +55,70 @@ export function portfolioImage(slug: string, file: string): string {
 }
 
 // --- Placeholder content ---------------------------------------------------
-// Photos/text below are stand-ins until real Project info is collected. Swap a
-// Project's `cover`/`gallery` for `portfolioImage(slug, "cover.jpg")` etc. once
-// its folder exists.
+// Project names, locations and text below are stand-ins until real Project info is
+// collected. Photos are REAL (carried over from the legacy site's gallery pages in
+// public/images/portfolio/legacy/{category}/) but not tied to a specific property: the
+// old site only had category galleries (residential, commercial, maintenance, lighting,
+// water features), so each placeholder Project borrows photos from its matching gallery.
+// Swap a Project's `cover`/`gallery` for `portfolioImage(slug, "cover.jpg")` etc. once
+// its own folder exists.
 
-const PHOTOS = [
-    "/images/home/project-photo-1.jpg",
-    "/images/home/project-photo-2.jpg",
-    "/images/home/project-photo-3.jpg",
-    "/images/home/project-photo-4.jpg",
-];
+const LEGACY_PHOTO_FILES = {
+    residential: [
+        "residential3.jpg",
+        "residential_2.jpg",
+        "residential.jpg",
+        "51.jpg",
+        "31.jpg",
+        "21.jpg",
+        "41.jpg",
+        "61.jpg",
+        "11.jpg",
+    ],
+    commercial: [
+        "img_2232.jpg",
+        "2-1.jpg",
+        "construction1.jpg",
+        "construction2.jpg",
+        "commerciallandscape.jpg",
+        "commerciallandscape2.jpg",
+        "download-6.jpg",
+        "download-8.jpg",
+        "download-7.jpg",
+        "download-1.jpg",
+    ],
+    maintenance: [
+        "logan-chicago-and-arlington-013.jpg",
+        "logan-chicago-and-arlington-006.jpg",
+        "droid-pics-222.jpg",
+        "droid-pics-223.jpg",
+        "logan-chicago-and-arlington-015.jpg",
+        "logan-chicago-and-arlington-005.jpg",
+    ],
+    lighting: [
+        "dsc_1105.jpg",
+        "nightscape-11.jpg",
+        "hansonlandscape_.jpg",
+        "nightscape-21.jpg",
+        "hansonlandscape_3.jpg",
+        "nightscape-3.jpg",
+        "hansonlandscape_2.jpg",
+    ],
+    "water-features": ["9.jpg", "7.jpg", "3.jpg", "6.jpg", "5.jpg", "2.jpg", "1.jpg", "4.jpg"],
+} as const;
 
-function placeholderImages(title: string, offset: number) {
-    const pick = (i: number) => PHOTOS[(offset + i) % PHOTOS.length];
+type LegacyGallery = keyof typeof LEGACY_PHOTO_FILES;
+
+function galleryFor(project: { sector: Sector; services: Service[]; projectTypes: ProjectType[] }): LegacyGallery {
+    if (project.projectTypes.includes("Water Features")) return "water-features";
+    if (project.projectTypes.includes("Lighting & Nightscapes")) return "lighting";
+    if (project.services.includes("Landscape Maintenance")) return "maintenance";
+    return project.sector === "commercial" ? "commercial" : "residential";
+}
+
+function placeholderImages(title: string, offset: number, gallery: LegacyGallery) {
+    const files = LEGACY_PHOTO_FILES[gallery];
+    const pick = (i: number) => `/images/portfolio/legacy/${gallery}/${files[(offset + i) % files.length]}`;
     return {
         cover: { src: pick(0), alt: `${title} — featured photo` },
         gallery: [1, 2, 3, 4].map((i) => ({ src: pick(i), alt: `${title} — photo ${i}` })),
@@ -90,7 +141,7 @@ function seed(project: ProjectSeed, imageOffset: number): Project {
         challenge: PLACEHOLDER_CHALLENGE,
         solution: PLACEHOLDER_SOLUTION,
         ...project,
-        ...placeholderImages(project.title, imageOffset),
+        ...placeholderImages(project.title, imageOffset, galleryFor(project)),
     };
 }
 
@@ -104,10 +155,11 @@ export const PROJECTS: Project[] = [
             services: ["Landscape Design", "Landscape Construction"],
             projectTypes: ["Patio & Hardscape", "Outdoor Living"],
             summary: "A pergola-covered outdoor kitchen and stone patio framed by layered perennial beds.",
+            // Real client quote from the legacy testimonials page (placeholder project, real words).
             testimonial: {
-                quote: "Hanson Landscape transformed our backyard into an oasis. The attention to detail was incredible.",
-                name: "Sarah M.",
-                location: "Naperville, IL",
+                quote: "They installed beautiful flowers, an entry sidewalk and patio for our home.",
+                name: "Mark Weinhold",
+                location: "",
             },
         },
         0,

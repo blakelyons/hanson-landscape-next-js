@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import { Carousel } from "./carousel";
 
 vi.mock("@/components/ui/icon", () => ({
@@ -67,18 +67,32 @@ describe("Carousel", () => {
     });
 
     it("wraps from the last slide back to the first when loop is true", () => {
-        const { container, getByLabelText } = render(
-            <Carousel slides={[slide("a"), slide("b"), slide("c")]} slidesPerView={1} loop />,
-        );
-        const activeSlideText = () => container.querySelector(".swiper-slide-active")?.textContent;
-        expect(activeSlideText()).toBe("a");
+        // jsdom has no layout, so Swiper sees a 0px-wide container and treats it as locked;
+        // give it real dimensions, and complete each transition manually (jsdom never
+        // fires `transitionend`, and Swiper ignores clicks while one is animating).
+        const sizes = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(300);
+        const offsets = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(300);
 
-        const next = getByLabelText("Next slide");
-        fireEvent.click(next);
-        expect(activeSlideText()).toBe("b");
-        fireEvent.click(next);
-        expect(activeSlideText()).toBe("c");
-        fireEvent.click(next);
-        expect(activeSlideText()).toBe("a");
+        try {
+            const { container, getByLabelText } = render(
+                <Carousel slides={[slide("a"), slide("b"), slide("c")]} slidesPerView={1} loop />,
+            );
+            const activeSlideText = () => container.querySelector(".swiper-slide-active")?.textContent;
+            const finishTransition = () =>
+                act(() => {
+                    container.querySelector(".swiper-wrapper")?.dispatchEvent(new Event("transitionend"));
+                });
+            expect(activeSlideText()).toBe("a");
+
+            const next = getByLabelText("Next slide");
+            for (const expected of ["b", "c", "a"]) {
+                fireEvent.click(next);
+                finishTransition();
+                expect(activeSlideText()).toBe(expected);
+            }
+        } finally {
+            sizes.mockRestore();
+            offsets.mockRestore();
+        }
     });
 });

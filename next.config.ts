@@ -4,7 +4,8 @@ import { BLOG_POSTS, BLOG_SLUG_ALIASES } from "./src/content/blog";
 // Legacy WordPress posts lived at /{slug}/ (and /yyyy/mm/{slug}/).
 const legacyBlogRedirects = [...BLOG_POSTS.map((post) => post.slug), ...Object.keys(BLOG_SLUG_ALIASES)].map((slug) => ({
     source: `/${slug}`,
-    destination: `/blog/${slug}`,
+    // Duplicates go straight to the canonical post (no double redirect).
+    destination: `/blog/${BLOG_SLUG_ALIASES[slug] ?? slug}`,
     permanent: true,
 }));
 
