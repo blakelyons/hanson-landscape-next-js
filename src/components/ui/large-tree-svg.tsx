@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { LEAF_PATHS, TRUNK_PATH } from "./tree-leaf-paths";
 import { LEAF_BASE_POINTS } from "./leaf-base-points";
-import { resolveWindMode, type WindMode } from "./large-tree-svg.logic";
+import { clientToViewBox, mouseWindRotation, resolveWindMode, type Point, type WindMode } from "./large-tree-svg.logic";
 
 gsap.registerPlugin(MorphSVGPlugin, Physics2DPlugin, PhysicsPropsPlugin, InertiaPlugin, ScrollTrigger);
 
@@ -18,6 +18,8 @@ gsap.registerPlugin(MorphSVGPlugin, Physics2DPlugin, PhysicsPropsPlugin, Inertia
 const WIND_MODE: WindMode = "hybrid";
 const SCROLL_GUST_POOL_SIZE = 20;
 
+const VIEWBOX = { width: 852, height: 979 };
+const HOVER_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
 const MOBILE_VIEWPORT_QUERY = "(max-width: 1023px)";
 const DOT_RADIUS = 3;
 const SWAY_CYCLES = 5;
@@ -149,6 +151,50 @@ export function LargeTreeSvg() {
                 });
             });
 
+            // Mouse Wind: starts once Growth completes, and only for hovering pointers
+            // (mouse/trackpad) — touch drags would fight page scroll.
+            let removeMouseWind: (() => void) | null = null;
+            const startMouseWind = contextSafe(() => {
+                if (removeMouseWind || !window.matchMedia(HOVER_POINTER_QUERY).matches) return;
+
+                let last: { point: Point; time: number } | null = null;
+                const onPointerMove = (event: PointerEvent) => {
+                    const point = clientToViewBox(
+                        { x: event.clientX, y: event.clientY },
+                        container.getBoundingClientRect(),
+                        VIEWBOX,
+                    );
+                    const previous = last;
+                    last = { point, time: event.timeStamp };
+                    if (!previous || event.timeStamp <= previous.time) return;
+
+                    const speed =
+                        Math.hypot(point.x - previous.point.x, point.y - previous.point.y) /
+                        (event.timeStamp - previous.time);
+
+                    LEAF_PATHS.forEach((leafPath, i) => {
+                        const group = mouseWindGroupRefs.current[i];
+                        const base = basePointById.get(leafPath.id);
+                        if (!group || !base) return;
+                        const rotation = mouseWindRotation({ base, cursor: point, speed });
+                        if (rotation === 0) return;
+                        // Placeholder return-to-rest (yoyo); ticket 04 swaps in the inertia + elastic settle.
+                        gsap.to(group, {
+                            svgOrigin: `${base.x} ${base.y}`,
+                            rotation,
+                            duration: 0.2,
+                            ease: "power2.out",
+                            yoyo: true,
+                            repeat: 1,
+                            overwrite: "auto",
+                        });
+                    });
+                };
+
+                window.addEventListener("pointermove", onPointerMove, { passive: true });
+                removeMouseWind = () => window.removeEventListener("pointermove", onPointerMove);
+            });
+
             const growthTimeline = gsap.timeline({ paused: true });
             const order = shuffled(LEAF_PATHS.map((_, i) => i));
 
@@ -170,13 +216,14 @@ export function LargeTreeSvg() {
 
             // Growth is scrubbed the first time through; once it completes, lock it
             // (kill the trigger) so scrolling back up afterward never un-grows it.
-            ScrollTrigger.create({
+            const growthTrigger = ScrollTrigger.create({
                 trigger: container,
                 start: GROWTH_START,
                 end: GROWTH_END,
                 scrub: true,
                 animation: growthTimeline,
                 onLeave: (self) => {
+                    startMouseWind();
                     // allowAnimation=true: killing the trigger must not also kill (and
                     // revert) growthTimeline — it needs to stay frozen fully-grown.
                     self.kill(false, true);
@@ -187,6 +234,11 @@ export function LargeTreeSvg() {
             // growth (not gated behind growth completing).
             startSway();
             startGusts();
+
+            // Page loaded already scrolled past the Tree: Growth is complete without onLeave firing.
+            if (growthTrigger.progress === 1) startMouseWind();
+
+            return () => removeMouseWind?.();
         },
         { scope: containerRef },
     );
@@ -197,7 +249,7 @@ export function LargeTreeSvg() {
             preserveAspectRatio="xMidYMid meet"
             overflow="visible"
             className="block h-auto w-[min(100vw,852px)]"
-            viewBox="0 0 852 979"
+            viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
