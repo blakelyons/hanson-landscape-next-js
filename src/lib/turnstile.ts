@@ -8,7 +8,9 @@ const VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 export async function verifyTurnstile(token: unknown, ip: string): Promise<boolean> {
     const secret = process.env.TURNSTILE_SECRET_KEY;
     if (!secret) {
-        console.warn("[turnstile] TURNSTILE_SECRET_KEY not set; skipping verification");
+        console.warn(
+            `[turnstile] TURNSTILE_SECRET_KEY not set; skipping verification (token present: ${typeof token === "string" && token.length > 0})`,
+        );
         return true;
     }
     if (typeof token !== "string" || !token) return false;

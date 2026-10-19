@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { InputText, Label, Textarea } from "@/components/ui/form-elements";
 import { Icon } from "@/components/ui/icon";
-import { TurnstileWidget, resetTurnstile } from "@/components/forms/turnstile-widget";
+import { TurnstileWidget } from "@/components/forms/turnstile-widget";
 
 // Design fields are cream-filled with no border; `!` beats FIELD_BASE's defaults.
 const FIELD_CLASS = "bg-light-green-cta! border-transparent! text-sm";
@@ -13,13 +13,19 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function CareersForm() {
     const [status, setStatus] = useState<Status>("idle");
     const [errorMessage, setErrorMessage] = useState("");
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    // Tokens are single-use: bumping the key remounts the widget for a fresh one after a failed submit.
+    const [turnstileKey, setTurnstileKey] = useState(0);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
         setStatus("submitting");
 
         try {
-            const response = await fetch("/api/careers", { method: "POST", body: new FormData(event.currentTarget) });
+            const formData = new FormData(event.currentTarget);
+            if (turnstileToken) formData.set("cf-turnstile-response", turnstileToken);
+            const response = await fetch("/api/careers", { method: "POST", body: formData });
             if (!response.ok) {
                 const body = (await response.json().catch(() => null)) as { error?: string } | null;
                 throw new Error(body?.error ?? "Submission failed");
@@ -28,7 +34,8 @@ export function CareersForm() {
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : "");
             setStatus("error");
-            resetTurnstile();
+            setTurnstileToken(null);
+            setTurnstileKey((key) => key + 1);
         }
     }
 
@@ -107,7 +114,14 @@ export function CareersForm() {
                 />
                 <p className="font-sans text-xs text-black/50">PDF, DOC or DOCX, 10 MB max.</p>
             </div>
-            <TurnstileWidget />
+            <TurnstileWidget
+                key={turnstileKey}
+                onToken={setTurnstileToken}
+                onError={(code) => {
+                    setErrorMessage(`Verification could not load (code ${code}). Please refresh the page`);
+                    setStatus("error");
+                }}
+            />
             <div className="flex flex-wrap items-center gap-4">
                 <button
                     type="submit"
