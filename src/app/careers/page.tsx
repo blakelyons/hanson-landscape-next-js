@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
-import { PillButton } from "@/components/ui/pill-button";
+import { CareersForm } from "@/components/careers/careers-form";
 import { SITE_CONTACT } from "@/content/site";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "Careers",
-    description: "Join the Hanson Landscape team. Call or email your resume to ask about employment opportunities.",
+    description:
+        "Join the Hanson Landscape team. Apply online with your resume or call our office to ask about employment opportunities.",
 };
 
 export default function CareersPage() {
@@ -30,40 +31,20 @@ export default function CareersPage() {
                     </h2>
                     <p className="font-sans text-lg leading-7.5 text-black/70">
                         We don&apos;t post open positions online. If you&apos;d like to work with our design,
-                        construction, maintenance or snow management crews, call our main office or email us your resume
-                        and tell us what you&apos;re looking for.
+                        construction, maintenance or snow management crews, send us an application below and tell us
+                        what you&apos;re looking for.
                     </p>
                 </div>
                 <div className="border-forrest/15 mx-auto flex w-full max-w-180 flex-col gap-6 rounded-xl border bg-[#f6f7f4] p-8">
-                    <h3 className="font-serif-display text-forrest text-2xl">How to apply</h3>
+                    <h3 className="font-serif-display text-forrest text-2xl">Apply online</h3>
+                    <CareersForm />
                     <p className="font-sans text-base leading-6 text-black/70">
-                        Contact our main office at{" "}
+                        Prefer to talk first? Call our main office at{" "}
                         <a href={SITE_CONTACT.phoneHref} className="text-forrest font-medium">
                             {SITE_CONTACT.phone}
-                        </a>{" "}
-                        or email your resume to{" "}
-                        <a
-                            href={`${SITE_CONTACT.emailHref}?subject=Employment%20Inquiry`}
-                            className="text-forrest font-medium"
-                        >
-                            {SITE_CONTACT.email}
                         </a>
                         .
                     </p>
-                    <div className="flex flex-wrap gap-4">
-                        <PillButton variant="secondary" size="md" icon="lucide:phone" href={SITE_CONTACT.phoneHref}>
-                            Call Us
-                        </PillButton>
-                        <PillButton
-                            variant="outline-secondary"
-                            size="md"
-                            icon="lucide:mail"
-                            textClassName="text-forrest"
-                            href={`${SITE_CONTACT.emailHref}?subject=Employment%20Inquiry`}
-                        >
-                            Email Your Resume
-                        </PillButton>
-                    </div>
                 </div>
             </section>
             <SiteFooter />

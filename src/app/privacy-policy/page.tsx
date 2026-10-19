@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "How Hanson Landscape collects, uses and protects information submitted through hansonlandscape.com.",
 };
 
-// DRAFT: generic policy written from what the site actually does (contact form -> email via Resend).
+// DRAFT: generic policy written from what the site actually does (contact and careers forms -> email via Resend, Cloudflare Turnstile bot check).
 // Needs client / legal review before launch. Update the date below when approved.
 const LAST_UPDATED = "October 2026";
 
@@ -38,7 +38,9 @@ export default function PrivacyPolicyPage() {
                             When you use our contact or quote form, we collect the details you give us: your name, email
                             address, phone number, the service you are interested in, your message, and any file you
                             choose to attach. We may also receive standard technical information from your browser, such
-                            as IP address, device and pages visited.
+                            as IP address, device and pages visited. If you submit a job application, we also collect
+                            the details you give us and any resume you attach; applications are emailed to Hanson
+                            Landscape and used only for hiring.
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">
@@ -52,9 +54,9 @@ export default function PrivacyPolicyPage() {
                         <h2 className="font-serif-display text-forrest text-2xl">Who we share it with</h2>
                         <p className="font-sans text-base leading-7 text-black/70">
                             We share information only with service providers that help us run the site and handle your
-                            requests, such as our email delivery provider (Resend) and hosting and analytics providers,
-                            and only as needed to provide those services. We may also disclose information when required
-                            by law.
+                            requests, such as our email delivery provider (Resend), our bot-protection provider
+                            (Cloudflare Turnstile) and hosting and analytics providers, and only as needed to provide
+                            those services. We may also disclose information when required by law.
                         </p>
                     </div>
                     <div className="flex flex-col gap-3">

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PillButton } from "@/components/ui/pill-button";
 import { PortfolioFilterBar } from "@/components/portfolio/portfolio-filter-bar";
 import { ProjectCard } from "@/components/portfolio/project-card";
@@ -24,12 +25,32 @@ function syncUrl(filters: PortfolioFilters) {
 }
 
 export function PortfolioGrid({ projects }: { projects: Project[] }) {
+    const rootRef = useRef<HTMLDivElement>(null);
     const searchParams = useSearchParams();
     const [filters, setFilters] = useState<PortfolioFilters>(() => ({
         sector: parseSector(searchParams.get("sector")),
         query: searchParams.get("q") ?? "",
     }));
     const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+    // The pinned CTA section below measures its start position once. Load More and
+    // filtering change this grid's height afterwards, which leaves that cached position
+    // too high so the CTA slides up over the grid. Re-measure whenever the height changes.
+    useEffect(() => {
+        const root = rootRef.current;
+        if (!root || typeof ResizeObserver === "undefined") return;
+
+        let frame = 0;
+        const observer = new ResizeObserver(() => {
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+        });
+        observer.observe(root);
+        return () => {
+            cancelAnimationFrame(frame);
+            observer.disconnect();
+        };
+    }, []);
 
     const updateFilters = (next: PortfolioFilters) => {
         setFilters(next);
@@ -42,7 +63,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
     const hasMore = visible.length < matches.length;
 
     return (
-        <div className="flex flex-col gap-12">
+        <div ref={rootRef} className="flex flex-col gap-12">
             <PortfolioFilterBar
                 sector={filters.sector}
                 query={filters.query}

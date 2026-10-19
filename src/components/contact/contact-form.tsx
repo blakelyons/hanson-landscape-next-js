@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { InputText, Label, Select, Textarea, type SelectOption } from "@/components/ui/form-elements";
 import { Icon } from "@/components/ui/icon";
+import { TurnstileWidget, resetTurnstile } from "@/components/forms/turnstile-widget";
 
 // Design fields are cream-filled with no border; `!` beats FIELD_BASE's defaults.
 const FIELD_CLASS = "bg-light-green-cta! border-transparent! text-sm";
@@ -35,6 +36,7 @@ export function ContactForm({
         } catch (error) {
             setErrorMessage(error instanceof Error ? error.message : "");
             setStatus("error");
+            resetTurnstile();
         }
     }
 
@@ -122,6 +124,7 @@ export function ContactForm({
                     className={`${FIELD_CLASS} min-h-28`}
                 />
             </div>
+            <TurnstileWidget />
             <div className="flex flex-wrap items-center gap-4">
                 <button
                     type="submit"

@@ -50,7 +50,7 @@ export function isAllowedAttachment(file: { name: string; size: number }): strin
     return null;
 }
 
-const escapeHtml = (text: string) =>
+export const escapeHtml = (text: string) =>
     text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 export function buildContactEmail(submission: ContactSubmission) {
