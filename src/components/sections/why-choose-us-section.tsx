@@ -6,12 +6,12 @@ const FEATURES = [
     {
         icon: "lucide:trees",
         title: "Expert Landscaping",
-        description: "Enim do contur adipisicing consecrer magna anim proident in velit commodo.",
+        description: "Award-winning design and craftsmanship from a team with 20+ years of experience across Chicagoland.",
     },
     {
         icon: "lucide:shield-check",
         title: "Reliable Support",
-        description: "Enim do contur adipisicing consecrer magna anim proident in velit commodo.",
+        description: "One dependable crew from first sketch to year-round care, with prompt answers whenever you call.",
     },
 ];
 
@@ -40,7 +40,7 @@ export function WhyChooseUsSection() {
                                 </div>
                                 <div className="block">
                                     <p className="w-full font-sans text-lg leading-7 font-normal whitespace-pre-wrap text-neutral-600 xl:max-w-104">
-                                        {`Qui id id labor occaecat Lorem labore. Et consectetur oaecat nisi  voluptate cupidatat ipsum laborum eiusmod sit.`}
+                                        {`From the first walkthrough to the final cleanup, we handle design, construction and maintenance in-house, so your property gets the same care at every step.`}
                                     </p>
                                 </div>
                             </div>
