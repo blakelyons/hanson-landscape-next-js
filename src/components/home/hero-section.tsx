@@ -47,53 +47,22 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                     ".hero-carousel-wrapper",
                     ".hero-carousel-actions",
                     ".hero-carousel-actions .btn",
-                    ".scroll-cue",
                 ],
                 { x: 0, y: 0, opacity: 1 },
             );
             gsap.set(".hero-title-highlight", { backgroundPositionX: "0%" });
             gsap.set(".green-plant-svg", { opacity: 1, display: "block", scale: 1 });
-            gsap.to("#mouse-icon .mouse-scroll-button", {
-                y: 4,
-                duration: 2,
-                ease: "power1.out",
-                repeat: -1,
-                opacity: 0.1,
-            });
             return;
         }
 
         const t = 1.8; // timeline duration
         const staggerDelay = t * 0.1;
 
-        const scrollTimeilne = gsap.timeline({ defaults: { duration: 2, ease: "power1.out" } });
         // Delayed so the hero's own entrance starts right as the header
         // finishes its slide-down (see site-header.tsx's HEADER_SLIDE_DURATION).
         const heroMainTimeline = gsap.timeline({ defaults: { duration: t, ease: "power3.out" } });
 
         gsap.set(".green-plant-svg", { opacity: 0, display: "block", scale: 0, transformOrigin: "bottom center" });
-
-        scrollTimeilne
-            .to(
-                ".scroll-cue",
-                {
-                    opacity: 1,
-                    duration: t,
-                    ease: "power3.out",
-                },
-                "<",
-            )
-            .to(
-                "#mouse-icon .mouse-scroll-button",
-                {
-                    y: 4,
-                    duration: 2,
-                    ease: "power1.out",
-                    repeat: -1,
-                    opacity: 0.1,
-                },
-                "<",
-            );
 
         const heroStatsItems = gsap.utils.toArray(".hero-stats-item");
 
@@ -183,8 +152,7 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                     stagger: staggerDelay,
                 },
                 "<-=1.2",
-            )
-            .add(scrollTimeilne, ">+=1.5");
+            );
     }, [playIntro]);
 
     return (
@@ -443,31 +411,6 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                     </div>
                 </div>
 
-                {/* Floating scroll cue — legitimate small overlay, unrelated to content column's x-axis */}
-                <div className="scroll-cue absolute -bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center justify-center gap-2 opacity-0 lg:flex">
-                    <div className="mouse text-muted flex items-center justify-center">
-                        <svg
-                            id="mouse-icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1.8em"
-                            height="1.8em"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                className="mouse-scroll-button"
-                                fill="currentColor"
-                                d="M11.25 10a.75.75 0 0 0 1.5 0V7a.75.75 0 0 0-1.5 0z"
-                            />
-                            <path
-                                fill="currentColor"
-                                fillRule="evenodd"
-                                d="M18.75 9.074a6.75 6.75 0 0 0-13.5 0v5.852a6.75 6.75 0 0 0 13.5 0zm-5.931-5.186a5.25 5.25 0 0 1 4.431 5.186v5.852a5.25 5.25 0 0 1-10.5 0V9.074a5.25 5.25 0 0 1 6.069-5.186"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </div>
-                </div>
             </div>
         </section>
     );
