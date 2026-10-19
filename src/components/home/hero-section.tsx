@@ -410,7 +410,6 @@ export function HeroSection({ playIntro = true }: { playIntro?: boolean }) {
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     );

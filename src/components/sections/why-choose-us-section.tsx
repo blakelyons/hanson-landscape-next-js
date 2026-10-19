@@ -6,7 +6,8 @@ const FEATURES = [
     {
         icon: "lucide:trees",
         title: "Expert Landscaping",
-        description: "Award-winning design and craftsmanship from a team with 20+ years of experience across Chicagoland.",
+        description:
+            "Award-winning design and craftsmanship from a team with 20+ years of experience across Chicagoland.",
     },
     {
         icon: "lucide:shield-check",

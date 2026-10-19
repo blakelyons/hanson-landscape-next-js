@@ -125,9 +125,7 @@ function Select({
     triggerClassName = "",
 }: SelectProps) {
     const [open, setOpen] = useState(false);
-    const [internalValue, setInternalValue] = useState(
-        defaultValue ?? (placeholder ? "" : (options[0]?.value ?? "")),
-    );
+    const [internalValue, setInternalValue] = useState(defaultValue ?? (placeholder ? "" : (options[0]?.value ?? "")));
     const selectedValue = value !== undefined ? value : internalValue;
     const selectedOption = options.find((option) => option.value === selectedValue);
 
@@ -220,7 +218,7 @@ function Checkbox({ label, id, className = "", ...props }: OptionProps) {
                 <input
                     id={id}
                     type="checkbox"
-                    className="peer size-5 shrink-0 cursor-pointer appearance-none rounded-md border border-gray-300 bg-white transition-colors checked:border-primary checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50"
+                    className="peer checked:border-primary checked:bg-primary focus-visible:outline-primary size-5 shrink-0 cursor-pointer appearance-none rounded-md border border-gray-300 bg-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     {...props}
                 />
                 <Icon
@@ -240,10 +238,10 @@ function Radio({ label, id, className = "", ...props }: OptionProps) {
                 <input
                     id={id}
                     type="radio"
-                    className="peer size-5 shrink-0 cursor-pointer appearance-none rounded-full border border-gray-300 bg-white transition-colors checked:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50"
+                    className="peer checked:border-primary focus-visible:outline-primary size-5 shrink-0 cursor-pointer appearance-none rounded-full border border-gray-300 bg-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     {...props}
                 />
-                <span className="pointer-events-none absolute size-2.5 scale-0 rounded-full bg-primary transition-transform peer-checked:scale-100" />
+                <span className="bg-primary pointer-events-none absolute size-2.5 scale-0 rounded-full transition-transform peer-checked:scale-100" />
             </span>
             {label ? <span className="text-sm text-gray-700">{label}</span> : null}
         </label>

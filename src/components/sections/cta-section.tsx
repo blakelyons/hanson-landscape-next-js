@@ -154,7 +154,12 @@ export function CtaSection() {
                             <PillButton variant="secondary" size="md" textClassName="text-white" href={CONTACT_PATH}>
                                 Get a Free Quote
                             </PillButton>
-                            <PillButton variant="primary-dark" size="md" icon="lucide:phone" href={SITE_CONTACT.phoneHref}>
+                            <PillButton
+                                variant="primary-dark"
+                                size="md"
+                                icon="lucide:phone"
+                                href={SITE_CONTACT.phoneHref}
+                            >
                                 Call Us Today
                             </PillButton>
                         </div>

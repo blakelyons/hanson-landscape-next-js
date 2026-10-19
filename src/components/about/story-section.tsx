@@ -28,7 +28,7 @@ export function StorySection() {
                             EST. 2001
                         </p>
                     </div>
-                    <h2 className="font-serif-display text-3xl leading-tight font-normal text-[#1a2e1a] sm:text-4xl lg:text-5xl lg:leading-12 not-italic">
+                    <h2 className="font-serif-display text-3xl leading-tight font-normal text-[#1a2e1a] not-italic sm:text-4xl lg:text-5xl lg:leading-12">
                         How a small crew became Chicagoland&apos;s trusted name in outdoor living.
                     </h2>
                     <p className="font-sans text-base leading-6.75 font-normal text-[#6b7b6b]">
