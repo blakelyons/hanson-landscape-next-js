@@ -10,6 +10,9 @@ const legacyBlogRedirects = [...BLOG_POSTS.map((post) => post.slug), ...Object.k
 }));
 
 const nextConfig: NextConfig = {
+    // deploy/build-swap.sh builds into an inactive slot (.next-a / .next-b) while the live
+    // server keeps reading the other one. Unset everywhere else (dev, build:local).
+    distDir: process.env.NEXT_DIST_DIR || ".next",
     // Legacy WordPress URLs kept alive for SEO — see .scratch/PAGES-CHECKLIST.md
     async redirects() {
         return [
