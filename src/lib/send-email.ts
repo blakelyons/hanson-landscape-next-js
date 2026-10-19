@@ -1,6 +1,7 @@
 export type EmailAttachment = { filename: string; content: string };
 
 export type OutgoingEmail = {
+    /** One address, or several separated by commas. */
     to: string;
     from: string;
     replyTo: string;
@@ -29,7 +30,10 @@ export async function sendEmail({ attachments = [], ...email }: OutgoingEmail) {
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
             from: email.from,
-            to: [email.to],
+            to: email.to
+                .split(",")
+                .map((address) => address.trim())
+                .filter(Boolean),
             reply_to: email.replyTo,
             subject: email.subject,
             text: email.text,
