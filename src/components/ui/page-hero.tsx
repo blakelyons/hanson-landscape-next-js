@@ -7,7 +7,7 @@ type PageHeroProps = {
 
 export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHeroProps) {
     return (
-        <section className="relative w-full overflow-clip bg-[#0e2113]">
+        <section className="page-hero relative flex min-h-90 w-full items-center overflow-clip bg-[#0e2113]">
             <div className="relative container">
                 {/* Decorative background — fixed treatment shared across all interior pages, not parameterized */}
                 <div className="pointer-events-none absolute inset-0 flex h-full w-full items-center justify-end overflow-clip opacity-60 md:opacity-100">
@@ -38,10 +38,10 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                             {eyebrow}
                         </p>
                     </div>
-                    <h1 className="font-serif-display text-4xl leading-tight font-normal text-[#fafbf8] sm:text-5xl lg:text-6xl lg:leading-15.5 not-italic">
+                    <h1 className="font-serif-display text-4xl leading-tight font-normal text-[#fafbf8] not-italic sm:text-5xl lg:text-6xl lg:leading-15.5">
                         {heading}
                     </h1>
-                    <p className="max-w-160 font-sans text-base leading-7 sm:text-lg sm:leading-7.5 font-normal text-[rgba(250,251,248,0.78)]">
+                    <p className="max-w-160 font-sans text-base leading-7 font-normal text-[rgba(250,251,248,0.78)] sm:text-lg sm:leading-7.5">
                         {description}
                     </p>
                 </div>
