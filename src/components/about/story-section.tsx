@@ -9,8 +9,8 @@ const STATS = [
 
 export function StorySection() {
     return (
-        <section className="w-full bg-white py-20">
-            <div className="container grid grid-cols-2 items-center gap-20">
+        <section className="w-full bg-white py-12 lg:py-20">
+            <div className="container grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
                 <div className="min-w-0 overflow-hidden rounded-2xl">
                     <Image
                         alt="Hanson Landscape crew working on a stone garden path"
@@ -28,7 +28,7 @@ export function StorySection() {
                             EST. 2001
                         </p>
                     </div>
-                    <h2 className="font-serif-display text-5xl leading-12 font-normal text-[#1a2e1a] not-italic">
+                    <h2 className="font-serif-display text-3xl leading-tight font-normal text-[#1a2e1a] sm:text-4xl lg:text-5xl lg:leading-12 not-italic">
                         How a small crew became Chicagoland&apos;s trusted name in outdoor living.
                     </h2>
                     <p className="font-sans text-base leading-6.75 font-normal text-[#6b7b6b]">

@@ -278,7 +278,7 @@ export function SiteHeader({
                         id="logo"
                         isScrolled={isScrolled || pathname !== "/"}
                         effectiveVariant={effectiveVariant}
-                        className="header-item-hidden hidden opacity-0 lg:block"
+                        className="header-item-hidden block opacity-0 max-lg:h-20 max-lg:w-26.25"
                         size={isScrolled || pathname !== "/" ? "md" : "lg"}
                     />
                     <nav

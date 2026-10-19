@@ -24,13 +24,18 @@ function SubmenuPanel({ items }: { items: MenuItem[] }) {
     const ref = useDropdownEnter<HTMLDivElement>();
 
     return (
-        <div
-            ref={ref}
-            className="absolute -top-1.5 left-full ml-1 flex min-w-50 flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
-        >
-            {items.map((item) => (
-                <MenuNode key={item.label} item={item} />
-            ))}
+        // Gap to the parent item is padding on this wrapper (not a margin on the
+        // panel), so it stays inside the hoverable box and the cursor never
+        // crosses dead space that would fire the parent's onMouseLeave.
+        <div className="absolute -top-1.5 left-full pl-1">
+            <div
+                ref={ref}
+                className="flex min-w-50 flex-col gap-1 rounded-xl border border-[rgba(250,251,248,0.14)] bg-[#1a2e1a] p-2 shadow-[0px_8px_24px_rgba(0,0,0,0.35)]"
+            >
+                {items.map((item) => (
+                    <MenuNode key={item.label} item={item} />
+                ))}
+            </div>
         </div>
     );
 }

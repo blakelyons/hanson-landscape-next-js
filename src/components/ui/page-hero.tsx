@@ -10,7 +10,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
         <section className="relative w-full overflow-clip bg-[#0e2113]">
             <div className="relative container">
                 {/* Decorative background — fixed treatment shared across all interior pages, not parameterized */}
-                <div className="pointer-events-none absolute inset-0 flex h-full w-full items-center justify-end overflow-clip">
+                <div className="pointer-events-none absolute inset-0 hidden h-full w-full items-center justify-end overflow-clip md:flex">
                     <div className="jusfity-end absolute top-0 right-0 z-1 flex h-full items-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -28,8 +28,8 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                         />
                     </div>
                 </div>
-                <div className="relative z-10 flex flex-col items-start gap-3.5 py-16">
-                    <p className="font-sans text-sm font-normal whitespace-pre-wrap text-[rgba(250,251,248,0.6)]">
+                <div className="relative z-10 flex flex-col items-start gap-3.5 py-10 md:py-16">
+                    <p className="font-sans text-xs font-normal whitespace-pre-wrap text-[rgba(250,251,248,0.6)] sm:text-sm">
                         {breadcrumb}
                     </p>
                     <div className="flex items-center gap-3">
@@ -38,10 +38,10 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
                             {eyebrow}
                         </p>
                     </div>
-                    <h1 className="font-serif-display text-6xl leading-15.5 font-normal text-[#fafbf8] not-italic">
+                    <h1 className="font-serif-display text-4xl leading-tight font-normal text-[#fafbf8] sm:text-5xl lg:text-6xl lg:leading-15.5 not-italic">
                         {heading}
                     </h1>
-                    <p className="max-w-160 font-sans text-lg leading-7.5 font-normal text-[rgba(250,251,248,0.78)]">
+                    <p className="max-w-160 font-sans text-base leading-7 sm:text-lg sm:leading-7.5 font-normal text-[rgba(250,251,248,0.78)]">
                         {description}
                     </p>
                 </div>
