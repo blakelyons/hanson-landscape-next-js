@@ -278,7 +278,11 @@ export function SiteHeader({
                         id="logo"
                         isScrolled={isScrolled || pathname !== "/"}
                         effectiveVariant={effectiveVariant}
-                        className="header-item-hidden block opacity-0 max-lg:h-20 max-lg:w-26.25"
+                        className={`header-item-hidden opacity-0 max-lg:h-20 max-lg:w-26.25 ${
+                            // The home hero renders its own logo below lg, so the header's copy
+                            // only shows there once the hero has scrolled away.
+                            pathname === "/" && !isScrolled ? "hidden lg:block" : "block"
+                        }`}
                         size={isScrolled || pathname !== "/" ? "md" : "lg"}
                     />
                     <nav
