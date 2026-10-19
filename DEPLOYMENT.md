@@ -65,6 +65,17 @@ changes (fails on a dirty tree) and a droplet reachable at the IP hardcoded in
 `deploy/remote-deploy.sh` (or cached in `deploy/.wizard-state` by the
 provisioning wizard).
 
+## Swap-slot builds
+
+`npm run build` (`deploy/build-swap.sh`) builds into the inactive slot (`.next-a` /
+`.next-b`, via `NEXT_DIST_DIR`) while the live server keeps reading the other, then
+writes the new slot to `.active-dist` and reloads PM2 (`ecosystem.config.js` reads that
+file). A failed build leaves the live site untouched; the build retries up to 3 times
+for flaky Google Fonts fetches. The only visitor-facing gap is the ~1s PM2 restart.
+`deploy/deploy.sh` runs `npm ci` only when `package-lock.json` changed, because it wipes
+`node_modules` under the running server. Rollback: write the previous slot name into
+`.active-dist` and `pm2 reload ecosystem.config.js --update-env`.
+
 ## `build` vs `build:local`
 
 `npm run build` is the server-ready build: `next build` followed by a PM2
