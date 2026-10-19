@@ -125,11 +125,7 @@ function placeholderImages(title: string, offset: number, gallery: LegacyGallery
     };
 }
 
-const PLACEHOLDER_CHALLENGE =
-    "Placeholder: a short description of what the property needed and the constraints we worked around. Replace with the real story for this Project.";
-const PLACEHOLDER_SOLUTION =
-    "Placeholder: a short description of what Hanson Landscape designed and built, and the materials and plantings used. Replace with the real details for this Project.";
-const PLACEHOLDER_SUMMARY = "Placeholder summary — a one-line description of this Project goes here.";
+const COMING_SOON = "More information coming soon.";
 
 type ProjectSeed = Omit<Project, "cover" | "gallery" | "challenge" | "solution" | "summary" | "year"> &
     Partial<Pick<Project, "challenge" | "solution" | "summary" | "year" | "testimonial">>;
@@ -137,9 +133,9 @@ type ProjectSeed = Omit<Project, "cover" | "gallery" | "challenge" | "solution" 
 function seed(project: ProjectSeed, imageOffset: number): Project {
     return {
         year: 2024,
-        summary: PLACEHOLDER_SUMMARY,
-        challenge: PLACEHOLDER_CHALLENGE,
-        solution: PLACEHOLDER_SOLUTION,
+        summary: COMING_SOON,
+        challenge: COMING_SOON,
+        solution: COMING_SOON,
         ...project,
         ...placeholderImages(project.title, imageOffset, galleryFor(project)),
     };
@@ -154,7 +150,6 @@ export const PROJECTS: Project[] = [
             sector: "residential",
             services: ["Landscape Design", "Landscape Construction"],
             projectTypes: ["Patio & Hardscape", "Outdoor Living"],
-            summary: "A pergola-covered outdoor kitchen and stone patio framed by layered perennial beds.",
             // Real client quote from the legacy testimonials page (placeholder project, real words).
             testimonial: {
                 quote: "They installed beautiful flowers, an entry sidewalk and patio for our home.",
