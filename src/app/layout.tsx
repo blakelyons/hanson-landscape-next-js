@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { DM_Sans, DM_Serif_Display, JetBrains_Mono, DM_Mono } from "next/font/google";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { AppProviders } from "@/components/providers/app-providers";
 import "./globals.css";
 import "@/styles/main.scss";
+
+// Inlined at build time; unset in dev so local traffic is never counted.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const dmSans = DM_Sans({
     subsets: ["latin"],
@@ -76,6 +80,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             suppressHydrationWarning
         >
             <body className="flex min-h-full flex-col">
+                {GA_ID && (
+                    <>
+                        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+                        <Script id="ga4-init" strategy="afterInteractive">
+                            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+                        </Script>
+                    </>
+                )}
                 <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
                 <AppProviders>{children}</AppProviders>
             </body>
