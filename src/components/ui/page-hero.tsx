@@ -10,7 +10,7 @@ export function PageHero({ breadcrumb, eyebrow, heading, description }: PageHero
         <section className="relative w-full overflow-clip bg-[#0e2113]">
             <div className="relative container">
                 {/* Decorative background — fixed treatment shared across all interior pages, not parameterized */}
-                <div className="pointer-events-none absolute inset-0 hidden h-full w-full items-center justify-end overflow-clip md:flex">
+                <div className="pointer-events-none absolute inset-0 flex h-full w-full items-center justify-end overflow-clip opacity-60 md:opacity-100">
                     <div className="jusfity-end absolute top-0 right-0 z-1 flex h-full items-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
