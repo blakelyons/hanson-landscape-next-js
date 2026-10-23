@@ -278,6 +278,8 @@ set -euo pipefail
 sudo apt-get install -y fail2ban unattended-upgrades
 sudo systemctl enable --now fail2ban
 sudo dpkg-reconfigure -f noninteractive unattended-upgrades
+# Node comes from NodeSource, which unattended-upgrades ignores by default.
+echo 'Unattended-Upgrade::Origins-Pattern { "origin=nodesource,codename=${distro_codename}"; };' | sudo tee /etc/apt/apt.conf.d/52nodesource-upgrades >/dev/null
 REMOTE
 say "fail2ban banning repeat failed SSH logins; security patches now apply automatically."
 

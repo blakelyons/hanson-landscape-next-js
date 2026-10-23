@@ -8,6 +8,12 @@ server {
     listen 80;
     server_name hansonlandscape.com www.hansonlandscape.com;
 
+    # Defense in depth for the Node.js Brotli decompression CVE-2026-111497:
+    # reject inbound request bodies compressed with Brotli.
+    if ($http_content_encoding ~* "br") {
+        return 415;
+    }
+
     location / {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
