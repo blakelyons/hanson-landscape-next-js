@@ -23,10 +23,13 @@ const THUMBNAIL_SIZE_PX = 80; // matches size-20 on HeroCarouselSlideThumb
 const THUMBNAIL_GAP_PX = 16;
 
 const HERO_SLIDES = [
-    { src: "/images/home/project-photo-1.webp", alt: "Home Hero Carousel Slide 1" },
-    { src: "/images/home/project-photo-2.jpg", alt: "Home Hero Carousel Slide 2" },
-    { src: "/images/home/project-photo-3.jpg", alt: "Home Hero Carousel Slide 3" },
-    { src: "/images/home/project-photo-4.jpg", alt: "Home Hero Carousel Slide 4" },
+    {
+        src: "/images/uploads/construction/const_2.webp",
+        alt: "Backyard patio at dusk with a fire table and lounge seating",
+    },
+    { src: "/images/uploads/construction/darrens_const.webp", alt: "Timber-framed home with mature plantings" },
+    { src: "/images/uploads/enhancement/fountain_install.webp", alt: "Pond with fountain and stone retaining wall" },
+    { src: "/images/uploads/enhancement/mums_2.webp", alt: "Pergola planter with kale, ivy and ornamental grasses" },
 ];
 
 const visibleThumbnailCount = Math.min(MAX_VISIBLE_THUMBNAILS, HERO_SLIDES.length);

@@ -1,21 +1,22 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { AboutCarouselSlide } from "./about-carousel-slide";
 
-describe("AboutCarouselSlide", () => {
-    it("renders the image with the given crop offsets", () => {
-        const { getByAltText } = render(
-            <AboutCarouselSlide src="/images/home/project-photo-3.jpg" top="0.05%" left="-4.45%" />,
-        );
+vi.mock("next/image", () => ({
+    // eslint-disable-next-line @next/next/no-img-element
+    default: ({ alt, src }: { alt: string; src: string }) => <img alt={alt} src={src} />,
+}));
 
-        const img = getByAltText("Landscaping project");
-        expect(img).toHaveAttribute("src", "/images/home/project-photo-3.jpg");
-        expect(img).toHaveStyle({ top: "0.05%", left: "-4.45%" });
+describe("AboutCarouselSlide", () => {
+    it("renders the image with the given src", () => {
+        const { getByAltText } = render(<AboutCarouselSlide src="/images/home/project-photo-3.jpg" />);
+
+        expect(getByAltText("Landscaping project")).toHaveAttribute("src", "/images/home/project-photo-3.jpg");
     });
 
-    it("defaults to no crop offset", () => {
-        const { getByAltText } = render(<AboutCarouselSlide src="/images/home/project-photo-1.jpg" />);
+    it("uses a custom alt when given", () => {
+        const { getByAltText } = render(<AboutCarouselSlide src="/images/home/project-photo-3.jpg" alt="Patio" />);
 
-        expect(getByAltText("Landscaping project")).toHaveStyle({ top: "0%", left: "0%" });
+        expect(getByAltText("Patio")).toBeInTheDocument();
     });
 });

@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PillButton } from "@/components/ui/pill-button";
 import { PortfolioFilterBar } from "@/components/portfolio/portfolio-filter-bar";
 import { ProjectCard } from "@/components/portfolio/project-card";
-import type { Project } from "@/content/projects";
+import type { PortfolioItem } from "@/content/projects";
 import {
     PAGE_SIZE,
     buildPortfolioQuery,
@@ -24,7 +24,7 @@ function syncUrl(filters: PortfolioFilters) {
     window.history.replaceState(null, "", query ? `?${query}` : window.location.pathname);
 }
 
-export function PortfolioGrid({ projects }: { projects: Project[] }) {
+export function PortfolioGrid({ projects }: { projects: PortfolioItem[] }) {
     const rootRef = useRef<HTMLDivElement>(null);
     const searchParams = useSearchParams();
     const [filters, setFilters] = useState<PortfolioFilters>(() => ({

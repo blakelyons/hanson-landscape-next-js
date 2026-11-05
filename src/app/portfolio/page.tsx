@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { PageHero } from "@/components/ui/page-hero";
 import { PortfolioGrid } from "@/components/portfolio/portfolio-grid";
 import { CtaSection } from "@/components/sections/cta-section";
-import { PROJECTS } from "@/content/projects";
+import { PORTFOLIO_ITEMS } from "@/content/projects";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
@@ -27,7 +27,7 @@ export default function PortfolioPage() {
             />
             <section className="container py-16 lg:py-20">
                 <Suspense fallback={null}>
-                    <PortfolioGrid projects={PROJECTS} />
+                    <PortfolioGrid projects={PORTFOLIO_ITEMS} />
                 </Suspense>
             </section>
             <CtaSection />

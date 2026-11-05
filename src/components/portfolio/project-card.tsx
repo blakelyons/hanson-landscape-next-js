@@ -1,8 +1,25 @@
 import Image from "next/image";
 import { TransitionLink } from "@/components/transitions/transition-link";
-import type { Project } from "@/content/projects";
+import type { PortfolioItem } from "@/content/projects";
 
-export function ProjectCard({ project }: { project: Project }) {
+const IMAGE_SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
+
+export function ProjectCard({ project }: { project: PortfolioItem }) {
+    // Photo-Only Projects have no info or detail page yet: image only, not a link.
+    if (project.photoOnly) {
+        return (
+            <div className="project-card relative aspect-4/3 w-full overflow-hidden rounded-lg">
+                <Image
+                    src={project.cover.src}
+                    alt={project.cover.alt}
+                    fill
+                    sizes={IMAGE_SIZES}
+                    className="object-cover"
+                />
+            </div>
+        );
+    }
+
     return (
         <TransitionLink
             href={`/portfolio/${project.slug}`}
@@ -14,7 +31,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     src={project.cover.src}
                     alt={project.cover.alt}
                     fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes={IMAGE_SIZES}
                     className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                 />
             </div>

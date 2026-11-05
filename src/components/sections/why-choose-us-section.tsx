@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PillButton } from "@/components/ui/pill-button";
 import { StatCard } from "@/components/ui/stat-card";
 import { Icon } from "@/components/ui/icon";
@@ -95,12 +96,13 @@ export function WhyChooseUsSection() {
                 <div className="relative top-0 right-0 left-0 z-0 grid h-full w-full grid-cols-1 gap-8 xl:absolute xl:grid-cols-2 xl:px-8">
                     <div className="hidden xl:block"></div>
                     <div className="right-0 z-0 flex h-full w-full shrink-0 items-center rounded-xl">
-                        <div className="pointer-events-none relative inset-0 mx-auto h-full max-h-64 w-full overflow-hidden rounded-xl xl:max-h-none xl:max-w-none">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                alt="Landscaping project"
-                                className="h-full min-h-105 w-full object-cover"
-                                src="/images/home/landscaping-collage.jpg"
+                        <div className="pointer-events-none relative inset-0 mx-auto h-full max-h-54 w-full overflow-clip rounded-xl xl:max-h-none xl:max-w-none">
+                            <Image
+                                alt="Tulips blooming in front of the River Place Condominiums sign"
+                                className="object-cover object-center"
+                                src="/images/uploads/enhancement/river_place_tulips_we.webp"
+                                fill
+                                sizes="(min-width: 1280px) 45vw, 100vw"
                             />
                         </div>
                     </div>

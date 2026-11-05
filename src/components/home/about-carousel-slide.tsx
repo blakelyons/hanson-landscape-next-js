@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { Fancybox } from "@fancyapps/ui/dist/fancybox/fancybox.js";
 import { Icon } from "@/components/ui/icon";
 
@@ -9,16 +10,9 @@ const LIGHTBOX_MAX_WIDTH = 1080;
 export type AboutCarouselSlideProps = {
     src: string;
     alt?: string;
-    top?: string;
-    left?: string;
 };
 
-export function AboutCarouselSlide({
-    src,
-    alt = "Landscaping project",
-    top = "0%",
-    left = "0%",
-}: AboutCarouselSlideProps) {
+export function AboutCarouselSlide({ src, alt = "Landscaping project" }: AboutCarouselSlideProps) {
     useEffect(() => {
         Fancybox.bind("[data-fancybox='about-carousel']", {
             Carousel: {
@@ -51,12 +45,12 @@ export function AboutCarouselSlide({
                 data-fancybox="about-carousel"
                 data-src={src}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     alt={alt}
-                    className="h-full w-full max-w-215 object-cover transition-transform duration-600 ease-in-out group-hover:scale-102"
-                    style={{ top, left }}
+                    className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-102"
                     src={src}
+                    fill
+                    sizes="(min-width: 1280px) 24vw, 80vw"
                 />
             </div>
             <button

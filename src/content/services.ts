@@ -44,7 +44,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         tagline: "Outdoor spaces that feel welcoming and serene, like an extension of your home's interior.",
         description:
             "Residential landscape design across Chicagoland: planting, outdoor lighting, irrigation, drainage solutions and seasonal pots from Hanson Landscape.",
-        image: { src: "/images/home/project-photo-1.jpg", alt: "Residential landscape design by Hanson Landscape" },
+        image: { src: "/images/uploads/enhancement/tulips_we_1.webp", alt: "Bed of purple, white and yellow tulips" },
         introHeading: "Design that makes your home feel complete",
         intro: "Your outdoor space should feel as welcoming as the rooms inside. We design every planting bed, light and pathway around how you live, so the result looks beautiful and works for your property in every season.",
         included: [
@@ -66,8 +66,8 @@ export const SERVICE_PAGES: ServicePage[] = [
         description:
             "Patios, driveways, retaining walls, fire pits, outdoor kitchens, pergolas and more. Residential landscape construction across Chicagoland by Hanson Landscape.",
         image: {
-            src: "/images/home/project-photo-2.jpg",
-            alt: "Residential landscape construction by Hanson Landscape",
+            src: "/images/uploads/construction/trevor_ryan_const_plant_material_and_fire_feature.webp",
+            alt: "Gas fire columns set in river rock with blue and red annuals",
         },
         introHeading: "Built with precision, made to last",
         intro: "From driveways and sidewalks to pergolas and fireplaces, our crews build the outdoor features that add value and curb appeal to your home. We use only premium materials for hardscapes and water features, and we build each one to stand up to Chicagoland weather.",
@@ -91,7 +91,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         tagline: "Year-round care that keeps your property engaging and inviting to clients, residents and customers.",
         description:
             "Full-service commercial landscape maintenance across Chicagoland: mowing, pruning, edging, fertilization and seasonal property care from Hanson Landscape.",
-        image: { src: "/images/home/project-photo-3.jpg", alt: "Commercial landscape maintenance by Hanson Landscape" },
+        image: {
+            src: "/images/uploads/construction/geneva_commons_const.webp",
+            alt: "Maintained pergola plaza with outdoor seating at Geneva Commons",
+        },
         introHeading: "Consistent care, tailored to your property",
         intro: "Landscaping is an investment, and well-kept grounds are often the first impression your property makes. Our crews handle seasonal property care throughout Chicagoland so your site stays engaging and inviting for the people who visit, live and work there.",
         included: [
@@ -126,7 +129,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         tagline: "Seasonal color, fresh plantings and curb appeal that keep your property manicured all year.",
         description:
             "Commercial landscape enhancement in Chicagoland: mulch, seasonal color, plantings, irrigation, aeration and the Commercial Pots Program from Hanson Landscape.",
-        image: { src: "/images/home/project-photo-4.jpg", alt: "Commercial landscape enhancement by Hanson Landscape" },
+        image: {
+            src: "/images/uploads/enhancement/annual_bed_2.webp",
+            alt: "Tall planters of palms and trailing foliage beside a glass entry",
+        },
         introHeading: "Keep your property looking its best, every season",
         intro: "Our highly trained technicians refresh your grounds as the seasons change, and we shape one-of-a-kind outdoor spaces your employees, clients and residents will enjoy.",
         included: [
@@ -154,8 +160,8 @@ export const SERVICE_PAGES: ServicePage[] = [
         description:
             "Commercial landscape architecture, design and construction across Chicagoland: brick pavers, patios, retaining walls and water features from Hanson Landscape.",
         image: {
-            src: "/images/home/project-photo-1.jpg",
-            alt: "Commercial landscape construction by Hanson Landscape",
+            src: "/images/uploads/construction/const_1.webp",
+            alt: "Twin stone grill stations under a cedar pergola on a paver patio",
         },
         introHeading: "One team from first sketch to final stone",
         intro: "Our professionally trained team handles every detail of your landscape project, from concept through construction. Hardscapes and water features are built with premium materials so they hold up for years.",
@@ -170,7 +176,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         tagline: "Prompt, thorough and consistent snow and ice removal to keep your property safe all winter.",
         description:
             "Commercial snow and ice management across Chicagoland: plowing, sidewalk shoveling, salting, hauling and a winter maintenance program from Hanson Landscape.",
-        image: { src: "/images/home/project-photo-2.jpg", alt: "Snow and ice management by Hanson Landscape" },
+        image: {
+            src: "/images/uploads/construction/snow_plows.webp",
+            alt: "Snow and ice management by Hanson Landscape",
+        },
         introHeading: "Ready for Chicagoland winters",
         intro: "We are a full-service snow and ice management firm. Our goal is simple: keep your property safe with prompt, thorough and consistent removal, storm after storm.",
         included: ["Snow removal", "Sidewalk shoveling", "Surface salting", "Snow hauling, when necessary"],

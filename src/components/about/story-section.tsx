@@ -13,9 +13,9 @@ export function StorySection() {
             <div className="container grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
                 <div className="min-w-0 overflow-hidden rounded-2xl">
                     <Image
-                        alt="Hanson Landscape crew working on a stone garden path"
+                        alt="Terrace planters of coleus, sweet potato vine and cordyline"
                         className="aspect-29/28 size-full object-cover"
-                        src="/images/about/story-photo.jpg"
+                        src="/images/uploads/enhancement/annuals_3.webp"
                         priority
                         width={750}
                         height={500}

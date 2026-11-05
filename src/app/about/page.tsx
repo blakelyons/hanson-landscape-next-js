@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { StorySection } from "@/components/about/story-section";
 import { WhyChooseUsSection } from "@/components/sections/why-choose-us-section";
 import { CtaSection } from "@/components/sections/cta-section";
+import { ConsultationSection } from "@/components/home/consultation-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
@@ -28,6 +29,7 @@ export default function AboutPage() {
             <StorySection />
             <WhyChooseUsSection />
             <CtaSection />
+            <ConsultationSection />
             <SiteFooter />
         </div>
     );

@@ -24,6 +24,10 @@ _Avoid_: Testimonial grid, testimonial list
 One finished property Hanson Landscape worked on (e.g. a single backyard patio build). The unit shown on the Portfolio page; each Project has its own detail page and may be tagged with one or more Services.
 _Avoid_: Portfolio item, case study, gallery item
 
+**Photo-Only Project**:
+A Project we have only a photo for: no title, location or Services yet. Shown on the Portfolio as an unlinked image card (no detail page), still tagged with a Sector so the filter chips work. Becomes a full Project once its information is collected.
+_Avoid_: Placeholder project (those are the full Projects with "More information coming soon." text), gallery image
+
 **Sector**:
 Whether a Project is Residential or Commercial. Exactly one per Project. The only Portfolio filter chips (plus "All Projects").
 _Avoid_: Category, market

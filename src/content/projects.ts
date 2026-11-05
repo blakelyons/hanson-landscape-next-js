@@ -28,7 +28,27 @@ export type ProjectType = (typeof PROJECT_TYPES)[number];
 
 export type ProjectImage = { src: string; alt: string };
 
+/** Official Hanson photos live in public/images/uploads/{construction,enhancement}/{name}.webp */
+export function uploadImage(folder: "construction" | "enhancement", name: string): string {
+    return `/images/uploads/${folder}/${name}.webp`;
+}
+
+/**
+ * A Project we only have a photo for: no title, location or detail page yet. Shown
+ * on the Portfolio as an unlinked image card; swap for a full `Project` once its
+ * info is collected.
+ */
+export type PhotoOnlyProject = {
+    slug: string;
+    sector: Sector;
+    cover: ProjectImage;
+    photoOnly: true;
+};
+
+export type PortfolioItem = Project | PhotoOnlyProject;
+
 export type Project = {
+    photoOnly?: false;
     slug: string;
     title: string;
     location: string;
@@ -281,6 +301,88 @@ export const PROJECTS: Project[] = [
         3,
     ),
 ];
+
+type PhotoSeed = [folder: "construction" | "enhancement", name: string, sector: Sector, alt: string];
+
+const PHOTO_SEEDS: PhotoSeed[] = [
+    [
+        "construction",
+        "const_2",
+        "residential",
+        "Backyard patio at dusk with a fire table, lounge seating and a lit planting bed",
+    ],
+    [
+        "construction",
+        "darrens_const",
+        "residential",
+        "Timber-framed home surrounded by shrubs, a flowering tree and fall color",
+    ],
+    [
+        "construction",
+        "trevor_ryan_const_plant_material_and_fire_feature",
+        "residential",
+        "Gas fire columns set in river rock with blue and red annuals",
+    ],
+    ["construction", "const_1", "commercial", "Twin stone grill stations under a cedar pergola on a paver patio"],
+    [
+        "construction",
+        "geneva_commons_const_1",
+        "commercial",
+        "Columned shade structure and stone seating wall at Geneva Commons",
+    ],
+    ["construction", "geneva_commons_const", "commercial", "Pergola plaza with outdoor seating at Geneva Commons"],
+    ["construction", "snow_plows", "commercial", "Three Hanson plow trucks lined up with snow blades attached"],
+    ["enhancement", "holiday_lights", "residential", "Home outlined in warm white holiday lights with lit shrubs"],
+    ["enhancement", "mums_6", "residential", "Terracotta planter with ornamental cabbage, grasses and fall color"],
+    [
+        "enhancement",
+        "winter_pots_1",
+        "residential",
+        "Winter porch planter with evergreen boughs, birch and red berries",
+    ],
+    ["enhancement", "winter_pots_2", "residential", "Winter planter with birch branches, ornaments and pine cones"],
+    [
+        "enhancement",
+        "river_place_tulips_we",
+        "commercial",
+        "Tulips blooming in front of the River Place Condominiums sign",
+    ],
+    ["enhancement", "tulips_we_1", "commercial", "Bed of purple, white and yellow tulips"],
+    ["enhancement", "tulips_we", "commercial", "Pink tulips lit by low sun"],
+    ["enhancement", "geneva_commons_annuals_we", "commercial", "Geneva Commons entrance sign above a bed of annuals"],
+    [
+        "enhancement",
+        "geneva_commons_annuals_we_1",
+        "commercial",
+        "Colorful annual bed with tropical foliage at Geneva Commons",
+    ],
+    ["enhancement", "fountain_install", "commercial", "Pond with fountain, stone wall and shoreline plantings"],
+    ["enhancement", "annuals_3", "commercial", "Terrace planters of coleus, sweet potato vine and cordyline"],
+    ["enhancement", "annual_bed_1", "commercial", "Storefront planter bed full of coleus, petunias and grasses"],
+    ["enhancement", "annual_bed_2", "commercial", "Tall planters of palms and trailing foliage beside a glass entry"],
+    ["enhancement", "annuals_pots_2", "commercial", "Large pot of palms, coleus and petunias beside a stone wall"],
+    ["enhancement", "fall_1", "commercial", "Terrace planter box of mums, kale and ivy"],
+    ["enhancement", "fall_display_1", "commercial", "Fall entry display with corn stalks, pumpkins, mums and cabbage"],
+    ["enhancement", "fall_mums_1", "commercial", "Raised planter bed of mums, celosia and ornamental cabbage"],
+    ["enhancement", "mums_2", "commercial", "Dark pergola planter with kale, ivy and ornamental grasses"],
+    ["enhancement", "mums_4", "commercial", "Fall pot with sunflowers, mums and a blue cabbage"],
+    ["enhancement", "mums_5", "commercial", "Concrete bowl planter of fall flowers and ornamental cabbage"],
+    [
+        "enhancement",
+        "winter_decor_1",
+        "commercial",
+        "Sidewalk planter bed filled with evergreen boughs and red accents",
+    ],
+];
+
+export const PHOTO_ONLY_PROJECTS: PhotoOnlyProject[] = PHOTO_SEEDS.map(([folder, name, sector, alt]) => ({
+    slug: name,
+    sector,
+    cover: { src: uploadImage(folder, name), alt },
+    photoOnly: true,
+}));
+
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [...PROJECTS, ...PHOTO_ONLY_PROJECTS];
 
 export function getProjectBySlug(slug: string): Project | undefined {
     return PROJECTS.find((project) => project.slug === slug);

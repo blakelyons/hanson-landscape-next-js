@@ -13,11 +13,11 @@ const STATS = [
 ];
 
 const ABOUT_PHOTOS = [
-    { src: "/images/home/project-photo-3.jpg", top: "0.05%", left: "-4.45%" },
-    { src: "/images/home/about-carousel-photo-2.jpg", top: "0.06%", left: "-10.31%" },
-    { src: "/images/home/project-photo-1.jpg" },
-    { src: "/images/home/project-photo-2.jpg" },
-    { src: "/images/home/project-photo-4.jpg" },
+    { src: "/images/home/project-photo-3.jpg" },
+    { src: "/images/uploads/enhancement/geneva_commons_annuals_we.webp" },
+    { src: "/images/uploads/enhancement/geneva_commons_annuals_we_1.webp" },
+    { src: "/images/uploads/enhancement/holiday_lights.webp" },
+    { src: "/images/uploads/enhancement/fall_1.webp" },
 ];
 
 export function AboutSection() {
@@ -55,12 +55,7 @@ export function AboutSection() {
                             <div className="about-section__carousel-wrapper w-full pt-8">
                                 <Carousel
                                     slides={ABOUT_PHOTOS.map((photo) => (
-                                        <AboutCarouselSlide
-                                            key={photo.src}
-                                            src={photo.src}
-                                            top={photo.top}
-                                            left={photo.left}
-                                        />
+                                        <AboutCarouselSlide key={photo.src} src={photo.src} />
                                     ))}
                                     slidesPerView={2}
                                     showArrows={true}

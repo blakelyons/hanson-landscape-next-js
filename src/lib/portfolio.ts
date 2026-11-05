@@ -1,4 +1,4 @@
-import { SECTORS, type Project, type Sector } from "@/content/projects";
+import { SECTORS, type PortfolioItem, type Project, type Sector } from "@/content/projects";
 
 /** Projects revealed per "Load More" batch (flat — same on every screen size). */
 export const PAGE_SIZE = 6;
@@ -16,13 +16,15 @@ export function parseSector(value: string | null | undefined): SectorFilter {
 
 // Title, location, summary, Services and Project Types only — the long-form
 // challenge/solution body is intentionally not searched (predictable results).
-function searchText(project: Project): string {
+// Photo-Only Projects have no text fields, so they match on their image alt text.
+function searchText(project: PortfolioItem): string {
+    if (project.photoOnly) return project.cover.alt.toLowerCase();
     return [project.title, project.location, project.summary, ...project.services, ...project.projectTypes]
         .join(" ")
         .toLowerCase();
 }
 
-export function filterProjects(projects: Project[], { sector, query }: PortfolioFilters): Project[] {
+export function filterProjects<T extends PortfolioItem>(projects: T[], { sector, query }: PortfolioFilters): T[] {
     const words = query.toLowerCase().split(/\s+/).filter(Boolean);
 
     return projects.filter((project) => {

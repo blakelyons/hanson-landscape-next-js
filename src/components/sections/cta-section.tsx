@@ -166,7 +166,13 @@ export function CtaSection() {
                     </div>
                 </div>
                 <div className="cta-image-reveal absolute top-0 left-0 z-0 h-dvh w-full opacity-0">
-                    <Image src="/images/home/project-photo-1.jpg" alt="CTA Image" fill className="object-cover" />
+                    <Image
+                        src="/images/uploads/construction/geneva_commons_const_1.webp"
+                        alt="Columned shade structure and stone seating at Geneva Commons"
+                        fill
+                        sizes="100vw"
+                        className="object-cover"
+                    />
                     <div className="cta-image-reveal-overlay absolute top-0 left-0 z-1 h-full w-full bg-black/50 opacity-0" />
                 </div>
             </section>

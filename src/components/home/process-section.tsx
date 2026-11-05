@@ -75,7 +75,7 @@ export function ProcessSection() {
             <div className="relative container flex flex-col items-center justify-center gap-12">
                 <SectionIntro
                     animateEntrance
-                    className="w-full max-w-170"
+                    className="w-full max-w-140"
                     eyebrow="Our process"
                     heading="How We Bring Your Project to Life"
                 />

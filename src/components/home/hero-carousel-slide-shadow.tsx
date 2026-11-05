@@ -13,7 +13,7 @@ export function HeroCarouselSlideShadow() {
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <g id="island-shadow" filter="url(#filter0_f_0_284)">
-                        <ellipse cx="349" cy="125" rx="279" ry="55" fill="black" fill-opacity="0.45" />
+                        <ellipse cx="349" cy="125" rx="279" ry="55" fill="black" fillOpacity="0.45" />
                     </g>
                     <defs>
                         <filter
@@ -23,9 +23,9 @@ export function HeroCarouselSlideShadow() {
                             width="698"
                             height="250"
                             filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
+                            colorInterpolationFilters="sRGB"
                         >
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feGaussianBlur stdDeviation="35" result="effect1_foregroundBlur_0_284" />
                         </filter>
@@ -42,7 +42,7 @@ export function HeroCarouselSlideShadow() {
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <g id="island-shadow" filter="url(#filter0_f_0_284)">
-                        <ellipse cx="349" cy="125" rx="279" ry="55" fill="black" fill-opacity="0.45" />
+                        <ellipse cx="349" cy="125" rx="279" ry="55" fill="black" fillOpacity="0.45" />
                     </g>
                     <defs>
                         <filter
@@ -52,9 +52,9 @@ export function HeroCarouselSlideShadow() {
                             width="698"
                             height="250"
                             filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
+                            colorInterpolationFilters="sRGB"
                         >
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feGaussianBlur stdDeviation="35" result="effect1_foregroundBlur_0_284" />
                         </filter>
